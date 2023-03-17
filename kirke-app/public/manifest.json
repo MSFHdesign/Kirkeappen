@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Kirkeappen",
+  "name": "Admin page for Kirkeappen",
   "icons": [
     {
       "src": "favicon.ico",
