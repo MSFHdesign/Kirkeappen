@@ -8,6 +8,8 @@ import AuthRoute from "./components/AuthRoute";
 import HomePage from "./pages/HomePage";
 import EditProfilePage from "./pages/EditProfilePage";
 
+import { LanguageProvider } from "./models/LanguageContext";
+
 initializeApp(config.firebaseConfig);
 
 export interface IApplicationProps {}
@@ -20,27 +22,29 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
     }
   }, []);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <AuthRoute>
-              <HomePage userEmail={userEmail} />
-            </AuthRoute>
-          }
-        />
-        <Route
-          path="/editProfile"
-          element={
-            <AuthRoute>
-              <EditProfilePage />
-            </AuthRoute>
-          }
-        />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <AuthRoute>
+                <HomePage userEmail={userEmail} />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/editProfile"
+            element={
+              <AuthRoute>
+                <EditProfilePage />
+              </AuthRoute>
+            }
+          />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    </LanguageProvider>
   );
 };
 
