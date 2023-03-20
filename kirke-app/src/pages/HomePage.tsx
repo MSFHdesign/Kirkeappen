@@ -12,7 +12,9 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
   return (
     <div>
       <h1>Home Page</h1>
-      <h2>Welcome {props.userEmail}</h2>
+      <h2>
+        Welcome <strong>{props.userEmail}</strong>
+      </h2>
       <Link to="/editProfile">
         <button>Edit Profile</button>
       </Link>
