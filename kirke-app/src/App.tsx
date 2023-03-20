@@ -6,6 +6,7 @@ import { initializeApp } from "firebase/app";
 import { config } from "./models/FBconfig";
 import AuthRoute from "./components/AuthRoute";
 import HomePage from "./pages/HomePage";
+import EditProfilePage from "./pages/EditProfilePage";
 
 initializeApp(config.firebaseConfig);
 
@@ -26,6 +27,14 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
           element={
             <AuthRoute>
               <HomePage userEmail={userEmail} />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/editProfile"
+          element={
+            <AuthRoute>
+              <EditProfilePage />
             </AuthRoute>
           }
         />
