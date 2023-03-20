@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import style from "../style/warning.module.css";
-import { useLanguage } from "../models/LanguageContext";
+import { useLanguage } from "../components/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 
 export interface ILoginPageProps {}

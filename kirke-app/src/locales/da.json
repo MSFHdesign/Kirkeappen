@@ -1,8 +1,7 @@
 {
-
   "error": {
     "generic": "Der opstod en fejl",
-      "loginFailed": "Login mislykkedes"
+    "loginFailed": "Login mislykkedes"
   },
   "login": {
     "title": "Log ind",
@@ -13,7 +12,7 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcomeMessage": "Velkommen til din dashboard"
+    "welcomeMessage": "Velkommen til dit dashboard"
   },
   "historie": {
     "title": "Historie",

@@ -2,18 +2,22 @@ import React from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 
-export interface IHomePageProps {
+import { useLanguage } from "../components/LanguageContext";
+
+export interface IDashBoardProps {
   userEmail: string;
 }
 
-const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
+const DashBoard: React.FunctionComponent<IDashBoardProps> = (props) => {
   const auth = getAuth();
-
+  const { locale } = useLanguage();
+  const dash = locale.dashboard;
   return (
     <div>
-      <h1>Home Page</h1>
+      <h1>{dash.title}</h1>
       <h2>
-        Welcome <strong>{props.userEmail}</strong>
+        {dash.welcomeMessage} <br />
+        <strong>{props.userEmail}</strong>
       </h2>
       <Link to="/editProfile">
         <button>Edit Profile</button>
@@ -23,4 +27,4 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
   );
 };
 
-export default HomePage;
+export default DashBoard;

@@ -5,10 +5,11 @@ import LoginPage from "./pages/Login";
 import { initializeApp } from "firebase/app";
 import { config } from "./models/FBconfig";
 import AuthRoute from "./components/AuthRoute";
-import HomePage from "./pages/HomePage";
+import DashBoard from "./pages/Dashboard";
 import EditProfilePage from "./pages/EditProfilePage";
-
-import { LanguageProvider } from "./models/LanguageContext";
+import Navigationsbar from './components/navigationbar'
+import { LanguageProvider } from "./components/LanguageContext";
+import Navigationbar from "./components/navigationbar";
 
 initializeApp(config.firebaseConfig);
 
@@ -23,13 +24,14 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
   }, []);
   return (
     <LanguageProvider>
+      <Navigationbar />
       <BrowserRouter>
         <Routes>
           <Route
             path="/"
             element={
               <AuthRoute>
-                <HomePage userEmail={userEmail} />
+                <DashBoard userEmail={userEmail} />
               </AuthRoute>
             }
           />

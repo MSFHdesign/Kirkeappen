@@ -1,39 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
 import da from "../locales/da.json";
 import en from "../locales/en.json";
-
-export interface Locale {
-  error: {
-    [key: string]: string;
-    generic: string;
-    loginFailed: string;
-    //more fails here if needed
-  };
-  login: {
-    title: string;
-    email: string;
-    password: string;
-    submit: string;
-    failedToLogIn: string;
-  };
-  dashboard: {
-    title: string;
-    welcomeMessage: string;
-  };
-  historie: {
-    title: string;
-    introText: string;
-  };
-  personlige: {
-    title: string;
-    fullName: string;
-    address: string;
-    submit: string;
-  };
-}
+import { iTexts } from "../models/iTexts";
 
 interface LanguageContextProps {
-  locale: Locale;
+  locale: iTexts;
   toggleLocale: () => void;
 }
 
@@ -51,7 +22,7 @@ interface LanguageProviderProps {
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children,
 }) => {
-  const [locale, setLocale] = useState<Locale>(da);
+  const [locale, setLocale] = useState<iTexts>(da);
 
   const toggleLocale = () => {
     if (locale === da) {
@@ -61,8 +32,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     }
   };
 
-
-  
   return (
     <LanguageContext.Provider value={{ locale, toggleLocale }}>
       {children}
