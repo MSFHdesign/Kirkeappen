@@ -1,0 +1,11 @@
+{
+  "da": {
+    "welcome": "Velkommen til min app",
+    "description": "Dette er en demo-app"
+  },
+
+  "en": {
+    "welcome": "Welcome to my app",
+    "description": "This is a demo app"
+  }
+}
