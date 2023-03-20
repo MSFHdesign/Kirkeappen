@@ -13,7 +13,9 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
     <div>
       <h1>Home Page</h1>
       <h2>Welcome {props.userEmail}</h2>
-      <Link to="/editProfile">Edit Profile</Link>
+      <Link to="/editProfile">
+        <button>Edit Profile</button>
+      </Link>
       <button onClick={() => signOut(auth)}>Sign out of Firebase</button>
     </div>
   );

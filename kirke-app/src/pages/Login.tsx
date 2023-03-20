@@ -38,13 +38,13 @@ const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
 
   return (
     <div>
-      <p>Login</p>
+      <p>Log ind</p>
       {showAlert && (
         <div className={style.alert}>
           <span className={style.closebtn} onClick={handleAlertClose}>
             &times;
           </span>
-          <strong>{error} </strong>
+          <strong>{error}</strong>
         </div>
       )}
 
@@ -62,7 +62,7 @@ const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" disabled={authing}>
-          Sign in with Email
+          Log ind
         </button>
       </form>
     </div>
