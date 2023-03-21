@@ -3,14 +3,14 @@ import { useLanguage } from "./LanguageContext";
 
 const LanguageSwitcher: React.FC = () => {
   const { toggleLocale } = useLanguage();
-  const [buttonText, setButtonText] = useState("EN");
+  const [buttonText, setButtonText] = useState("SWITCH TO ENGLISH");
 
   const handleClick = () => {
-    if (buttonText === "EN") {
-      setButtonText("DK");
+    if (buttonText === "SWITCH TO ENGLISH") {
+      setButtonText("SKIFT TIL DANSK");
       toggleLocale();
     } else {
-      setButtonText("EN");
+      setButtonText("SWITCH TO ENGLISH");
       toggleLocale();
     }
   };
