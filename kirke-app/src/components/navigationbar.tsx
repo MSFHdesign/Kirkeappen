@@ -1,13 +1,13 @@
-import React from "react";
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import SignOut from "./SignOut";
 
 type Props = {};
 
 const Navigationsbar = (props: Props) => {
   return (
     <div>
-      navigationbar
       <LanguageSwitcher />
+      <SignOut />
     </div>
   );
 };
