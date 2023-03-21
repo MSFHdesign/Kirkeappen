@@ -14,7 +14,7 @@ const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
 
   return (
     <div>
-      <p>{home.title}</p>
+      <h2>{home.title}</h2>
       <SignIn />
       <ResetPassword />
     </div>

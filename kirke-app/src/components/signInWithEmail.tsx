@@ -39,7 +39,6 @@ const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
 
   return (
     <div>
-      <p>{home.title}</p>
       {showAlert && (
         <div className={style.alert}>
           <span className={style.closebtn} onClick={handleAlertClose}>
