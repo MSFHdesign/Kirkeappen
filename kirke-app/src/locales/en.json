@@ -3,11 +3,16 @@
     "generic": "Der opstod en fejl",
     "loginFailed": "Login failed"
   },
+  "succes": {
+    "resetEmail": "Tjek din inbox, mulgivis spamfilter."
+  },
   "login": {
     "title": "Log in",
     "email": " eng Email",
     "password": " eng Password",
     "submit": "Log in",
+    "ResetPassword": "Send code",
+    "ResetLabel": "Forgot password?",
     "failedToLogIn": "Kunne ikke logge dig ind"
   },
   "dashboard": {
