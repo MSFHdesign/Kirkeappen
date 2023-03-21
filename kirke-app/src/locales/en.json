@@ -1,7 +1,27 @@
 {
-  "login": "Log in",
-  "email": "Email",
-  "password": "Password",
-  "submit": "Log in",
-  "failedToLogIn": "Failed to log in"
+  "error": {
+    "generic": "Der opstod en fejl",
+    "loginFailed": "Login failed"
+  },
+  "login": {
+    "title": "Log in",
+    "email": " eng Email",
+    "password": " eng Password",
+    "submit": "Log in",
+    "failedToLogIn": "Kunne ikke logge dig ind"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcomeMessage": "Welcome to your dashboard"
+  },
+  "historie": {
+    "title": "Historie",
+    "introText": "Her er en introduktion til historien"
+  },
+  "personlige": {
+    "title": "Personlige oplysninger",
+    "fullName": "Fulde navn",
+    "address": "Adresse",
+    "submit": "Gem ændringer"
+  }
 }
