@@ -3,15 +3,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import LoginPage from "./pages/Login";
 import { initializeApp } from "firebase/app";
-import { config } from "./models/FBconfig";
+import { firebaseConfig } from "./models/FBconfig";
 import AuthRoute from "./components/AuthRoute";
 import DashBoard from "./pages/Dashboard";
 import EditProfilePage from "./pages/EditProfilePage";
-import Navigationsbar from './components/navigationbar'
+import Navigationsbar from "./components/navigationbar";
+import StoryDisplay from "./components/StoryDisplay";
+
 import { LanguageProvider } from "./components/LanguageContext";
 import Navigationbar from "./components/navigationbar";
 
-initializeApp(config.firebaseConfig);
+initializeApp(firebaseConfig);
 
 export interface IApplicationProps {}
 const Application: React.FunctionComponent<IApplicationProps> = (props) => {
@@ -40,6 +42,14 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             element={
               <AuthRoute>
                 <EditProfilePage />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/storyDisplay"
+            element={
+              <AuthRoute>
+                <StoryDisplay collectionName={"Historier"} subCollectionName={"Kendte"} />
               </AuthRoute>
             }
           />
