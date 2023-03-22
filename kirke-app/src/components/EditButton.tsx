@@ -33,9 +33,17 @@ const EditButton: React.FC<Props> = (props) => {
   const [updatedSections, setUpdatedSections] = useState(props.sections);
 
   const handleEditClick = () => {
-    setIsEditing(true);
+    setIsEditing((prevIsEditing) => !prevIsEditing);
   };
-
+  const handleSectionTitleChange = (index: number, value: string) => {
+    const updated = updatedSections.map((section, i) => {
+      if (i === index) {
+        return { ...section, title: value };
+      }
+      return section;
+    });
+    setUpdatedSections(updated);
+  };
   const handleSectionDescriptionChange = (index: number, value: string) => {
     // update the updatedSections state variable
     const updated = updatedSections.map((section, i) => {
@@ -125,7 +133,16 @@ const EditButton: React.FC<Props> = (props) => {
           />
           {props.sections.map((section, index) => (
             <div key={index}>
-              <label htmlFor={`description-${index}`}>{section.title}:</label>
+              <label htmlFor={`title-${index}`}>Title:</label>
+              <input
+                type="text"
+                id={`title-${index}`}
+                value={updatedSections[index].title}
+                onChange={(e) =>
+                  handleSectionTitleChange(index, e.target.value)
+                }
+              />
+              <label htmlFor={`description-${index}`}>Description:</label>
               <textarea
                 id={`description-${index}`}
                 value={updatedSections[index].description}
