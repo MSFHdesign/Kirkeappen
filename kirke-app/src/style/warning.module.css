@@ -28,3 +28,76 @@
   left: 50%;
   transform: rotate(-50%, -50%);
 }
+
+
+.warning-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.warning-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.warning-modal-content h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.warning-modal-content button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.warning-modal-content button.yes-button {
+  background-color: green;
+  color: white;
+}
+
+.warning-modal-content button.yes-button:hover {
+  transform: scale(1.1);
+}
+
+.warning-modal-content button.no-button {
+  background-color: red;
+  color: white;
+}
+
+.warning-modal-content button.no-button:hover {
+  transform: scale(1.1);
+}
+
+.delete-button {
+  background-color: #ff4136;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.delete-button:hover {
+  background-color: #e51c23;
+}

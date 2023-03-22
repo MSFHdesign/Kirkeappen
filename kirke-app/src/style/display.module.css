@@ -1,0 +1,38 @@
+.collectionWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cardWrapper {
+  max-width: 500px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  width: 300px;
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+p {
+  font-size: 16px;
+  margin: 10px 0 20px;
+}
+
+.cardWrapper h2,
+.cardWrapper p {
+  overflow-wrap: break-word;
+}
+.cardWrapper p {
+  word-break: break-all;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
+}

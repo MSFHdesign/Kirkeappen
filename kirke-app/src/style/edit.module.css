@@ -1,0 +1,67 @@
+/* edit.module.css */
+
+.edit-container {
+  position: relative;
+  display: inline-block;
+}
+
+.edit-form {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 1;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+.edit-form input[type="text"],
+.edit-form textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.edit-form textarea {
+  height: 150px;
+}
+
+.edit-form button {
+  display: block;
+  width: 100%;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-form button:hover {
+  background-color: #3e8e41;
+}
+
+.edit-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: darkgreen;
+}

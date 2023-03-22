@@ -36,13 +36,27 @@ const DeleteButton: React.FC<Props> = (props) => {
   return (
     <div>
       {isModalOpen ? (
-        <div>
-          <h3>Are you sure you want to delete this card?</h3>
-          <button onClick={handleDeleteConfirmed}>Yes</button>
-          <button onClick={handleModalClose}>No</button>
+        <div className={style["warning-modal"]}>
+          <div className={style["warning-modal-content"]}>
+            <h3>Are you sure you want to delete this card?</h3>
+            <button
+              className={`${style["yes-button"]} ${style["warning-modal-content"]}`}
+              onClick={handleDeleteConfirmed}
+            >
+              Yes
+            </button>
+            <button
+              className={`${style["no-button"]} ${style["warning-modal-content"]}`}
+              onClick={handleModalClose}
+            >
+              No
+            </button>
+          </div>
         </div>
       ) : (
-        <button onClick={handleDeleteClick}>Delete</button>
+        <button className={style["delete-button"]} onClick={handleDeleteClick}>
+          Delete
+        </button>
       )}
     </div>
   );

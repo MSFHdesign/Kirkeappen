@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../models/FBconfig";
+import style from "../style/edit.module.css";
 
 interface Props {
   collectionName: string;
@@ -18,7 +19,8 @@ const EditButton: React.FC<Props> = (props) => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = async () => {
+  const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       const docRef = doc(db, props.collectionName, props.cardId);
 
@@ -33,26 +35,29 @@ const EditButton: React.FC<Props> = (props) => {
   };
 
   return (
-    <div>
+    <div className={style["edit-container"]}>
       {isEditing ? (
-        <div>
+        <form
+          className={style["edit-form"]}
+          onSubmit={(event) => handleSaveClick(event)}
+        >
           <input
             type="text"
             placeholder="Title"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
           />
-          <br />
           <textarea
             placeholder="Content"
             value={newContent}
             onChange={(e) => setNewContent(e.target.value)}
           />
-          <br />
-          <button onClick={handleSaveClick}>Save</button>
-        </div>
+          <button type="submit">Save</button>
+        </form>
       ) : (
-        <button onClick={handleEditClick}>Edit</button>
+        <button className={style["edit-button"]} onClick={handleEditClick}>
+          Edit
+        </button>
       )}
     </div>
   );

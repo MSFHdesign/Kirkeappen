@@ -3,7 +3,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../models/FBconfig";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
-
+import style from "../style/display.module.css";
 interface Props {
   collectionName: string;
   cardId?: string;
@@ -11,6 +11,7 @@ interface Props {
 
 const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   const [collectionData, setCollectionData] = useState<any[]>([]);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
 
   useEffect(() => {
     const subCollectionRef = collection(db, props.collectionName);
@@ -40,24 +41,36 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   };
 
   return (
-    <div>
+    <div className={style.collectionWrapper}>
       {filteredCollectionData.map((item, index) => (
-        <div key={index}>
-          <h2>{item.title}</h2>
-          <p>{item.content}</p>
-          <div>
+        <div key={index} className={style.cardWrapper}>
+          {editingCardId !== item.id && (
+            <>
+              <h2>{item.title}</h2>
+              <p>{item.content}</p>
+              <div className={style.buttonsWrapper}>
+                <DeleteButton
+                  collectionName={props.collectionName}
+                  cardId={item.id}
+                  onDelete={() => handleCardDelete(item.id)}
+                />
+                <EditButton
+                  collectionName={props.collectionName}
+                  cardId={item.id}
+                  title={item.title}
+                  content={item.content}
+                />
+              </div>
+            </>
+          )}
+          {editingCardId === item.id && (
             <EditButton
               collectionName={props.collectionName}
               cardId={item.id}
               title={item.title}
               content={item.content}
             />
-            <DeleteButton
-              collectionName={props.collectionName}
-              cardId={item.id}
-              onDelete={() => handleCardDelete(item.id)}
-            />
-          </div>
+          )}
         </div>
       ))}
     </div>
