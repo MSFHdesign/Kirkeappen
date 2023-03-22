@@ -5,17 +5,17 @@ import { db } from "../models/FBconfig";
 interface Props {
   collectionName: string;
   cardId: string;
+  title: string;
+  content: string;
 }
 
 const EditButton: React.FC<Props> = (props) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-  const [newContent, setNewContent] = useState("");
+  const [newTitle, setNewTitle] = useState(props.title);
+  const [newContent, setNewContent] = useState(props.content);
 
   const handleEditClick = () => {
     setIsEditing(true);
-    setNewTitle("");
-    setNewContent("");
   };
 
   const handleSaveClick = async () => {

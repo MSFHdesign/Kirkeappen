@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../models/FBconfig";
 import EditButton from "./EditButton";
+import DeleteButton from "./DeleteButton";
 
 interface Props {
   collectionName: string;
@@ -12,24 +13,31 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   const [collectionData, setCollectionData] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const subCollectionRef = collection(db, props.collectionName);
-      const data = await getDocs(subCollectionRef);
-      setCollectionData(
-        data.docs.map((doc) => {
-          return {
-            ...doc.data(),
-            id: doc.id,
-          };
-        })
-      );
-    };
-    fetchData();
+    const subCollectionRef = collection(db, props.collectionName);
+
+    const unsubscribe = onSnapshot(subCollectionRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        return {
+          ...doc.data(),
+          id: doc.id,
+        };
+      });
+      setCollectionData(data);
+    });
+
+    return () => unsubscribe();
   }, [props.collectionName]);
 
   const filteredCollectionData = props.cardId
     ? collectionData.filter((item) => item.id === props.cardId)
     : collectionData;
+
+  const handleCardDelete = (cardId: string) => {
+    const updatedCollectionData = collectionData.filter(
+      (item) => item.id !== cardId
+    );
+    setCollectionData(updatedCollectionData);
+  };
 
   return (
     <div>
@@ -37,7 +45,17 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         <div key={index}>
           <h2>{item.title}</h2>
           <p>{item.content}</p>
-          <EditButton collectionName={props.collectionName} cardId={item.id} />
+          <EditButton
+            collectionName={props.collectionName}
+            cardId={item.id}
+            title={item.title}
+            content={item.content}
+          />
+          <DeleteButton
+            collectionName={props.collectionName}
+            cardId={item.id}
+            onDelete={() => handleCardDelete(item.id)}
+          />
         </div>
       ))}
     </div>
