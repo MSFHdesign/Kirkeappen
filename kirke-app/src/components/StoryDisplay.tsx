@@ -82,7 +82,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                   lastName={item.lastName}
                   born={item.born}
                   death={item.death}
-                  graveId={item.GraveId}
+                  graveId={item.graveNumber}
                   sections={item.sections}
                 />
               </div>
@@ -96,7 +96,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
               lastName={item.lastName}
               born={item.born}
               death={item.death}
-              graveId={item.GraveId}
+              graveId={item.graveNumber}
               sections={item.sections}
             />
           )}

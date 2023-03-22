@@ -4,6 +4,7 @@ import { db } from "../models/FBconfig";
 import style from "../style/edit.module.css";
 
 interface Props {
+  [x: string]: any;
   collectionName: string;
   cardId: string;
   firstName: string;
@@ -24,9 +25,31 @@ const EditButton: React.FC<Props> = (props) => {
   const [newBorn, setNewBorn] = useState(props.born);
   const [newDeath, setNewDeath] = useState(props.death);
   const [newGraveId, setNewGraveId] = useState(props.graveId);
+  const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
+  const [newDescription, setNewDescription] = useState(
+    props.sections[sectionIndexToUpdate]?.description
+  );
+
+  const [updatedSections, setUpdatedSections] = useState(props.sections);
 
   const handleEditClick = () => {
     setIsEditing(true);
+  };
+
+  const handleSectionDescriptionChange = (index: number, value: string) => {
+    // update the updatedSections state variable
+    const updated = updatedSections.map((section, i) => {
+      if (i === index) {
+        return { ...section, description: value };
+      }
+      return section;
+    });
+    setUpdatedSections(updated);
+
+    // update the newDescription state variable for the current section being edited
+    if (sectionIndexToUpdate === index) {
+      setNewDescription(value);
+    }
   };
 
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -34,12 +57,22 @@ const EditButton: React.FC<Props> = (props) => {
     try {
       const docRef = doc(db, props.collectionName, props.cardId);
 
+      const updatedSectionsWithNewDescription = updatedSections.map(
+        (section, index) => {
+          if (index === sectionIndexToUpdate) {
+            return { ...section, description: newDescription };
+          }
+          return section;
+        }
+      );
+
       await updateDoc(docRef, {
         firstName: newFirstName,
         lastName: newLastName,
         born: newBorn,
         death: newDeath,
         graveId: newGraveId,
+        sections: updatedSectionsWithNewDescription,
       });
 
       setIsEditing(false);
@@ -48,75 +81,68 @@ const EditButton: React.FC<Props> = (props) => {
     }
   };
 
-return (
-  <div className={style["edit-container"]}>
-    {isEditing ? (
-      <form
-        className={style["edit-form"]}
-        onSubmit={(event) => handleSaveClick(event)}
-      >
-        <label>Name</label>
-        <input
-          type="text"
-          placeholder="Title"
-          value={newFirstName}
-          onChange={(e) => setNewFirstName(e.target.value)}
-        />
-        <label>Last Name</label>
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={newLastName}
-          onChange={(e) => setNewLastName(e.target.value)}
-        />
-        <label>Born</label>
-        <input
-          type="text"
-          placeholder="Born"
-          value={newBorn}
-          onChange={(e) => setNewBorn(e.target.value)}
-        />
-        <label>Death</label>
-        <input
-          type="text"
-          placeholder="Death"
-          value={newDeath}
-          onChange={(e) => setNewDeath(e.target.value)}
-        />
-        <label>Grave ID</label>
-        <input
-          type="text"
-          placeholder="Grave ID"
-          value={newGraveId}
-          onChange={(e) => setNewGraveId(e.target.value)}
-        />
-        {props.sections.map((section, index) => (
-          <div key={index}>
-            <label>{section.title}</label>
-            <input
-              type="text"
-              placeholder={section.description}
-              value={section.description}
-              onChange={(e) => {
-                const newSections = [...props.sections];
-                newSections[index] = {
-                  title: section.title,
-                  description: e.target.value,
-                };
-                props.setSections(newSections);
-              }}
-            />
-          </div>
-        ))}
-        <button type="submit">Save</button>
-      </form>
-    ) : (
-      <button className={style["edit-button"]} onClick={handleEditClick}>
+  return (
+    <div className={style.editContainer}>
+      <button className={style.editButton} onClick={handleEditClick}>
         Edit
       </button>
-    )}
-  </div>
-);
-
-
+      {isEditing && (
+        <form className={style.editForm} onSubmit={handleSaveClick}>
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            value={newFirstName}
+            onChange={(e) => setNewFirstName(e.target.value)}
+          />
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            value={newLastName}
+            onChange={(e) => setNewLastName(e.target.value)}
+          />
+          <label htmlFor="born">Born:</label>
+          <input
+            type="text"
+            id="born"
+            value={newBorn}
+            onChange={(e) => setNewBorn(e.target.value)}
+          />
+          <label htmlFor="death">Death:</label>
+          <input
+            type="text"
+            id="death"
+            value={newDeath}
+            onChange={(e) => setNewDeath(e.target.value)}
+          />
+          <label htmlFor="graveId">Grave ID:</label>
+          <input
+            type="text"
+            id="graveId"
+            value={newGraveId}
+            onChange={(e) => setNewGraveId(e.target.value)}
+          />
+          {props.sections.map((section, index) => (
+            <div key={index}>
+              <label htmlFor={`description-${index}`}>{section.title}:</label>
+              <textarea
+                id={`description-${index}`}
+                value={updatedSections[index].description}
+                onFocus={() => setSectionIndexToUpdate(index)}
+                onBlur={() => {
+                  setSectionIndexToUpdate(-1);
+                }}
+                onChange={(e) =>
+                  handleSectionDescriptionChange(index, e.target.value)
+                }
+              />
+            </div>
+          ))}
+          <button type="submit">Save</button>
+        </form>
+      )}
+    </div>
+  );
+};
 export default EditButton;
