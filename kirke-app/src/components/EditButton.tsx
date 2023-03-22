@@ -112,14 +112,14 @@ const EditButton: React.FC<Props> = (props) => {
           />
           <label htmlFor="born">Born:</label>
           <input
-            type="text"
+            type="date"
             id="born"
             value={newBorn}
             onChange={(e) => setNewBorn(e.target.value)}
           />
           <label htmlFor="death">Death:</label>
           <input
-            type="text"
+            type="date"
             id="death"
             value={newDeath}
             onChange={(e) => setNewDeath(e.target.value)}

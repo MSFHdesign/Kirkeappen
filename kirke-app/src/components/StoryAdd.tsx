@@ -137,7 +137,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
         <div className={style.formGroup}>
           <label htmlFor="born">Birth Date:</label>
           <input
-            type="text"
+            type="date"
             id="born"
             value={born}
             onChange={(e) => setBorn(e.target.value)}
@@ -147,7 +147,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
         <div className={style.formGroup}>
           <label htmlFor="death">Death Date:</label>
           <input
-            type="text"
+            type="date"
             id="death"
             value={death}
             onChange={(e) => setDeath(e.target.value)}
