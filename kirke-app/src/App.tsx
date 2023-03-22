@@ -46,7 +46,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             }
           />
           <Route
-            path="/storyDisplay"
+            path="/Historiske"
             element={
               <AuthRoute>
                 <StoryDisplay collectionName="Kendte" />

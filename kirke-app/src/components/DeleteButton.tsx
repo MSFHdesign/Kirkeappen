@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../models/FBconfig";
-
+import style from "../style/warning.module.css";
 
 interface Props {
   collectionName: string;
@@ -37,7 +37,7 @@ const DeleteButton: React.FC<Props> = (props) => {
     <div>
       {isModalOpen ? (
         <div>
-          <p>Are you sure you want to delete this card?</p>
+          <h3>Are you sure you want to delete this card?</h3>
           <button onClick={handleDeleteConfirmed}>Yes</button>
           <button onClick={handleModalClose}>No</button>
         </div>

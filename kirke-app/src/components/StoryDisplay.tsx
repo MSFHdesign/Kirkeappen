@@ -45,17 +45,19 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         <div key={index}>
           <h2>{item.title}</h2>
           <p>{item.content}</p>
-          <EditButton
-            collectionName={props.collectionName}
-            cardId={item.id}
-            title={item.title}
-            content={item.content}
-          />
-          <DeleteButton
-            collectionName={props.collectionName}
-            cardId={item.id}
-            onDelete={() => handleCardDelete(item.id)}
-          />
+          <div>
+            <EditButton
+              collectionName={props.collectionName}
+              cardId={item.id}
+              title={item.title}
+              content={item.content}
+            />
+            <DeleteButton
+              collectionName={props.collectionName}
+              cardId={item.id}
+              onDelete={() => handleCardDelete(item.id)}
+            />
+          </div>
         </div>
       ))}
     </div>
