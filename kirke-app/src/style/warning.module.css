@@ -29,7 +29,6 @@
   transform: rotate(-50%, -50%);
 }
 
-
 .warning-modal {
   position: fixed;
   top: 50%;
@@ -69,7 +68,7 @@
 }
 
 .warning-modal-content button.yes-button {
-  background-color: green;
+  background-color: red;
   color: white;
 }
 
@@ -78,7 +77,7 @@
 }
 
 .warning-modal-content button.no-button {
-  background-color: red;
+  background-color: green;
   color: white;
 }
 

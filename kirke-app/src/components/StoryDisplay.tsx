@@ -31,7 +31,10 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
 
   const filteredCollectionData = props.cardId
     ? collectionData.filter((item) => item.id === props.cardId)
-    : collectionData;
+    : collectionData.map((item) => ({
+        ...item,
+        sections: item.sections || [],
+      }));
 
   const handleCardDelete = (cardId: string) => {
     const updatedCollectionData = collectionData.filter(
@@ -46,8 +49,26 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         <div key={index} className={style.cardWrapper}>
           {editingCardId !== item.id && (
             <>
-              <h2>{item.title}</h2>
-              <p>{item.content}</p>
+              <h2>
+                {item.firstName} {item.lastName}
+              </h2>
+
+              <h3>Født: {item.born}</h3>
+              <h3>Død: {item.death}</h3>
+              <h3>Grav nummer {item.graveNumber}</h3>
+              {item.sections.map(
+                (
+                  section: { title: string; description: string },
+                  sectionIndex: React.Key
+                ) => (
+                  <div key={sectionIndex} className={style.section}>
+                    <h3>{section.title}</h3>
+                    <p>{section.description}</p>
+                  </div>
+                )
+              )}
+              {/* item.born */}
+
               <div className={style.buttonsWrapper}>
                 <DeleteButton
                   collectionName={props.collectionName}
@@ -57,8 +78,12 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                 <EditButton
                   collectionName={props.collectionName}
                   cardId={item.id}
-                  title={item.title}
-                  content={item.content}
+                  firstName={item.firstName}
+                  lastName={item.lastName}
+                  born={item.born}
+                  death={item.death}
+                  graveId={item.GraveId}
+                  sections={item.sections}
                 />
               </div>
             </>
@@ -67,8 +92,12 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
             <EditButton
               collectionName={props.collectionName}
               cardId={item.id}
-              title={item.title}
-              content={item.content}
+              firstName={item.firstName}
+              lastName={item.lastName}
+              born={item.born}
+              death={item.death}
+              graveId={item.GraveId}
+              sections={item.sections}
             />
           )}
         </div>
