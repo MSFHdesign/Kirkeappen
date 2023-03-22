@@ -26,14 +26,27 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
   }, []);
   return (
     <LanguageProvider>
+      <Navigationbar />
       <BrowserRouter>
         <Routes>
-          <AuthRoute>
-            <Navigationbar />
-            <Route path="/" element={<DashBoard userEmail={userEmail} />} />
-            <Route path="/editProfile" element={<EditProfilePage />} />
-            <Route path="/login" element={<LoginPage />} />
-          </AuthRoute>
+          <Route
+            path="/"
+            element={
+              <AuthRoute>
+                <DashBoard userEmail={userEmail} />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/editProfile"
+            element={
+              <AuthRoute>
+                <EditProfilePage />
+              </AuthRoute>
+            }
+          />
+
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </LanguageProvider>
