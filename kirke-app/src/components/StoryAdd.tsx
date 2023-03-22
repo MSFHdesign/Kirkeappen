@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../models/FBconfig";
-import style from "../style/add.module.css"; // import your CSS module
+import style from "../style/add.module.css";
 
 interface Props {
   collectionName: string;
@@ -16,13 +16,24 @@ const AddPostComponent: React.FC<Props> = (props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Reset error messages
+    setTitleError("");
+    setContentError("");
+
+    let hasErrors = false;
+
     // Check if fields are not empty
     if (!title.trim()) {
       setTitleError("Title is required");
-      return;
+      hasErrors = true;
     }
     if (!content.trim()) {
       setContentError("Content is required");
+      hasErrors = true;
+    }
+
+    // Check if all fields are valid
+    if (hasErrors) {
       return;
     }
 
@@ -35,16 +46,13 @@ const AddPostComponent: React.FC<Props> = (props) => {
 
       console.log("Document written with ID: ", docRef.id);
 
-      // Reset the form inputs and errors
+      // Reset the form inputs
       setTitle("");
       setContent("");
-      setTitleError("");
-      setContentError("");
     } catch (error) {
       console.error("Error adding document: ", error);
     }
   };
-
   return (
     <div className={style.addPostContainer}>
       <h2>Add a new post</h2>
@@ -57,8 +65,8 @@ const AddPostComponent: React.FC<Props> = (props) => {
             onChange={(e) => setTitle(e.target.value)}
             className={style.addPostInput}
           />
-          {titleError && <div className={style.error}>{titleError}</div>}
         </label>
+        {titleError && <p>{titleError}</p>}
         <label>
           Content:
           <textarea
@@ -66,8 +74,8 @@ const AddPostComponent: React.FC<Props> = (props) => {
             onChange={(e) => setContent(e.target.value)}
             className={style.addPostTextArea}
           />
-          {contentError && <div className={style.error}>{contentError}</div>}
         </label>
+        {contentError && <p>{contentError}</p>}
         <button type="submit" className={style.addPostButton}>
           Submit
         </button>
