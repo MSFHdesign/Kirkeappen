@@ -9,7 +9,7 @@ import DashBoard from "./pages/Dashboard";
 import EditProfilePage from "./pages/EditProfilePage";
 import Navigationsbar from "./components/navigationbar";
 import StoryDisplay from "./components/StoryDisplay";
-
+import StoryAdd from "./components/StoryAdd";
 import { LanguageProvider } from "./components/LanguageContext";
 import Navigationbar from "./components/navigationbar";
 
@@ -49,7 +49,8 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/storyDisplay"
             element={
               <AuthRoute>
-                <StoryDisplay collectionName={"Historier"} subCollectionName={"Kendte"} />
+                <StoryDisplay collectionName="Kendte" />
+                <StoryAdd collectionName="Kendte" />
               </AuthRoute>
             }
           />
