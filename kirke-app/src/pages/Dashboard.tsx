@@ -22,6 +22,9 @@ const DashBoard: React.FunctionComponent<IDashBoardProps> = (props) => {
       <Link to="/editProfile">
         <button>Edit Profile</button>
       </Link>
+      <Link to="/Historiske">
+        <button>Historiske</button>
+      </Link>
       <button onClick={() => signOut(auth)}>Sign out of Firebase</button>
     </div>
   );

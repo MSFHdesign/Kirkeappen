@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+// globale CSS
+import "./style/global.css";
+
 import LoginPage from "./pages/Login";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./models/FBconfig";

@@ -1,55 +1,35 @@
 import React, { useState } from "react";
 
 interface Props {
-  buttonContent: React.ReactNode;
-  closeButtonContent: React.ReactNode;
-  onClose?: () => void;
+  isOpen: boolean;
+  onClose: () => void;
   children: React.ReactNode;
 }
 
-const Modal: React.FC<Props> = ({
-  buttonContent,
-  closeButtonContent,
-  onClose,
-  children,
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-    if (onClose) {
-      onClose();
-    }
-  };
-
+const Modal: React.FC<Props> = ({ isOpen, onClose, children }) => {
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      handleClose();
+      onClose();
     }
   };
 
   const handleEscapeKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
-      handleClose();
+      onClose();
     }
   };
 
+  if (!isOpen) {
+    return null;
+  }
+
   return (
-    <>
-      <button onClick={handleOpen}>{buttonContent}</button>
-      {isOpen && (
-        <div className="modal-overlay" onClick={handleOverlayClick}>
-          <div className="modal">
-            {children}
-            <button onClick={handleClose}>{closeButtonContent}</button>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="modal-overlay" onClick={handleOverlayClick}>
+      <div className="modal">
+        {children}
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>
   );
 };
 

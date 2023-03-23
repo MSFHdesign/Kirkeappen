@@ -5,19 +5,28 @@ import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import style from "../style/display.module.css";
 import { useLanguage } from "../components/LanguageContext";
+import Skeletor from "./Skeleton";
 
+interface Props {
+  collectionName: string;
+  cardId?: string;
+}
 interface Props {
   collectionName: string;
   cardId?: string;
 }
 
 const FirebaseCollectionComponent: React.FC<Props> = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [collectionData, setCollectionData] = useState<any[]>([]);
   const [editingCardId] = useState<string | null>(null);
 
   // Text
-  const { locale } = useLanguage();
-  const story = locale.story;
+  const story = {
+    born: "Born",
+    dead: "Dead",
+    graveID: "Grave ID",
+  };
 
   useEffect(() => {
     const subCollectionRef = collection(db, props.collectionName);
@@ -30,6 +39,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         };
       });
       setCollectionData(data);
+      setIsLoading(false); // set isLoading to false when data is fetched
     });
 
     return () => unsubscribe();
@@ -51,9 +61,13 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
 
   return (
     <div className={style.collectionWrapper}>
-      {filteredCollectionData.map((item, index) => (
-        <div key={index} className={style.cardWrapper}>
-          {editingCardId !== item.id && (
+      {isLoading ? (
+        // Skeleton Placeholder
+        <Skeletor />
+      ) : (
+        // Actual Content
+        filteredCollectionData.map((item, index) => (
+          <div key={index} className={style.cardWrapper}>
             <>
               <h2>
                 {item.firstName} &nbsp;
@@ -64,10 +78,10 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                 {story.born}: {item.born}
               </h3>
               <h3>
-                {story.dead}: {item.death}
+                {story.dead} {item.death}
               </h3>
               <h3>
-                {story.graveID}: {item.graveNumber}
+                {story.graveID} {item.graveNumber}
               </h3>
               {item.sections.map(
                 (
@@ -100,21 +114,9 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                 />
               </div>
             </>
-          )}
-          {editingCardId === item.id && (
-            <EditButton
-              collectionName={props.collectionName}
-              cardId={item.id}
-              firstName={item.firstName}
-              lastName={item.lastName}
-              born={item.born}
-              death={item.death}
-              graveId={item.graveNumber}
-              sections={item.sections}
-            />
-          )}
-        </div>
-      ))}
+          </div>
+        ))
+      )}
     </div>
   );
 };
