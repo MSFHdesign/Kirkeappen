@@ -6,11 +6,7 @@ import DeleteButton from "./DeleteButton";
 import style from "../style/display.module.css";
 import { useLanguage } from "../components/LanguageContext";
 import Skeletor from "./Skeleton";
-
-interface Props {
-  collectionName: string;
-  cardId?: string;
-}
+import Search from "./Search";
 interface Props {
   collectionName: string;
   cardId?: string;
@@ -19,6 +15,9 @@ interface Props {
 const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [collectionData, setCollectionData] = useState<any[]>([]);
+  const [filteredCollectionData, setFilteredCollectionData] = useState<any[]>(
+    []
+  );
 
   // Text
   const { locale } = useLanguage();
@@ -35,38 +34,41 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         };
       });
       setCollectionData(data);
+      setFilteredCollectionData(data); // set filtered data to initial data
       setIsLoading(false); // set isLoading to false when data is fetched
     });
 
     return () => unsubscribe();
   }, [props.collectionName]);
 
-  const filteredCollectionData = props.cardId
-    ? collectionData.filter((item) => item.id === props.cardId)
-    : collectionData.map((item) => ({
-        ...item,
-        sections: item.sections || [],
-      }));
-
   const handleCardDelete = (cardId: string) => {
     const updatedCollectionData = collectionData.filter(
       (item) => item.id !== cardId
     );
     setCollectionData(updatedCollectionData);
+    setFilteredCollectionData(updatedCollectionData); // update filtered data when item is deleted
+  };
+
+  const handleSearch = (searchText: string) => {
+    const filteredData = collectionData.filter(
+      (item) =>
+        item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.lastName.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredCollectionData(filteredData);
   };
 
   return (
     <div className={style.collectionWrapper}>
+      <Search data={[]} onSearch={handleSearch} />
       {isLoading ? (
-        // Skeleton Placeholder
         <>
           <Skeletor />
           <Skeletor />
-          <Skeletor />
-          <Skeletor />
         </>
+      ) : filteredCollectionData.length === 0 ? (
+        <div>Nothing to show</div>
       ) : (
-        // Actual Content
         filteredCollectionData.map((item, index) => (
           <div key={index} className={style.cardWrapper}>
             <div className={style.cardImg} />

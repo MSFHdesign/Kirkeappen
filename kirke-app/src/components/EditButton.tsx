@@ -96,75 +96,89 @@ const EditButton: React.FC<Props> = (props) => {
 
   return (
     <div className={style.editContainer}>
-      <button className={style.editButton} onClick={handleEditClick}>
-        Edit
-      </button>
-      {isEditing && (
-        <form className={style.editForm} onSubmit={handleSaveClick}>
-          <label htmlFor="firstName">{story.firstName}:</label>
-          <input
-            type="text"
-            id="firstName"
-            value={newFirstName}
-            onChange={(e) => setNewFirstName(e.target.value)}
-          />
-          <label htmlFor="lastName">{story.lastName}:</label>
-          <input
-            type="text"
-            id="lastName"
-            value={newLastName}
-            onChange={(e) => setNewLastName(e.target.value)}
-          />
-          <label htmlFor="born">{story.born}:</label>
-          <input
-            type="date"
-            id="born"
-            value={newBorn}
-            onChange={(e) => setNewBorn(e.target.value)}
-          />
-          <label htmlFor="death">{story.dead}:</label>
-          <input
-            type="date"
-            id="death"
-            value={newDeath}
-            onChange={(e) => setNewDeath(e.target.value)}
-          />
-          <label htmlFor="graveId">{story.graveID}:</label>
-          <input
-            type="text"
-            id="graveId"
-            value={newGraveId}
-            onChange={(e) => setNewGraveId(e.target.value)}
-          />
-          {props.sections.map((section, index) => (
-            <div key={index}>
-              <label htmlFor={`title-${index}`}>{story.section.title}:</label>
-              <input
-                type="text"
-                id={`title-${index}`}
-                value={updatedSections[index].title}
-                onChange={(e) =>
-                  handleSectionTitleChange(index, e.target.value)
-                }
-              />
-              <label htmlFor={`description-${index}`}>
-                {story.section.description}:
-              </label>
-              <textarea
-                id={`description-${index}`}
-                value={updatedSections[index].description}
-                onFocus={() => setSectionIndexToUpdate(index)}
-                onBlur={() => {
-                  setSectionIndexToUpdate(-1);
-                }}
-                onChange={(e) =>
-                  handleSectionDescriptionChange(index, e.target.value)
-                }
-              />
-            </div>
-          ))}
-          <button type="submit">{story.section.submit}</button>
-        </form>
+      {isEditing ? (
+        <div className={style.Container}>
+          <div className={style.boxSize}>
+            <form className={style.editForm} onSubmit={handleSaveClick}>
+              <div className={style.topBar}>
+                <span className={style.leftSide}>
+                  <label htmlFor="firstName">{story.firstName}:</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={newFirstName}
+                    onChange={(e) => setNewFirstName(e.target.value)}
+                  />
+                  <label htmlFor="lastName">{story.lastName}:</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={newLastName}
+                    onChange={(e) => setNewLastName(e.target.value)}
+                  />
+                  <label htmlFor="graveId">{story.graveID}:</label>
+                  <input
+                    type="text"
+                    id="graveId"
+                    value={newGraveId}
+                    onChange={(e) => setNewGraveId(e.target.value)}
+                  />
+                </span>
+                <span className={style.rightSide}>
+                  <label htmlFor="born">{story.born}:</label>
+                  <input
+                    type="date"
+                    id="born"
+                    value={newBorn}
+                    onChange={(e) => setNewBorn(e.target.value)}
+                  />
+                  <label htmlFor="death">{story.dead}:</label>
+                  <input
+                    type="date"
+                    id="death"
+                    value={newDeath}
+                    onChange={(e) => setNewDeath(e.target.value)}
+                  />
+                </span>
+              </div>
+              {props.sections.map((section, index) => (
+                <div key={index} className={style.sectionBox}>
+                  <label htmlFor={`title-${index}`}>
+                    {story.section.title}:
+                  </label>
+                  <input
+                    id={`title-${index}`}
+                    value={updatedSections[index].title}
+                    onChange={(e) =>
+                      handleSectionTitleChange(index, e.target.value)
+                    }
+                  />
+                  <label htmlFor={`description-${index}`}>
+                    {story.section.description}:
+                  </label>
+                  <textarea
+                    id={`description-${index}`}
+                    value={updatedSections[index].description}
+                    onFocus={() => setSectionIndexToUpdate(index)}
+                    onBlur={() => {
+                      setSectionIndexToUpdate(-1);
+                    }}
+                    onChange={(e) =>
+                      handleSectionDescriptionChange(index, e.target.value)
+                    }
+                  />
+                </div>
+              ))}
+              <button className={style.editButton} type="submit">
+                {story.section.submit}
+              </button>
+            </form>
+          </div>
+        </div>
+      ) : (
+        <button className={style.editButton} onClick={handleEditClick}>
+          {locale.story.submit}
+        </button>
       )}
     </div>
   );
