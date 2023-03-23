@@ -2,26 +2,74 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2%;
+  height: 80vh;
+  overflow: scroll;
 }
 
 .cardWrapper {
-  max-width: 500px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  width: 300px;
+  background-color: #fff;
+  max-width: var(--cardWidth);
+  height: var(--cardHeight);
+  width: 100%;
+}
+
+.cardImg {
+  width: 25%;
+  height: 100%;
+  background-color: #ddd;
+  margin-right: 16px;
+}
+.contentWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.topBoxes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nameBox {
+  margin: 0;
+  width: 70%;
+  height: 24px;
+}
+.nameBox p {
+  margin: 0;
+}
+.textBox {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  height: 100%;
+  margin-bottom: 2%;
 }
 
 h2 {
-  font-size: 24px;
   margin: 0;
+  font-size: 14px;
+}
+h3 {
+  margin: 0;
+  font-size: 14px;
+}
+.dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 p {
-  font-size: 16px;
-  margin: 10px 0 20px;
 }
 
 .cardWrapper h2,
@@ -32,7 +80,18 @@ p {
   word-break: break-all;
 }
 
+.section {
+  padding-top: 5px;
+}
+
+.section h3 {
+  text-decoration: underline;
+}
+.section p {
+  margin: 0;
+}
 .buttonsWrapper {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }

@@ -1,6 +1,6 @@
 .alert {
   padding: 20px;
-  background-color: #f44336;
+  background-color: C17878;
   color: white;
 }
 
@@ -22,7 +22,7 @@
 .Deletewarning {
   width: 50vw;
   height: 50vw;
-  border: 2px solid red;
+  border: 2px solid var(--Red100);
   position: relative;
   top: 50%;
   left: 50%;
@@ -68,7 +68,7 @@
 }
 
 .warning-modal-content button.yes-button {
-  background-color: red;
+  background-color: var(--Red100);
   color: white;
 }
 
@@ -86,10 +86,11 @@
 }
 
 .delete-button {
-  background-color: #ff4136;
-  color: #fff;
+  background-color: var(--Red100);
+  color: var(--textColor);
+  text-transform: uppercase;
   border: none;
-  padding: 8px 16px;
+  padding: 8px 50px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 4px;
@@ -98,5 +99,5 @@
 }
 
 .delete-button:hover {
-  background-color: #e51c23;
+  background-color: var(--Red50);
 }

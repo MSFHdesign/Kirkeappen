@@ -7,7 +7,7 @@ const Skeletor: React.FC = (props) => {
       <div className={style.contentWrapper}>
         <div className={style.topBoxes}>
           <div className={style.nameSkeleton} />
-          <div className={style.dobSkeleton} />
+
           <div className={style.dodSkeleton} />
         </div>
         <div className={style.midBox}>

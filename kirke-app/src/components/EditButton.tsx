@@ -101,35 +101,35 @@ const EditButton: React.FC<Props> = (props) => {
       </button>
       {isEditing && (
         <form className={style.editForm} onSubmit={handleSaveClick}>
-          <label htmlFor="firstName">{ story.firstName }:</label>
+          <label htmlFor="firstName">{story.firstName}:</label>
           <input
             type="text"
             id="firstName"
             value={newFirstName}
             onChange={(e) => setNewFirstName(e.target.value)}
           />
-          <label htmlFor="lastName">{ story.lastName}:</label>
+          <label htmlFor="lastName">{story.lastName}:</label>
           <input
             type="text"
             id="lastName"
             value={newLastName}
             onChange={(e) => setNewLastName(e.target.value)}
           />
-          <label htmlFor="born">{ story.born}:</label>
+          <label htmlFor="born">{story.born}:</label>
           <input
             type="date"
             id="born"
             value={newBorn}
             onChange={(e) => setNewBorn(e.target.value)}
           />
-          <label htmlFor="death">{story.dead }:</label>
+          <label htmlFor="death">{story.dead}:</label>
           <input
             type="date"
             id="death"
             value={newDeath}
             onChange={(e) => setNewDeath(e.target.value)}
           />
-          <label htmlFor="graveId">{ story.graveID }:</label>
+          <label htmlFor="graveId">{story.graveID}:</label>
           <input
             type="text"
             id="graveId"
@@ -138,7 +138,7 @@ const EditButton: React.FC<Props> = (props) => {
           />
           {props.sections.map((section, index) => (
             <div key={index}>
-              <label htmlFor={`title-${index}`}>{ story.section.title }:</label>
+              <label htmlFor={`title-${index}`}>{story.section.title}:</label>
               <input
                 type="text"
                 id={`title-${index}`}
@@ -147,7 +147,9 @@ const EditButton: React.FC<Props> = (props) => {
                   handleSectionTitleChange(index, e.target.value)
                 }
               />
-              <label htmlFor={`description-${index}`}>{ story.section.description }:</label>
+              <label htmlFor={`description-${index}`}>
+                {story.section.description}:
+              </label>
               <textarea
                 id={`description-${index}`}
                 value={updatedSections[index].description}
@@ -161,7 +163,7 @@ const EditButton: React.FC<Props> = (props) => {
               />
             </div>
           ))}
-          <button type="submit">{ story.section.submit }</button>
+          <button type="submit">{story.section.submit}</button>
         </form>
       )}
     </div>

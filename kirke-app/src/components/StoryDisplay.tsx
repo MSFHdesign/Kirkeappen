@@ -19,14 +19,10 @@ interface Props {
 const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [collectionData, setCollectionData] = useState<any[]>([]);
-  const [editingCardId] = useState<string | null>(null);
 
   // Text
-  const story = {
-    born: "Born",
-    dead: "Dead",
-    graveID: "Grave ID",
-  };
+  const { locale } = useLanguage();
+  const story = locale.story;
 
   useEffect(() => {
     const subCollectionRef = collection(db, props.collectionName);
@@ -73,34 +69,42 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         // Actual Content
         filteredCollectionData.map((item, index) => (
           <div key={index} className={style.cardWrapper}>
-            <>
-              <h2>
-                {item.firstName} &nbsp;
-                {item.lastName}
-              </h2>
-
-              <h3>
-                {story.born}: {item.born}
-              </h3>
-              <h3>
-                {story.dead} {item.death}
-              </h3>
-              <h3>
-                {story.graveID} {item.graveNumber}
-              </h3>
-              {item.sections.map(
-                (
-                  section: { title: string; description: string },
-                  sectionIndex: React.Key
-                ) => (
-                  <div key={sectionIndex} className={style.section}>
-                    <h3>{section.title}</h3>
-                    <p>{section.description}</p>
-                  </div>
-                )
-              )}
-              {/* item.born */}
-
+            <div className={style.cardImg} />
+            <div className={style.contentWrapper}>
+              <div className={style.textBox}>
+                <div className={style.topBoxes}>
+                  <span className={style.nameBox}>
+                    <h2>
+                      {item.firstName}&nbsp;
+                      {item.lastName}
+                    </h2>
+                    <p>
+                      {story.graveID} {item.graveNumber}
+                    </p>
+                  </span>
+                  <span className={style.dates}>
+                    <h3>
+                      {story.born}: {item.born}
+                    </h3>
+                    <h3>
+                      {story.dead}: {item.death}
+                    </h3>
+                  </span>
+                </div>
+                <div>
+                  {item.sections.map(
+                    (
+                      section: { title: string; description: string },
+                      sectionIndex: React.Key
+                    ) => (
+                      <div key={sectionIndex} className={style.section}>
+                        <h3>{section.title}</h3>
+                        <p>{section.description}</p>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
               <div className={style.buttonsWrapper}>
                 <DeleteButton
                   collectionName={props.collectionName}
@@ -118,7 +122,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                   sections={item.sections}
                 />
               </div>
-            </>
+            </div>
           </div>
         ))
       )}
