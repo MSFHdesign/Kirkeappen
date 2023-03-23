@@ -4,11 +4,16 @@ export interface iTexts {
     loginFailed: string;
     [key: string]: string;
   };
+  succes: {
+    resetEmail: string;
+  };
   login: {
     title: string;
     email: string;
     password: string;
     submit: string;
+    ResetPassword: string;
+    ResetLabel: string;
     failedToLogIn: string;
   };
   dashboard: {
