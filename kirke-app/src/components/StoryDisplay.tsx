@@ -63,7 +63,12 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
     <div className={style.collectionWrapper}>
       {isLoading ? (
         // Skeleton Placeholder
-        <Skeletor />
+        <>
+          <Skeletor />
+          <Skeletor />
+          <Skeletor />
+          <Skeletor />
+        </>
       ) : (
         // Actual Content
         filteredCollectionData.map((item, index) => (
