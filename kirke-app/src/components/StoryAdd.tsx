@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../models/FBconfig";
 import style from "../style/add.module.css";
+import { useLanguage } from "../components/LanguageContext";
 
 interface Props {
   collectionName: string;
@@ -26,6 +27,10 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   const [deathError, setDeathError] = useState("");
   const [graveNumberError, setGraveNumberError] = useState("");
 
+  // Text
+  const { locale } = useLanguage();
+  const story = locale.story;
+  
   const handleSectionChange = (index: number, field: string, value: string) => {
     const updatedSections = [...sections];
     updatedSections[index][field] = value;
@@ -56,23 +61,23 @@ const AddPersonComponent: React.FC<Props> = (props) => {
 
     // Check if fields are not empty
     if (!firstName.trim()) {
-      setFirstNameError("First name is required");
+      setFirstNameError(story.error.firstName);
       hasErrors = true;
     }
     if (!lastName.trim()) {
-      setLastNameError("Last name is required");
+      setLastNameError(story.error.lastName);
       hasErrors = true;
     }
     if (!born.trim()) {
-      setBornError("Birth date is required");
+      setBornError(story.error.born);
       hasErrors = true;
     }
     if (!death.trim()) {
-      setDeathError("Death date is required");
+      setDeathError(story.error.dead);
       hasErrors = true;
     }
     if (!graveNumber.trim()) {
-      setGraveNumberError("Grave number is required");
+      setGraveNumberError(story.error.graveID);
       hasErrors = true;
     }
 
@@ -110,7 +115,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
     <>
       <form onSubmit={handleSubmit}>
         <div className={style.formGroup}>
-          <label htmlFor="firstName">First Name:</label>
+          <label htmlFor="firstName">{story.firstName}:</label>
           <input
             type="text"
             id="firstName"
@@ -122,7 +127,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           )}
         </div>
         <div className={style.formGroup}>
-          <label htmlFor="lastName">Last Name:</label>
+          <label htmlFor="lastName">{story.lastName}:</label>
           <input
             type="text"
             id="lastName"
@@ -135,7 +140,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
         </div>
 
         <div className={style.formGroup}>
-          <label htmlFor="born">Birth Date:</label>
+          <label htmlFor="born">{story.born}:</label>
           <input
             type="date"
             id="born"
@@ -145,7 +150,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           {bornError && <span className={style.error}>{bornError}</span>}
         </div>
         <div className={style.formGroup}>
-          <label htmlFor="death">Death Date:</label>
+          <label htmlFor="death">{story.dead}:</label>
           <input
             type="date"
             id="death"
@@ -155,7 +160,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           {deathError && <span className={style.error}>{deathError}</span>}
         </div>
         <div className={style.formGroup}>
-          <label htmlFor="graveNumber">Grave Number:</label>
+          <label htmlFor="graveNumber">{story.graveID}</label>
           <input
             type="text"
             id="graveNumber"
@@ -167,13 +172,20 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           )}
         </div>
         <div className={style.formGroup}>
-          <label>Sections:</label>
+          <label>{story.section.sectionTitle}:</label>
           {sections.map((section, index) => (
             <div key={index} className={style.section}>
               <div className={style.sectionInputs}>
+                <button
+                  type="button"
+                  className={style.removeSectionButton}
+                  onClick={() => handleRemoveSection(index)}
+                >
+                  {story.section.remove}
+                </button>
                 <input
                   type="text"
-                  placeholder="Title"
+                  placeholder={story.section.title}
                   value={section.title}
                   onChange={(e) =>
                     handleSectionChange(index, "title", e.target.value)
@@ -181,27 +193,20 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 />
                 <input
                   type="text"
-                  placeholder="Description"
+                  placeholder={story.section.description}
                   value={section.description}
                   onChange={(e) =>
                     handleSectionChange(index, "description", e.target.value)
                   }
                 />
               </div>
-              <button
-                type="button"
-                className={style.removeSectionButton}
-                onClick={() => handleRemoveSection(index)}
-              >
-                X
-              </button>
             </div>
           ))}
           <button type="button" onClick={handleAddSection}>
-            Add Section
+            {story.section.addSection}
           </button>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">{story.submit}</button>
       </form>
     </>
   );

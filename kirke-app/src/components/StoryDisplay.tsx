@@ -4,6 +4,8 @@ import { db } from "../models/FBconfig";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import style from "../style/display.module.css";
+import { useLanguage } from "../components/LanguageContext";
+
 interface Props {
   collectionName: string;
   cardId?: string;
@@ -11,7 +13,11 @@ interface Props {
 
 const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   const [collectionData, setCollectionData] = useState<any[]>([]);
-  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [editingCardId] = useState<string | null>(null);
+
+  // Text
+  const { locale } = useLanguage();
+  const story = locale.story;
 
   useEffect(() => {
     const subCollectionRef = collection(db, props.collectionName);
@@ -50,12 +56,19 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
           {editingCardId !== item.id && (
             <>
               <h2>
-                {item.firstName} {item.lastName}
+                {item.firstName} &nbsp;
+                {item.lastName}
               </h2>
 
-              <h3>Født: {item.born}</h3>
-              <h3>Død: {item.death}</h3>
-              <h3>Grav nummer {item.graveNumber}</h3>
+              <h3>
+                {story.born}: {item.born}
+              </h3>
+              <h3>
+                {story.dead}: {item.death}
+              </h3>
+              <h3>
+                {story.graveID}: {item.graveNumber}
+              </h3>
               {item.sections.map(
                 (
                   section: { title: string; description: string },
