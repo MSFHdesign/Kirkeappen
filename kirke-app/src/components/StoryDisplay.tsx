@@ -113,11 +113,11 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
           ))}
 
           {filteredCollectionData.length > visibleCount ? (
-            <button onClick={handleShowMore}>
+            <button className={style.loadMoreStories} onClick={handleShowMore}>
               {story.card.showMore.replace("{0}", String(visibleCount))}
             </button>
           ) : (
-            <div>{story.card.showEnd}</div>
+            <div className={style.loadMoreStories}>{story.card.showEnd}</div>
           )}
         </>
       )}

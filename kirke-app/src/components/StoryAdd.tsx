@@ -237,12 +237,19 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           </div>
         </div>
         <div className={style.addImg}>
-          <label htmlFor="image">image:</label>
+          <label className={style.imgUploader} htmlFor="image">
+            <span>Choose an image</span>
+            <svg viewBox="0 0 24 24">
+              <path d="M17 12l-5-5-1.41 1.41L14.17 11H4v2h10.17l-3.58 3.58L12 17l7-7z" />
+            </svg>
+          </label>
           <input
             type="file"
             id="image"
+            accept="image/*"
             onChange={(e) => setFile(e.target.files?.[0] || null)}
           />
+
           <progress value={progress} max="100" />
         </div>
 
@@ -281,7 +288,9 @@ const AddPersonComponent: React.FC<Props> = (props) => {
             {story.section.addSection}
           </button>
         </div>
-        <button type="submit">{story.submit}</button>
+        <button className={style.submitBtn} type="submit">
+          {story.submit}
+        </button>
         <div className={style.warningSucces}>
           {isSuccess && <h3>Form submitted successfully!</h3>}
         </div>
