@@ -98,6 +98,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                 graveNumber={item.graveNumber}
                 born={item.born}
                 death={item.death}
+                imageUrl={item.imageUrl}
                 sections={item.sections.map(
                   (section: { title: string; description: string }) => ({
                     title: section.title,

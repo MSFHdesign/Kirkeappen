@@ -3,10 +3,12 @@ import style from "../style/display.module.css";
 import { useLanguage } from "./LanguageContext";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+
 interface CardProps {
   firstName: string;
   lastName: string;
   graveNumber: string;
+  imageUrl: string;
   born: string;
   death: string;
   sections: {
@@ -25,7 +27,12 @@ const Card: React.FC<CardProps> = (props) => {
 
   return (
     <>
-      <div className={style.cardImg} />
+      {props.imageUrl ? (
+        <img src={props.imageUrl} alt={firstName} className={style.cardImg} />
+      ) : (
+        <div className={style.cardImg}></div>
+      )}
+
       <div className={style.contentWrapper}>
         <div className={style.textBox}>
           <div className={style.topBoxes}>
@@ -62,6 +69,7 @@ const Card: React.FC<CardProps> = (props) => {
             onDelete={props.onDelete}
           />
           <EditButton
+            imageUrl={props.imageUrl}
             collectionName={props.collectionName}
             cardId={props.cardId}
             firstName={props.firstName}

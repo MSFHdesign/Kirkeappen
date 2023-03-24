@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../models/FBconfig";
+import { db, storage } from "../models/FBconfig";
 import style from "../style/edit.module.css";
 import { useLanguage } from "../components/LanguageContext";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 interface Props {
   [x: string]: any;
+  imageUrl: string;
   collectionName: string;
   cardId: string;
   firstName: string;
@@ -28,8 +30,9 @@ const EditButton: React.FC<Props> = (props) => {
   const [newGraveId, setNewGraveId] = useState(props.graveId);
   const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
   const [newDescription, setNewDescription] = useState(
-    props.sections[sectionIndexToUpdate]?.description
+    props.sections[sectionIndexToUpdate]?.description ?? ""
   );
+  const [newImage, setNewImage] = useState<File | null>(null);
 
   // Text
   const { locale } = useLanguage();
@@ -64,11 +67,20 @@ const EditButton: React.FC<Props> = (props) => {
       setNewDescription(value);
     }
   };
-
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const docRef = doc(db, props.collectionName, props.cardId);
+
+      let newImageUrl = props.imageUrl;
+      if (newImage) {
+        // Upload the new image file
+        const imageRef = ref(storage, "/images/" + newImage.name);
+        await uploadBytesResumable(imageRef, newImage);
+
+        // Get the new URL of the image
+        newImageUrl = await getDownloadURL(imageRef);
+      }
 
       const updatedSectionsWithNewDescription = updatedSections.map(
         (section, index) => {
@@ -85,6 +97,7 @@ const EditButton: React.FC<Props> = (props) => {
         born: newBorn,
         death: newDeath,
         graveId: newGraveId,
+        imageUrl: newImageUrl,
         sections: updatedSectionsWithNewDescription,
       });
 
@@ -140,6 +153,13 @@ const EditButton: React.FC<Props> = (props) => {
                     onChange={(e) => setNewDeath(e.target.value)}
                   />
                 </span>
+                <label htmlFor="image">Image:</label>
+                <input
+                  type="file"
+                  id="image"
+                  accept="image/*"
+                  onChange={(e) => setNewImage(e.target.files?.[0] ?? null)}
+                />
               </div>
               {props.sections.map((section, index) => (
                 <div key={index} className={style.sectionBox}>

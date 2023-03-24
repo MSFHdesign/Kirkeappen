@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../models/FBconfig";
 import style from "../style/add.module.css";
-import { useLanguage } from "../components/LanguageContext";
+import { useLanguage } from "./LanguageContext";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 interface Props {
@@ -27,10 +27,12 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   const [bornError, setBornError] = useState("");
   const [deathError, setDeathError] = useState("");
   const [graveNumberError, setGraveNumberError] = useState("");
-  const [file, setFile] = useState<File | null>(null);
 
+  const [file, setFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [progress, setProgress] = useState(0);
 
+  const [isSuccess, setIsSuccess] = useState(false);
   // Text
   const { locale } = useLanguage();
   const story = locale.story;
@@ -89,9 +91,8 @@ const AddPersonComponent: React.FC<Props> = (props) => {
     if (hasErrors) {
       return;
     }
-
+    setIsSuccess(true);
     try {
-      let imageUrl = "";
       if (file) {
         const storageRef = ref(storage, "images/" + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -111,26 +112,53 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           },
           () => {
             // Handle successful upload
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log("File available at", downloadURL);
-              imageUrl = downloadURL;
-            });
+            getDownloadURL(uploadTask.snapshot.ref)
+              .then(async (downloadURL) => {
+                console.log("File available at", downloadURL);
+                setImageUrl(downloadURL); // Set imageUrl to the download URL
+                const docRef = await addDoc(
+                  collection(db, props.collectionName),
+                  {
+                    firstName,
+                    lastName,
+                    born,
+                    death,
+                    graveNumber,
+                    sections,
+                    imageUrl: downloadURL, // Use download URL as imageUrl
+                    timestamp: new Date(),
+                  }
+                );
+                console.log("Document written with ID: ", docRef.id);
+                // Reset the form inputs
+                setFirstName("");
+                setLastName("");
+                setBorn("");
+                setDeath("");
+                setGraveNumber("");
+                setSections([]);
+                setFile(null);
+              })
+              .catch((error) => {
+                // Handle errors
+                console.error(error);
+              });
           }
         );
+      } else {
+        const docRef = await addDoc(collection(db, props.collectionName), {
+          firstName,
+          lastName,
+          born,
+          death,
+          graveNumber,
+          sections,
+          imageUrl, // Add image URL to document
+          timestamp: new Date(),
+        });
+
+        console.log("Document written with ID: ", docRef.id);
       }
-      const docRef = await addDoc(collection(db, props.collectionName), {
-        firstName,
-        lastName,
-        born,
-        death,
-        graveNumber,
-        sections,
-        imageUrl, // Add image URL to document
-        timestamp: new Date(),
-      });
-
-      console.log("Document written with ID: ", docRef.id);
-
       // Reset the form inputs
       setFirstName("");
       setLastName("");
@@ -143,6 +171,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       console.error("Error adding document: ", error);
     }
   };
+
   return (
     <div className={style.addWrapper}>
       <form className={style.formData} onSubmit={handleSubmit}>
@@ -256,6 +285,9 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           </button>
         </div>
         <button type="submit">{story.submit}</button>
+        <div className={style.warningSucces}>
+          {isSuccess && <h3>Form submitted successfully!</h3>}
+        </div>
       </form>
     </div>
   );
