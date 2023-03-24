@@ -56,7 +56,12 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
     const filteredData = collectionData.filter(
       (item) =>
         item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.lastName.toLowerCase().includes(searchText.toLowerCase())
+        item.lastName.toLowerCase().includes(searchText.toLowerCase()) ||
+        (
+          item.firstName.toLowerCase() +
+          " " +
+          item.lastName.toLowerCase()
+        ).includes(searchText.toLowerCase())
     );
     setFilteredCollectionData(filteredData);
   };
