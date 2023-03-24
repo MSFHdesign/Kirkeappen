@@ -113,7 +113,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className={style.formData} onSubmit={handleSubmit}>
         <div className={style.formGroup}>
           <label htmlFor="firstName">{story.firstName}:</label>
           <input
