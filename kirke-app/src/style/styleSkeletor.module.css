@@ -1,0 +1,112 @@
+.skeletonWrapper {
+  margin-top: 2vw;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: var(--cardWidth);
+  height: var(--cardHeight);
+  padding: 2%;
+}
+
+.imgSkeleton {
+  width: 25%;
+  height: 100%;
+  background-color: #ddd;
+  margin-right: 16px;
+  animation: shimmer 2s infinite;
+}
+.contentWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.topBoxes {
+  margin-top: 1%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.nameSkeleton {
+  width: 30%;
+  height: 24px;
+  background-color: #ddd;
+  animation: shimmer 2s infinite;
+}
+
+.dobSkeleton,
+.dodSkeleton {
+  width: 20%;
+  height: 24px;
+  background-color: #ddd;
+  animation: shimmer 3s reverse infinite;
+}
+
+.midBox {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
+  margin-bottom: 16px;
+}
+
+.contentSkeleton {
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  margin: auto;
+}
+
+.contentSkeleton span::before {
+  padding-top: 10%;
+  margin: 5%;
+  opacity: 50%;
+  font-size: 25px;
+  content: "loading";
+  animation: shimmertext 1.5s ease-in-out infinite;
+}
+@keyframes shimmertext {
+  0% {
+    content: "Loading";
+  }
+  33% {
+    content: "Loading.";
+  }
+  66% {
+    content: "Loading..";
+  }
+  100% {
+    content: "Loading...";
+  }
+}
+
+.bottomBoxes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.btnSkeleton {
+  width: 40%;
+  height: 40px;
+  background-color: #ddd;
+  animation: shimmer 3s reverse infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-color: #ddd;
+    color: black;
+  }
+  50% {
+    background-color: #ccc;
+    color: white;
+  }
+  100% {
+    background-color: #ddd;
+    color: black;
+  }
+}

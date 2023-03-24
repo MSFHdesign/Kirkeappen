@@ -1,0 +1,62 @@
+.addWrappr {
+  display: flex;
+}
+
+.addPostContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.addPostContainer h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.addPostContainer form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.addPostContainer form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.addPostContainer form label input,
+.addPostContainer form label textarea {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.addPostContainer form label input:focus,
+.addPostContainer form label textarea:focus {
+  outline: none;
+  border: 1px solid #0077ff;
+}
+
+.addPostContainer button {
+  padding: 10px 20px;
+  background-color: #0077ff;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-post-wrapper button:hover {
+  background-color: #0059b3;
+}
+
+.error {
+  color: red;
+}

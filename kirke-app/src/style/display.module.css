@@ -1,0 +1,98 @@
+.collectionWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 2%;
+  height: 80vh;
+  overflow: scroll;
+  align-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardWrapper {
+  display: flex;
+  flex-direction: row;
+
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  background-color: #fff;
+  max-width: var(--cardWidth);
+  min-height: var(--cardHeight);
+  max-height: var(--cardHeight);
+  width: 100%;
+}
+
+.cardImg {
+  width: 25%;
+  height: 100%;
+  background-color: #ddd;
+  margin-right: 16px;
+}
+.contentWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.topBoxes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nameBox {
+  margin: 0;
+  width: 70%;
+  height: 24px;
+}
+.nameBox p {
+  margin: 0;
+}
+.textBox {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  height: 100%;
+  margin-bottom: 2%;
+}
+
+h2 {
+  margin: 0;
+  font-size: 14px;
+}
+h3 {
+  margin: 0;
+  font-size: 14px;
+}
+.dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cardWrapper h2,
+.cardWrapper p {
+  overflow-wrap: break-word;
+}
+.cardWrapper p {
+  word-break: break-all;
+}
+
+.section {
+  padding-top: 5px;
+}
+
+.section h3 {
+  text-decoration: underline;
+}
+.section p {
+  margin: 0;
+}
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

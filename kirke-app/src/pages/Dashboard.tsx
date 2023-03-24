@@ -1,5 +1,5 @@
 import React from "react";
-
+import { getAuth, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 import { useLanguage } from "../components/LanguageContext";
@@ -9,6 +9,7 @@ export interface IDashBoardProps {
 }
 
 const DashBoard: React.FunctionComponent<IDashBoardProps> = (props) => {
+  const auth = getAuth();
   const { locale } = useLanguage();
   const dash = locale.dashboard;
   return (
@@ -21,6 +22,10 @@ const DashBoard: React.FunctionComponent<IDashBoardProps> = (props) => {
       <Link to="/editProfile">
         <button>Edit Profile</button>
       </Link>
+      <Link to="/Historiske">
+        <button>Historiske</button>
+      </Link>
+      <button onClick={() => signOut(auth)}>Sign out of Firebase</button>
     </div>
   );
 };

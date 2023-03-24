@@ -1,9 +1,8 @@
 export interface iTexts {
   error: {
-    [key: string]: string;
     generic: string;
     loginFailed: string;
-    //more fails here if needed
+    [key: string]: string;
   };
   succes: {
     resetEmail: string;
@@ -29,6 +28,47 @@ export interface iTexts {
     title: string;
     fullName: string;
     address: string;
+  };
+  story: {
+    card: {
+      showEnd: string;
+      showMore: string;
+    };
+    title: {
+      add: string;
+      history: string;
+      personale: string;
+      toApprove: string;
+    };
+    firstName: string;
+    lastName: string;
+    born: string;
+    dead: string;
+    graveID: string;
+    deleteBtn: string;
+    editBtn: string;
     submit: string;
+    section: {
+      sectionTitle: string;
+      description: string;
+      title: string;
+      addSection: string;
+      remove: string;
+      submit: string;
+    };
+    error: {
+      show: string;
+      firstName: string;
+      lastName: string;
+      born: string;
+      dead: string;
+      graveID: string;
+      delete: {
+        title: string;
+        description: string;
+        confirm: string;
+        reject: string;
+      };
+    };
   };
 }

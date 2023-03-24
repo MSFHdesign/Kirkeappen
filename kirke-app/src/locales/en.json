@@ -26,7 +26,48 @@
   "personlige": {
     "title": "Personlige oplysninger",
     "fullName": "Fulde navn",
-    "address": "Adresse",
-    "submit": "Gem ændringer"
+    "address": "Adresse"
+  },
+  "story": {
+    "card": {
+      "showMore": "Hent flere historier",
+      "showEnd": "Ikke flere historier"
+    },
+    "title": {
+      "add": "tilføj",
+      "history": "Historiske",
+      "personale": "Personlige",
+      "toApprove": "til godkendelse"
+    },
+    "firstName": "string",
+    "lastName": "string",
+    "born": "string",
+    "dead": "string",
+    "graveID": "string",
+    "deleteBtn": "string",
+    "editBtn": "string",
+    "submit": "string",
+    "section": {
+      "sectionTitle": "string",
+      "description": "string",
+      "title": "string",
+      "addSection": "Add sektion",
+      "remove": "Remove section",
+      "submit": "Gem ændringer"
+    },
+    "error": {
+      "show": "Nothing to show",
+      "firstName": "string",
+      "lastName": "string",
+      "born": "string",
+      "dead": "string",
+      "graveID": "string",
+      "delete": {
+        "title": "Are you sure you want to delete this card?",
+        "description": "Hvis du sletter vil det forsvinde og kan ikke komme tilbage",
+        "confirm": "YES",
+        "reject": "NO"
+      }
+    }
   }
 }

@@ -26,7 +26,48 @@
   "personlige": {
     "title": "Personlige oplysninger",
     "fullName": "Fulde navn",
-    "address": "Adresse",
-    "submit": "Gem ændringer"
+    "address": "Adresse"
+  },
+  "story": {
+    "card": {
+      "showMore": "load more stories",
+      "showEnd": "ikke flere historier"
+    },
+    "title": {
+      "add": "tilføj",
+      "history": "Historiske",
+      "personale": "Personlige",
+      "toApprove": "til godkendelse"
+    },
+    "firstName": "Fornavn",
+    "lastName": "Efternavn",
+    "born": "Født",
+    "dead": "Afgået",
+    "graveID": "Grav nummer",
+    "deleteBtn": "Slet",
+    "editBtn": "Rediger",
+    "submit": "Indsend",
+    "section": {
+      "sectionTitle": "Afsnit",
+      "description": "Forklaring",
+      "title": "Afsnit title",
+      "addSection": "Tilføj afsnit",
+      "remove": "fjern section",
+      "submit": "Gem ændringer"
+    },
+    "error": {
+      "show": "Din søgning matcher ikke med nogen i databasen.",
+      "firstName": "Fornavnet skal udfyldes",
+      "lastName": "Efternavn skal udfyldes",
+      "born": "Fødselsdagen skal udfyldes",
+      "dead": "Dødsdagen skal udfyldes",
+      "graveID": "Grav id skal udfyldes",
+      "delete": {
+        "title": "Er du sikker på du vil slette?",
+        "description": "Hvis du sletter vil det forsvinde og kan ikke komme tilbage",
+        "confirm": "JA",
+        "reject": "NEJ"
+      }
+    }
   }
 }
