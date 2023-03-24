@@ -1,27 +1,37 @@
 import style from "../style/styleSkeletor.module.css";
 
-const Skeletor: React.FC = (props) => {
-  return (
-    <div className={style.skeletonWrapper}>
-      <div className={style.imgSkeleton} />
-      <div className={style.contentWrapper}>
-        <div className={style.topBoxes}>
-          <div className={style.nameSkeleton} />
+interface Props {
+  index: number;
+}
 
-          <div className={style.dodSkeleton} />
-        </div>
-        <div className={style.midBox}>
-          <div className={style.contentSkeleton}>
-            <span></span>
+const Skeletor: React.FC<Props> = ({ index }) => {
+  const skeletons = [];
+
+  for (let i = 0; i < index; i++) {
+    skeletons.push(
+      <div className={style.skeletonWrapper}>
+        <div className={style.imgSkeleton} />
+        <div className={style.contentWrapper}>
+          <div className={style.topBoxes}>
+            <div className={style.nameSkeleton} />
+
+            <div className={style.dodSkeleton} />
+          </div>
+          <div className={style.midBox}>
+            <div className={style.contentSkeleton}>
+              <span></span>
+            </div>
+          </div>
+          <div className={style.bottomBoxes}>
+            <div className={style.btnSkeleton} />
+            <div className={style.btnSkeleton} />
           </div>
         </div>
-        <div className={style.bottomBoxes}>
-          <div className={style.btnSkeleton} />
-          <div className={style.btnSkeleton} />
-        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <>{skeletons}</>;
 };
 
 export default Skeletor;

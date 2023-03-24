@@ -177,7 +177,7 @@ const EditButton: React.FC<Props> = (props) => {
         </div>
       ) : (
         <button className={style.editButton} onClick={handleEditClick}>
-          {locale.story.submit}
+          {locale.story.editBtn}
         </button>
       )}
     </div>

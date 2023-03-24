@@ -1,24 +1,28 @@
 .collectionWrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   margin-top: 2%;
   height: 80vh;
   overflow: scroll;
+  align-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cardWrapper {
   display: flex;
   flex-direction: row;
-  align-items: center;
+
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   padding: 20px;
   background-color: #fff;
   max-width: var(--cardWidth);
-  height: var(--cardHeight);
+  min-height: var(--cardHeight);
+  max-height: var(--cardHeight);
   width: 100%;
 }
 
@@ -67,9 +71,6 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-}
-
-p {
 }
 
 .cardWrapper h2,

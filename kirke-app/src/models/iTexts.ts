@@ -53,6 +53,7 @@ export interface iTexts {
       submit: string;
     };
     error: {
+      show: string;
       firstName: string;
       lastName: string;
       born: string;

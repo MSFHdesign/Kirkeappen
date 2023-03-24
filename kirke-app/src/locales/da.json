@@ -53,6 +53,7 @@
       "submit": "Gem ændringer"
     },
     "error": {
+      "show": "Din søgning matcher ikke med nogen i databasen.",
       "firstName": "Fornavnet skal udfyldes",
       "lastName": "Efternavn skal udfyldes",
       "born": "Fødselsdagen skal udfyldes",
