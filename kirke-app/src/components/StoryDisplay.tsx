@@ -16,8 +16,11 @@ interface Props {
 const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [collectionData, setCollectionData] = useState<any[]>([]);
-  const [filteredCollectionData, setFilteredCollectionData] = useState<any[]>([]);
+  const [filteredCollectionData, setFilteredCollectionData] = useState<any[]>(
+    []
+  );
   const [visibleCount, setVisibleCount] = useState(5); // number of visible items
+  const [selectValue, setSelectValue] = useState("5");
 
   // Text
   const { locale } = useLanguage();
@@ -59,13 +62,23 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   };
 
   const handleShowMore = () => {
-    setVisibleCount((prevCount) => prevCount + visibleCount);
+    setVisibleCount((prevCount) => prevCount + parseInt(selectValue, 10));
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectValue(e.target.value);
+    setVisibleCount(parseInt(e.target.value, 10));
   };
 
   return (
     <div className={style.collectionWrapper}>
       <Search data={[]} onSearch={handleSearch} />
-
+      <select value={selectValue} onChange={handleSelectChange}>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
       {isLoading ? (
         <Skeletor index={3} />
       ) : filteredCollectionData.length === 0 ? (
