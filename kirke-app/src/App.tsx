@@ -61,6 +61,14 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
               </AuthRoute>
             }
           />
+          <Route
+            path="/add"
+            element={
+              <AuthRoute>
+                <StoryAdd collectionName="Kendte" />
+              </AuthRoute>
+            }
+          />
 
           <Route path="/login" element={<LoginPage />} />
         </Routes>

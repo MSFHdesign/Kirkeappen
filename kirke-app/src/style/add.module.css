@@ -1,63 +1,150 @@
-.addWrappr {
+.addWrapper {
   display: flex;
-  border: 2px solid red;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.addPostContainer {
+.formData {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 20px 0;
+  align-items: center;
 }
 
-.addPostContainer h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+  flex-direction: column;
 }
 
-.addPostContainer form {
+.leftSide {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
-.addPostContainer form label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 18px;
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
-.addPostContainer form label input,
-.addPostContainer form label textarea {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
+.nameBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.labelBox {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin-right: 10%;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #444;
+}
+
+input {
+  padding: 8px;
   border: 1px solid #ccc;
-  margin-bottom: 10px;
-}
-
-.addPostContainer form label input:focus,
-.addPostContainer form label textarea:focus {
+  border-radius: 3px;
+  font-size: 1rem;
+  color: #444;
   outline: none;
-  border: 1px solid #0077ff;
 }
 
-.addPostContainer button {
-  padding: 10px 20px;
-  background-color: #0077ff;
-  color: #fff;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+}
+input[type="date"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 0.25rem;
+  outline: none;
 }
 
-.add-post-wrapper button:hover {
-  background-color: #0059b3;
+input[type="date"]:hover,
+input[type="date"]:focus {
+  border-color: #333;
 }
 
 .error {
   color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.addImg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.progress {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.section {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.sectionInputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.removeSectionButton {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  background-color: #f44336;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.addSectionButton {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.warningSuccess {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4caf50;
 }

@@ -175,68 +175,65 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   return (
     <div className={style.addWrapper}>
       <form className={style.formData} onSubmit={handleSubmit}>
-        <div className={style.formGroup}>
-          <div className={style.topBar}>
-            <div className={style.leftSide}>
-              <div className={style.nameBox}>
-                <label htmlFor="firstName">{story.firstName}:</label>
-                <input
-                  type="text"
-                  id="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-                {firstNameError && (
-                  <span className={style.error}>{firstNameError}</span>
-                )}
-              </div>
-              <div className={style.formGroup}>
-                <label htmlFor="lastName">{story.lastName}:</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                {lastNameError && (
-                  <span className={style.error}>{lastNameError}</span>
-                )}
-              </div>
-            </div>
-            <div className={style.formGroup}>
-              <label htmlFor="graveNumber">{story.graveID}</label>
+        <div className={style.topBar}>
+          <div className={style.leftSide}>
+            <div className={style.nameBox}>
+              <label htmlFor="firstName">{story.firstName}:</label>
               <input
                 type="text"
-                id="graveNumber"
-                value={graveNumber}
-                onChange={(e) => setGraveNumber(e.target.value)}
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
+              {firstNameError && (
+                <span className={style.error}>{firstNameError}</span>
+              )}
+
+              <label htmlFor="lastName">{story.lastName}:</label>
+              <input
+                type="text"
+                id="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              {lastNameError && (
+                <span className={style.error}>{lastNameError}</span>
+              )}
             </div>
-            {graveNumberError && (
-              <span className={style.error}>{graveNumberError}</span>
-            )}
           </div>
-          <div className={style.rightSide}>
-            <div className={style.formGroup}>
-              <label htmlFor="born">{story.born}:</label>
-              <input
-                type="date"
-                id="born"
-                value={born}
-                onChange={(e) => setBorn(e.target.value)}
-              />
-              {bornError && <span className={style.error}>{bornError}</span>}
-            </div>
-            <div className={style.formGroup}>
-              <label htmlFor="death">{story.dead}:</label>
-              <input
-                type="date"
-                id="death"
-                value={death}
-                onChange={(e) => setDeath(e.target.value)}
-              />
-              {deathError && <span className={style.error}>{deathError}</span>}
-            </div>
+
+          <label htmlFor="graveNumber">{story.graveID}</label>
+          <input
+            type="text"
+            id="graveNumber"
+            value={graveNumber}
+            onChange={(e) => setGraveNumber(e.target.value)}
+          />
+
+          {graveNumberError && (
+            <span className={style.error}>{graveNumberError}</span>
+          )}
+        </div>
+        <div className={style.rightSide}>
+          <div className={style.formGroup}>
+            <label htmlFor="born">{story.born}:</label>
+            <input
+              type="date"
+              id="born"
+              value={born}
+              onChange={(e) => setBorn(e.target.value)}
+            />
+            {bornError && <span className={style.error}>{bornError}</span>}
+          </div>
+          <div className={style.formGroup}>
+            <label htmlFor="death">{story.dead}:</label>
+            <input
+              type="date"
+              id="death"
+              value={death}
+              onChange={(e) => setDeath(e.target.value)}
+            />
+            {deathError && <span className={style.error}>{deathError}</span>}
           </div>
         </div>
         <div className={style.addImg}>
