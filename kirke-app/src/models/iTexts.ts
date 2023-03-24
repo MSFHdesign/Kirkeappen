@@ -30,6 +30,9 @@ export interface iTexts {
     address: string;
   };
   story: {
+    card: {
+      showMore: string;
+    }
     title: {
       add: string;
       history: string;

@@ -27,9 +27,11 @@
     "title": "Personlige oplysninger",
     "fullName": "Fulde navn",
     "address": "Adresse"
-    
   },
   "story": {
+    "card": {
+      "showMore": "load more stories"
+    },
     "title": {
       "add": "tilføj",
       "history": "Historiske",

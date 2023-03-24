@@ -17,7 +17,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [collectionData, setCollectionData] = useState<any[]>([]);
   const [filteredCollectionData, setFilteredCollectionData] = useState<any[]>([]);
-  const [limit, setLimit] = useState(10); // default limit is 10
+  const [visibleCount, setVisibleCount] = useState(5); // number of visible items
 
   // Text
   const { locale } = useLanguage();
@@ -42,7 +42,9 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   }, [props.collectionName]);
 
   const handleCardDelete = (cardId: string) => {
-    const updatedCollectionData = collectionData.filter((item) => item.id !== cardId);
+    const updatedCollectionData = collectionData.filter(
+      (item) => item.id !== cardId
+    );
     setCollectionData(updatedCollectionData);
     setFilteredCollectionData(updatedCollectionData); // update filtered data when item is deleted
   };
@@ -53,44 +55,50 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
         item.lastName.toLowerCase().includes(searchText.toLowerCase())
     );
-    setFilteredCollectionData(filteredData.slice(0, limit)); // apply limit to filtered data
+    setFilteredCollectionData(filteredData);
   };
 
   const handleShowMore = () => {
-    setLimit(limit + limit); // increase the limit by the selected value
-    setFilteredCollectionData(collectionData.slice(0, limit + limit)); // apply the new limit to filtered data
+    setVisibleCount((prevCount) => prevCount + visibleCount);
   };
 
   return (
     <div className={style.collectionWrapper}>
       <Search data={[]} onSearch={handleSearch} />
+
       {isLoading ? (
-        <>
-          <Skeletor index={3} />
-        </>
+        <Skeletor index={3} />
       ) : filteredCollectionData.length === 0 ? (
         <div>{story.error.show}</div>
       ) : (
-        filteredCollectionData.map((item, index) => (
-          <div key={index} className={style.cardWrapper}>
-            <Card
-              firstName={item.firstName}
-              lastName={item.lastName}
-              graveNumber={item.graveNumber}
-              born={item.born}
-              death={item.death}
-              sections={item.sections.map(
-                (section: { title: string; description: string }) => ({
-                  title: section.title,
-                  description: section.description,
-                })
-              )}
-              collectionName={props.collectionName}
-              cardId={item.id}
-              onDelete={() => handleCardDelete(item.id)}
-            />
-          </div>
-        ))
+        <>
+          {filteredCollectionData.slice(0, visibleCount).map((item, index) => (
+            <div key={index} className={style.cardWrapper}>
+              <Card
+                firstName={item.firstName}
+                lastName={item.lastName}
+                graveNumber={item.graveNumber}
+                born={item.born}
+                death={item.death}
+                sections={item.sections.map(
+                  (section: { title: string; description: string }) => ({
+                    title: section.title,
+                    description: section.description,
+                  })
+                )}
+                collectionName={props.collectionName}
+                cardId={item.id}
+                onDelete={() => handleCardDelete(item.id)}
+              />
+            </div>
+          ))}
+
+          {filteredCollectionData.length > visibleCount && (
+            <button onClick={handleShowMore}>
+              {story.card.showMore.replace("{0}", String(visibleCount))}
+            </button>
+          )}
+        </>
       )}
     </div>
   );

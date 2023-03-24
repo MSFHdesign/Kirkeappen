@@ -29,6 +29,9 @@
     "address": "Adresse"
   },
   "story": {
+    "card": {
+      "showMore": "Hent flere Historier"
+    },
     "title": {
       "add": "tilføj",
       "history": "Historiske",
