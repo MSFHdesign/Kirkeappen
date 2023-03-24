@@ -30,7 +30,8 @@
   },
   "story": {
     "card": {
-      "showMore": "Hent flere Historier"
+      "showMore": "Hent flere historier",
+      "showEnd": "Ikke flere historier"
     },
     "title": {
       "add": "tilføj",

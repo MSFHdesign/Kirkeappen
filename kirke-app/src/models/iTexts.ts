@@ -31,8 +31,9 @@ export interface iTexts {
   };
   story: {
     card: {
+      showEnd: string;
       showMore: string;
-    }
+    };
     title: {
       add: string;
       history: string;

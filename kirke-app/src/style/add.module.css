@@ -1,3 +1,7 @@
+.addWrappr {
+  display: flex;
+}
+
 .addPostContainer {
   display: flex;
   flex-direction: column;
