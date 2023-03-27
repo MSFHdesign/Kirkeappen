@@ -202,6 +202,7 @@ const EditButton: React.FC<Props> = (props) => {
                   />
                 </div>
               ))}
+
               <button className={style.editButton} type="submit">
                 {story.section.submit}
               </button>
