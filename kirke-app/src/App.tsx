@@ -56,7 +56,6 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             element={
               <AuthRoute>
                 <StoryDisplay collectionName="Kendte" />
-                <StoryAdd collectionName="Kendte" />
               </AuthRoute>
             }
           />

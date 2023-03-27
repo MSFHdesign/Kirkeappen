@@ -57,6 +57,9 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+ 
+
+
     e.preventDefault();
     let hasErrors = false;
     // Reset error messages
@@ -133,7 +136,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                     born,
                     death,
                     graveNumber,
-                    sections,
+                    sections: sections ? sections : [],
                     imageUrl: downloadURL, // Use download URL as imageUrl
                     timestamp: new Date(),
                   }
@@ -147,8 +150,6 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 setGraveNumber("");
                 setSections([]);
                 setFile(null);
-                const formElement = e.currentTarget;
-                formElement.reset();
                 setProgress(0);
               })
               .catch((error) => {
@@ -165,7 +166,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           born,
           death,
           graveNumber,
-          sections,
+          sections: sections ? sections : [],
           imageUrl, // Add image URL to document
           timestamp: new Date(),
         });
@@ -185,7 +186,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       formElement.reset();
     } catch (error) {
       console.error("Error adding document: ", error);
-      setHasError(true);
+    
     }
   };
   const handleReset = () => {

@@ -248,7 +248,7 @@ textarea {
   height: 10vw;
 }
 
-.warningSucces,
+.warningSucces h3,
 .Error h3 {
   margin: 0;
 }
@@ -260,7 +260,7 @@ textarea {
   width: 100%;
 }
 
-.warningSucces,
+.warningSucces button,
 .Error button {
   text-decoration: underline;
   background: none;
@@ -277,7 +277,7 @@ textarea {
   align-items: center;
 }
 
-.warningSucces,
+.warningSucces button::before,
 .Error button::before,
 .warningSucces,
 .Error button::after {

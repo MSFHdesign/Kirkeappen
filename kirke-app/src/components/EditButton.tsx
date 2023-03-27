@@ -43,7 +43,6 @@ const EditButton: React.FC<Props> = (props) => {
 
   const handleEditClick = () => {
     setIsEditing((prevIsEditing) => !prevIsEditing);
-
     setNewFirstName(props.firstName);
     setNewLastName(props.lastName);
     setNewBorn(props.born);
