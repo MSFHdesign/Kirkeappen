@@ -1,0 +1,78 @@
+.container,
+.spacing {
+  display: flex;
+  flex-direction: column;
+  width: 99vw;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacing {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.img {
+  margin-bottom: 1vh;
+}
+
+.inputfield {
+  min-width: 25vw;
+  min-height: fit-content;
+  background-color: #f2f2f2;
+  border-radius: var(--roundedBorders);
+  padding: 15px;
+  margin-bottom: 15vh;
+}
+
+.inputfield h2 {
+  font-size: 30px;
+  text-align: center;
+  margin: 25px 0px;
+}
+
+.email,
+.password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.email h3,
+.password h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.email > input,
+.password > input {
+  width: 90%;
+  border-radius: var(--roundedBorders);
+  border: 0px solid black;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.button {
+  width: 45%;
+}
+
+.button > button,
+.buttonStyling > button {
+  background-color: var(--Green100);
+  border-radius: var(--roundedBorders);
+  border: 0px solid black;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+}

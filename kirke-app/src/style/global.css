@@ -6,5 +6,10 @@
   --Red100: #c17878;
   --Red50: #c1787881;
   --textColor: black;
-  --roundedBorders: 20px;
+  --roundedBorders: 15px;
+  background: url("../img/bg.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  min-height: 100vh;
 }
