@@ -1,22 +1,24 @@
-.container,
-.spacing {
+.container {
   display: flex;
   flex-direction: column;
-  width: 99vw;
-  height: 90vh;
-  justify-content: center;
+  height: fit-content;
   align-items: center;
 }
 
 .spacing {
   display: flex;
-  width: 100%;
-  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 90%;
   justify-content: space-around;
 }
 
-.img {
-  margin-bottom: 1vh;
+.img > img {
+  min-width: 175px;
+  max-width: 15vw;
+  margin: 1vh;
 }
 
 .inputfield {
@@ -25,7 +27,7 @@
   background-color: #f2f2f2;
   border-radius: var(--roundedBorders);
   padding: 15px;
-  margin-bottom: 15vh;
+  margin-bottom: 10vh;
 }
 
 .inputfield h2 {

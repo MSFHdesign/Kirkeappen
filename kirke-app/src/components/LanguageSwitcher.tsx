@@ -7,36 +7,24 @@ const LanguageSwitcher: React.FC = () => {
   const { toggleLocale } = useLanguage();
   const [languageFlag, setLanguageFlag] = useState(uk);
 
-  const handleClick = (props: any) => {
-    if (languageFlag === props) {
+  const handleClick = () => {
+    if (languageFlag === dk) {
+      setLanguageFlag(uk);
       toggleLocale();
     } else {
+      setLanguageFlag(dk);
+      toggleLocale();
     }
-  };
-  const changeLanguageUk = () => {
-    setLanguageFlag(uk);
-    handleClick(uk);
-  };
-  const changeLanguageDk = () => {
-    setLanguageFlag(dk);
-    handleClick(dk);
   };
 
   return (
     <div>
       <img
-        src={dk}
+        src={languageFlag}
         alt="languageFlag"
         width={100}
         height={50}
-        onClick={changeLanguageDk}
-      />
-      <img
-        src={uk}
-        alt="languageFlag"
-        width={100}
-        height={50}
-        onClick={changeLanguageUk}
+        onClick={handleClick}
       />
     </div>
   );
