@@ -22,6 +22,7 @@ interface Props {
 }
 
 const EditButton: React.FC<Props> = (props) => {
+  console.log(props);
   const [isEditing, setIsEditing] = useState(false);
   const [newFirstName, setNewFirstName] = useState(props.firstName);
   const [newLastName, setNewLastName] = useState(props.lastName);
@@ -30,7 +31,7 @@ const EditButton: React.FC<Props> = (props) => {
   const [newGraveId, setNewGraveId] = useState(props.graveId);
   const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
   const [newDescription, setNewDescription] = useState(
-    props.sections[sectionIndexToUpdate]?.description || ""
+    props.sections?.[sectionIndexToUpdate]?.description || ""
   );
 
   const [newImage, setNewImage] = useState<File | null>(null);
@@ -174,6 +175,7 @@ const EditButton: React.FC<Props> = (props) => {
                       handleSectionTitleChange(index, e.target.value)
                     }
                   />
+
                   <label htmlFor={`description-${index}`}>
                     {story.section.description}:
                   </label>
