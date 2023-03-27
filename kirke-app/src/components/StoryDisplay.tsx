@@ -27,8 +27,8 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   // sorting
   const [visibleCount, setVisibleCount] = useState(5); // number of visible items
   const [selectValue, setSelectValue] = useState("5");
-  const [sortValue, setSortValue] = useState(""); // initial sort value is an empty string
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc"); // initial sort direction is "newest"
+  const [sortValue] = useState(""); // initial sort value is an empty string
+  const [sortDirection] = useState("asc"); // initial sort direction is "newest"
 
   // Text
   const { locale } = useLanguage();
@@ -97,84 +97,73 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
           ? a.timestamp - b.timestamp
           : b.timestamp - a.timestamp
       );
-    } else if (sortValue === "firstName") {
-      return [...data].sort((a, b) =>
-        sortDirection === "asc"
-          ? a.firstName.localeCompare(b.firstName)
-          : b.firstName.localeCompare(a.firstName)
-      );
-    } else if (sortValue === "lastName") {
-      return [...data].sort((a, b) =>
-        sortDirection === "asc"
-          ? a.lastName.localeCompare(b.lastName)
-          : b.lastName.localeCompare(a.lastName)
-      );
     } else {
       return data;
     }
   };
 
   return (
-    <div className={style.collectionWrapper}>
-      <Search data={[]} onSearch={handleSearch} />
+    <div>
       <div className={style.selectWrapper}>
-        <select
-          className={style.value}
-          value={selectValue}
-          onChange={handleSelectChange}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-        </select>
-        <button
-          onClick={() =>
-            setSortDirection(sortDirection === "asc" ? "desc" : "asc")
-          }
-        >
-          Toggle Sorting Direction
-        </button>
+        <Search data={[]} onSearch={handleSearch} />
+        <div className={style.selctionBar}>
+          <label># </label>
+          <select
+            className={style.value}
+            value={selectValue}
+            onChange={handleSelectChange}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+          </select>
+        </div>
       </div>
-      {isLoading ? (
-        <Skeletor index={3} />
-      ) : filteredCollectionData.length === 0 ? (
-        <div>{story.error.show}</div>
-      ) : (
-        <>
-          {sortFunction(filteredCollectionData)
-            .slice(0, visibleCount)
-            .map((item, index) => (
-              <div key={index} className={style.cardWrapper}>
-                <Card
-                  firstName={item.firstName}
-                  lastName={item.lastName}
-                  graveNumber={item.graveNumber}
-                  born={item.born}
-                  death={item.death}
-                  imageUrl={item.imageUrl}
-                  sections={item.sections.map(
-                    (section: { title: string; description: string }) => ({
-                      title: section.title,
-                      description: section.description,
-                    })
-                  )}
-                  collectionName={props.collectionName}
-                  cardId={item.id}
-                  onDelete={() => handleCardDelete(item.id)}
-                />
-              </div>
-            ))}
+      <div className={style.collectionWrapper}>
+        {isLoading ? (
+          <Skeletor index={3} />
+        ) : filteredCollectionData.length === 0 ? (
+          <div>{story.error.show}</div>
+        ) : (
+          <>
+            {sortFunction(filteredCollectionData)
+              .slice(0, visibleCount)
+              .map((item, index) => (
+                <div key={index} className={style.cardWrapper}>
+                  <Card
+                    firstName={item.firstName}
+                    lastName={item.lastName}
+                    graveNumber={item.graveNumber}
+                    born={item.born}
+                    death={item.death}
+                    imageUrl={item.imageUrl}
+                    sections={item.sections.map(
+                      (section: { title: string; description: string }) => ({
+                        title: section.title,
+                        description: section.description,
+                      })
+                    )}
+                    collectionName={props.collectionName}
+                    cardId={item.id}
+                    onDelete={() => handleCardDelete(item.id)}
+                  />
+                </div>
+              ))}
 
-          {filteredCollectionData.length > visibleCount ? (
-            <button className={style.loadMoreStories} onClick={handleShowMore}>
-              {story.card.showMore.replace("{0}", String(visibleCount))}
-            </button>
-          ) : (
-            <div className={style.loadMoreStories}>{story.card.showEnd}</div>
-          )}
-        </>
-      )}
+            {filteredCollectionData.length > visibleCount ? (
+              <button
+                className={style.loadMoreStories}
+                onClick={handleShowMore}
+              >
+                {story.card.showMore.replace("{0}", String(visibleCount))}
+              </button>
+            ) : (
+              <div className={style.loadMoreStories}>{story.card.showEnd}</div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

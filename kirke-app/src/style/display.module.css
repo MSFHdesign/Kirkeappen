@@ -4,12 +4,20 @@
   gap: 20px;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 20px;
   height: 80vh;
   overflow: scroll;
   align-content: center;
   flex-direction: column;
   align-items: center;
+}
+.selectWrapper {
+  gap: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
 .cardWrapper {
@@ -116,4 +124,3 @@ h3 {
 .loadMoreStories:hover {
   background-color: #16a085;
 }
-
