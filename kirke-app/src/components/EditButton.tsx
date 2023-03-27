@@ -30,8 +30,9 @@ const EditButton: React.FC<Props> = (props) => {
   const [newGraveId, setNewGraveId] = useState(props.graveId);
   const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
   const [newDescription, setNewDescription] = useState(
-    props.sections[sectionIndexToUpdate]?.description ?? ""
+    props.sections?.[sectionIndexToUpdate]?.description || ""
   );
+
   const [newImage, setNewImage] = useState<File | null>(null);
 
   // Text
@@ -42,7 +43,14 @@ const EditButton: React.FC<Props> = (props) => {
 
   const handleEditClick = () => {
     setIsEditing((prevIsEditing) => !prevIsEditing);
+    setNewFirstName(props.firstName);
+    setNewLastName(props.lastName);
+    setNewBorn(props.born);
+    setNewDeath(props.death);
+    setNewGraveId(props.graveId);
+    setUpdatedSections(props.sections);
   };
+
   const handleSectionTitleChange = (index: number, value: string) => {
     const updated = updatedSections.map((section, i) => {
       if (i === index) {
@@ -51,7 +59,11 @@ const EditButton: React.FC<Props> = (props) => {
       return section;
     });
     setUpdatedSections(updated);
+
+    // set sectionIndexToUpdate to the index of the section being edited
+    setSectionIndexToUpdate(index);
   };
+
   const handleSectionDescriptionChange = (index: number, value: string) => {
     // update the updatedSections state variable
     const updated = updatedSections.map((section, i) => {
@@ -173,6 +185,7 @@ const EditButton: React.FC<Props> = (props) => {
                       handleSectionTitleChange(index, e.target.value)
                     }
                   />
+
                   <label htmlFor={`description-${index}`}>
                     {story.section.description}:
                   </label>
@@ -189,6 +202,7 @@ const EditButton: React.FC<Props> = (props) => {
                   />
                 </div>
               ))}
+
               <button className={style.editButton} type="submit">
                 {story.section.submit}
               </button>

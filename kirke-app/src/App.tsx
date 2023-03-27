@@ -22,12 +22,11 @@ export interface IApplicationProps {}
 
 const Application: React.FunctionComponent<IApplicationProps> = (props) => {
   const [userEmail, setUserEmail] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // add state variable
+
   useEffect(() => {
     const email = localStorage.getItem("userEmail");
     if (email) {
       setUserEmail(email);
-      setIsAuthenticated(true); // set state to true if user email exists
     }
   }, []);
   return (
@@ -57,6 +56,13 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             element={
               <AuthRoute>
                 <StoryDisplay collectionName="Kendte" />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/add"
+            element={
+              <AuthRoute>
                 <StoryAdd collectionName="Kendte" />
               </AuthRoute>
             }
