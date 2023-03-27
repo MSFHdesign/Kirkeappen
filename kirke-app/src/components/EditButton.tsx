@@ -30,7 +30,7 @@ const EditButton: React.FC<Props> = (props) => {
   const [newGraveId, setNewGraveId] = useState(props.graveId);
   const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
   const [newDescription, setNewDescription] = useState(
-    props.sections[sectionIndexToUpdate]?.description
+    props.sections[sectionIndexToUpdate]?.description ?? ""
   );
   const [newImage, setNewImage] = useState<File | null>(null);
 
