@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../models/FBconfig";
 import style from "../style/add.module.css";
+
 import { useLanguage } from "./LanguageContext";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
@@ -33,6 +34,8 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   const [progress, setProgress] = useState(0);
 
   const [isSuccess, setIsSuccess] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
   // Text
   const { locale } = useLanguage();
   const story = locale.story;
@@ -55,15 +58,13 @@ const AddPersonComponent: React.FC<Props> = (props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    let hasErrors = false;
     // Reset error messages
     setFirstNameError("");
     setLastNameError("");
     setBornError("");
     setDeathError("");
     setGraveNumberError("");
-
-    let hasErrors = false;
 
     // Check if fields are not empty
     if (!firstName.trim()) {
@@ -89,9 +90,16 @@ const AddPersonComponent: React.FC<Props> = (props) => {
 
     // Check if all fields are valid
     if (hasErrors) {
+      setHasError(true);
+      setTimeout(() => {
+        setHasError(false);
+      }, 5000);
       return;
     }
     setIsSuccess(true);
+    setTimeout(() => {
+      setIsSuccess(false);
+    }, 5000);
     try {
       if (file) {
         const storageRef = ref(storage, "images/" + file.name);
@@ -109,6 +117,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           (error) => {
             // Handle errors
             console.error(error);
+            setHasError(true);
           },
           () => {
             // Handle successful upload
@@ -138,9 +147,13 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 setGraveNumber("");
                 setSections([]);
                 setFile(null);
+                const formElement = e.currentTarget;
+                formElement.reset();
+                setProgress(0);
               })
               .catch((error) => {
                 // Handle errors
+                setHasError(true);
                 console.error(error);
               });
           }
@@ -167,114 +180,153 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       setGraveNumber("");
       setSections([]);
       setFile(null);
+      setProgress(0);
+      const formElement = e.currentTarget;
+      formElement.reset();
     } catch (error) {
       console.error("Error adding document: ", error);
+      setHasError(true);
     }
+  };
+  const handleReset = () => {
+    setFirstName("");
+    setLastName("");
+    setBorn("");
+    setDeath("");
+    setGraveNumber("");
+    setSections([]);
+    setFile(null);
+    setImageUrl("");
+    setProgress(0);
+    setHasError(false);
+    setIsSuccess(false);
+    setFirstNameError("");
+    setLastNameError("");
+    setBornError("");
+    setDeathError("");
+    setGraveNumberError("");
   };
 
   return (
     <div className={style.addWrapper}>
-      <form className={style.formData} onSubmit={handleSubmit}>
+      <form
+        className={style.formData}
+        onReset={handleReset}
+        onSubmit={handleSubmit}
+      >
         <div className={style.topBar}>
           <div className={style.leftSide}>
             <div className={style.nameBox}>
-              <label htmlFor="firstName">{story.firstName}:</label>
-              <input
-                type="text"
-                id="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              {firstNameError && (
-                <span className={style.error}>{firstNameError}</span>
-              )}
+              <div className={style.dirLod}>
+                <span className={style.contentWrap}>
+                  <label htmlFor="firstName">{story.firstName}:</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                  {firstNameError && (
+                    <span className={style.error}>{firstNameError}</span>
+                  )}
+                </span>
+                <span className={style.contentWrap}>
+                  <label htmlFor="graveNumber">{story.graveID}</label>
+                  <input
+                    type="text"
+                    id="graveNumber"
+                    value={graveNumber}
+                    onChange={(e) => setGraveNumber(e.target.value)}
+                  />
 
-              <label htmlFor="lastName">{story.lastName}:</label>
-              <input
-                type="text"
-                id="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-              {lastNameError && (
-                <span className={style.error}>{lastNameError}</span>
-              )}
+                  {graveNumberError && (
+                    <span className={style.error}>{graveNumberError}</span>
+                  )}
+                </span>
+              </div>
+              <span className={style.contentWrap}>
+                <label htmlFor="lastName">{story.lastName}:</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                {lastNameError && (
+                  <span className={style.error}>{lastNameError}</span>
+                )}
+              </span>
             </div>
           </div>
-
-          <label htmlFor="graveNumber">{story.graveID}</label>
-          <input
-            type="text"
-            id="graveNumber"
-            value={graveNumber}
-            onChange={(e) => setGraveNumber(e.target.value)}
-          />
-
-          {graveNumberError && (
-            <span className={style.error}>{graveNumberError}</span>
-          )}
-        </div>
-        <div className={style.rightSide}>
-          <div className={style.formGroup}>
-            <label htmlFor="born">{story.born}:</label>
-            <input
-              type="date"
-              id="born"
-              value={born}
-              onChange={(e) => setBorn(e.target.value)}
-            />
-            {bornError && <span className={style.error}>{bornError}</span>}
-          </div>
-          <div className={style.formGroup}>
-            <label htmlFor="death">{story.dead}:</label>
-            <input
-              type="date"
-              id="death"
-              value={death}
-              onChange={(e) => setDeath(e.target.value)}
-            />
-            {deathError && <span className={style.error}>{deathError}</span>}
+          <div className={style.dirLod}>
+            <span className={style.contentWrap}>
+              <label htmlFor="born">{story.born}:</label>
+              <input
+                type="date"
+                id="born"
+                value={born}
+                onChange={(e) => setBorn(e.target.value)}
+              />
+              {bornError && <span className={style.error}>{bornError}</span>}
+            </span>
+            <span className={style.contentWrap}>
+              <label htmlFor="death">{story.dead}:</label>
+              <input
+                type="date"
+                id="death"
+                value={death}
+                onChange={(e) => setDeath(e.target.value)}
+              />
+              {deathError && <span className={style.error}>{deathError}</span>}
+            </span>
           </div>
         </div>
-        <div className={style.addImg}>
-          <label className={style.imgUploader} htmlFor="image">
-            <span>Choose an image</span>
-            <svg viewBox="0 0 24 24">
-              <path d="M17 12l-5-5-1.41 1.41L14.17 11H4v2h10.17l-3.58 3.58L12 17l7-7z" />
-            </svg>
-          </label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-          />
-
-          <progress value={progress} max="100" />
+        <div className={style.contentWrap}>
+          <div className={style.addImg}>
+            <label className={style.imgUploader} htmlFor="image">
+              <span>Vælg et billede</span>
+              <svg viewBox="0 0 24 24">
+                <path d="M17 12l-5-5-1.41 1.41L14.17 11H4v2h10.17l-3.58 3.58L12 17l7-7z" />
+              </svg>
+            </label>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+            />
+          </div>
+          <div className={style.progressContainer}>
+            <progress className={style.ulProcess} value={progress} max="100" />
+            <span className={style.progressLabel}>{`${progress}%`}</span>
+          </div>
         </div>
 
-        <div className={style.formGroup}>
+        <span className={style.sectionWrap}>
           <label>{story.section.sectionTitle}:</label>
           {sections.map((section, index) => (
             <div key={index} className={style.section}>
               <div className={style.sectionInputs}>
-                <button
-                  type="button"
-                  className={style.removeSectionButton}
-                  onClick={() => handleRemoveSection(index)}
-                >
-                  {story.section.remove}
-                </button>
-                <input
-                  type="text"
-                  placeholder={story.section.title}
-                  value={section.title}
-                  onChange={(e) =>
-                    handleSectionChange(index, "title", e.target.value)
-                  }
-                />
-                <input
-                  type="text"
+                <div className={style.sectionFlex}>
+                  <button
+                    type="button"
+                    className={style.removeSectionButton}
+                    onClick={() => handleRemoveSection(index)}
+                  >
+                    {story.section.remove}
+                  </button>
+                  <input
+                    type="text"
+                    placeholder={story.section.title}
+                    value={section.title}
+                    onChange={(e) =>
+                      handleSectionChange(index, "title", e.target.value)
+                    }
+                  />
+                </div>
+
+                <textarea
+                  className={style.textarea}
                   placeholder={story.section.description}
                   value={section.description}
                   onChange={(e) =>
@@ -284,16 +336,41 @@ const AddPersonComponent: React.FC<Props> = (props) => {
               </div>
             </div>
           ))}
-          <button type="button" onClick={handleAddSection}>
-            {story.section.addSection}
+          <span className={style.addSectionBtnbar}>
+            <button
+              className={style.addSectionButton}
+              type="button"
+              onClick={handleAddSection}
+            >
+              {story.section.addSection}
+            </button>
+          </span>
+        </span>
+
+        <span className={style.buttonBar}>
+          <button className={style.resetBtn} type="reset">
+            Reset
           </button>
-        </div>
-        <button className={style.submitBtn} type="submit">
-          {story.submit}
-        </button>
-        <div className={style.warningSucces}>
-          {isSuccess && <h3>Form submitted successfully!</h3>}
-        </div>
+          <button className={style.submitBtn} type="submit">
+            {story.submit}
+          </button>
+        </span>
+        {hasError && (
+          <div className={style.Error}>
+            <h3> An error occurred. Please try again.</h3>
+            <button onClick={() => setHasError(false)}>×</button>
+          </div>
+        )}
+
+        {isSuccess && (
+          <div
+            className={style.warningSucces}
+            onClick={() => setIsSuccess(false)}
+          >
+            <h3>Form submitted successfully!</h3>
+            <button onClick={() => setIsSuccess(false)}>×</button>
+          </div>
+        )}
       </form>
     </div>
   );
