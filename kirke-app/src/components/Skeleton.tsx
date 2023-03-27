@@ -9,7 +9,7 @@ const Skeletor: React.FC<Props> = ({ index }) => {
 
   for (let i = 0; i < index; i++) {
     skeletons.push(
-      <div className={style.skeletonWrapper}>
+      <div className={style.skeletonWrapper} key={i}>
         <div className={style.imgSkeleton} />
         <div className={style.contentWrapper}>
           <div className={style.topBoxes}>
