@@ -22,7 +22,6 @@ interface Props {
 }
 
 const EditButton: React.FC<Props> = (props) => {
-  console.log(props);
   const [isEditing, setIsEditing] = useState(false);
   const [newFirstName, setNewFirstName] = useState(props.firstName);
   const [newLastName, setNewLastName] = useState(props.lastName);
@@ -44,7 +43,15 @@ const EditButton: React.FC<Props> = (props) => {
 
   const handleEditClick = () => {
     setIsEditing((prevIsEditing) => !prevIsEditing);
+
+    setNewFirstName(props.firstName);
+    setNewLastName(props.lastName);
+    setNewBorn(props.born);
+    setNewDeath(props.death);
+    setNewGraveId(props.graveId);
+    setUpdatedSections(props.sections);
   };
+
   const handleSectionTitleChange = (index: number, value: string) => {
     const updated = updatedSections.map((section, i) => {
       if (i === index) {
@@ -53,7 +60,11 @@ const EditButton: React.FC<Props> = (props) => {
       return section;
     });
     setUpdatedSections(updated);
+
+    // set sectionIndexToUpdate to the index of the section being edited
+    setSectionIndexToUpdate(index);
   };
+
   const handleSectionDescriptionChange = (index: number, value: string) => {
     // update the updatedSections state variable
     const updated = updatedSections.map((section, i) => {
