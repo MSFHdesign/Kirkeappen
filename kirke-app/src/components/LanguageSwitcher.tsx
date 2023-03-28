@@ -6,53 +6,26 @@ import uk from "../img/uk.png";
 const LanguageSwitcher: React.FC = () => {
   const { toggleLocale } = useLanguage();
   const [languageFlag, setLanguageFlag] = useState(uk);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleLanguageClick = (flag: any) => {
-    setLanguageFlag(flag);
-    toggleLocale();
-    setDropdownOpen(false);
+  const handleClick = () => {
+    if (languageFlag === dk) {
+      setLanguageFlag(uk);
+      toggleLocale();
+    } else {
+      setLanguageFlag(dk);
+      toggleLocale();
+    }
   };
-
-  const handleDropdownClick = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const languages = [
-    { flag: uk, name: "English" },
-    { flag: dk, name: "Danish" },
-  ];
 
   return (
-    <div className="dropdown" onClick={handleDropdownClick}>
+    <div>
       <img
         src={languageFlag}
         alt="languageFlag"
-        width={30}
-        height={20}
-        className="dropdown-toggle"
-        data-toggle="dropdown"
+        width={100}
+        height={50}
+        onClick={handleClick}
       />
-      {dropdownOpen && (
-        <div className="dropdown-menu">
-          {languages.map((language, index) => (
-            <button
-              key={index}
-              className="dropdown-item"
-              onClick={() => handleLanguageClick(language.flag)}
-            >
-              <img
-                src={language.flag}
-                alt={language.name}
-                width={30}
-                height={20}
-                className="mr-2"
-              />
-              {language.name}
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
