@@ -31,6 +31,7 @@ const Card: React.FC<CardProps> = (props) => {
         src={props.imageUrl || Logo}
         alt={firstName}
         className={style.cardImg}
+        onContextMenu={(e) => e.preventDefault()}
       />
       <div className={style.contentWrapper}>
         <div className={style.textBox}>
@@ -40,7 +41,7 @@ const Card: React.FC<CardProps> = (props) => {
                 {firstName}&nbsp;{lastName}
               </h2>
               <p>
-                {story.graveID} {graveNumber}
+                <b>{story.graveID}: </b> {graveNumber}
               </p>
             </span>
             <span className={style.dates}>

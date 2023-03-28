@@ -35,10 +35,15 @@
 }
 
 .cardImg {
-  width: 25%;
-  height: 100%;
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
+
   border: 1px solid #ddd;
-  margin-right: 16px;
+  margin-right: 20px;
 }
 .contentWrapper {
   height: 100%;
