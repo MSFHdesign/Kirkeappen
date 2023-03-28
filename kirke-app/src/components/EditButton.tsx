@@ -4,6 +4,7 @@ import { db, storage } from "../models/FBconfig";
 import style from "../style/edit.module.css";
 import { useLanguage } from "../components/LanguageContext";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import Logo from "../img/logo.svg";
 
 interface Props {
   [x: string]: any;
@@ -32,7 +33,7 @@ const EditButton: React.FC<Props> = (props) => {
   const [newDescription, setNewDescription] = useState(
     props.sections?.[sectionIndexToUpdate]?.description
   );
-
+  const [deleteButtonClicked, setDeleteButtonClicked] = useState(false);
   const [newImage, setNewImage] = useState<File | null>(null);
 
   // Text
@@ -82,7 +83,6 @@ const EditButton: React.FC<Props> = (props) => {
       setNewDescription(newDesc);
     }
   };
-
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -96,6 +96,8 @@ const EditButton: React.FC<Props> = (props) => {
 
         // Get the new URL of the image
         newImageUrl = await getDownloadURL(imageRef);
+      } else if (props.imageUrl && deleteButtonClicked) {
+        newImageUrl = "";
       }
 
       const updatedSectionsWithNewDescription = updatedSections.map(
@@ -122,6 +124,18 @@ const EditButton: React.FC<Props> = (props) => {
       console.error("Error updating card: ", e);
     }
   };
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    setNewFirstName(props.firstName);
+    setNewLastName(props.lastName);
+    setNewBorn(props.born);
+    setNewDeath(props.death);
+    setNewGraveId(props.graveId);
+    setUpdatedSections(props.sections);
+    setDeleteButtonClicked(false);
+    setNewImage(null);
+  };
+
   const handleDeleteSection = async (
     index: number,
     event: React.MouseEvent<HTMLButtonElement>
@@ -205,7 +219,21 @@ const EditButton: React.FC<Props> = (props) => {
                     onChange={(e) => setNewDeath(e.target.value)}
                   />
                 </span>
+              </div>
+              <div className={style.imgcontainer}>
                 <label htmlFor="image">Image:</label>
+                <img
+                  className={style.img}
+                  src={props.imageUrl || Logo}
+                  alt={"billede af " + props.firstName}
+                />
+                <button
+                  className={style.deleteDtn}
+                  onClick={(e) => setDeleteButtonClicked(true)}
+                >
+                  Remove Picture
+                </button>
+
                 <input
                   type="file"
                   id="image"
@@ -214,10 +242,11 @@ const EditButton: React.FC<Props> = (props) => {
                 />
               </div>
               {updatedSections.map((section, index) => (
-                <div key={index}>
-                  <span>
+                <div key={index} className={style.sectionContainer}>
+                  <span className={style.sectionBox}>
                     <div>
                       <button
+                        className={style.deleteDtn}
                         onClick={(event) => handleDeleteSection(index, event)}
                       >
                         Delete
@@ -240,11 +269,17 @@ const EditButton: React.FC<Props> = (props) => {
                   />
                 </div>
               ))}
-              <button onClick={handleAddSection}>Add Section</button>
-
-              <button className={style.editButton} type="submit">
-                {story.section.submit}
-              </button>
+              <div className={style.btnBox}>
+                <button className={style.sectionBtn} onClick={handleAddSection}>
+                  Add Section
+                </button>
+                <span className={style.btnSpan}>
+                  <button onClick={handleCancelClick} className={ style.cancelBtn}>Cancel</button>
+                  <button className={style.submitBtn} type="submit">
+                    {story.section.submit}
+                  </button>
+                </span>
+              </div>
             </form>
           </div>
         </div>

@@ -37,7 +37,7 @@
 .cardImg {
   width: 25%;
   height: 100%;
-  background-color: #ddd;
+  border: 1px solid #ddd;
   margin-right: 16px;
 }
 .contentWrapper {

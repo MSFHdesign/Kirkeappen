@@ -3,7 +3,7 @@ import style from "../style/display.module.css";
 import { useLanguage } from "./LanguageContext";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
-
+import Logo from "../img/logo.svg";
 interface CardProps {
   firstName: string;
   lastName: string;
@@ -27,12 +27,11 @@ const Card: React.FC<CardProps> = (props) => {
 
   return (
     <>
-      {props.imageUrl ? (
-        <img src={props.imageUrl} alt={firstName} className={style.cardImg} />
-      ) : (
-        <div className={style.cardImg}></div>
-      )}
-
+      <img
+        src={props.imageUrl || Logo}
+        alt={firstName}
+        className={style.cardImg}
+      />
       <div className={style.contentWrapper}>
         <div className={style.textBox}>
           <div className={style.topBoxes}>
