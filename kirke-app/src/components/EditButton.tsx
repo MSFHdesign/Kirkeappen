@@ -30,7 +30,7 @@ const EditButton: React.FC<Props> = (props) => {
   const [newGraveId, setNewGraveId] = useState(props.graveId);
   const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
   const [newDescription, setNewDescription] = useState(
-    props.sections?.[sectionIndexToUpdate]?.description || ""
+    props.sections?.[sectionIndexToUpdate]?.description
   );
 
   const [newImage, setNewImage] = useState<File | null>(null);
@@ -77,8 +77,12 @@ const EditButton: React.FC<Props> = (props) => {
     // update the newDescription state variable for the current section being edited
     if (sectionIndexToUpdate === index) {
       setNewDescription(value);
+    } else {
+      const newDesc = updated[sectionIndexToUpdate]?.description || "";
+      setNewDescription(newDesc);
     }
   };
+
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -117,6 +121,42 @@ const EditButton: React.FC<Props> = (props) => {
     } catch (e) {
       console.error("Error updating card: ", e);
     }
+  };
+  const handleDeleteSection = async (
+    index: number,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+    const updated = [...updatedSections];
+    updated.splice(index, 1);
+    setUpdatedSections(updated);
+
+    try {
+      const docRef = doc(db, props.collectionName, props.cardId);
+
+      await updateDoc(docRef, {
+        sections: updated,
+      });
+
+      // Update the sectionIndexToUpdate state variable
+      const newSectionCount = updated.length;
+      if (sectionIndexToUpdate === index) {
+        // If the deleted section was the one being edited, reset sectionIndexToUpdate
+        setSectionIndexToUpdate(-1);
+      } else if (sectionIndexToUpdate > index) {
+        // If the deleted section was before the one being edited, decrement sectionIndexToUpdate
+        setSectionIndexToUpdate(sectionIndexToUpdate - 1);
+      } else if (sectionIndexToUpdate >= newSectionCount) {
+        setSectionIndexToUpdate(newSectionCount - 1);
+      }
+    } catch (e) {
+      console.error("Error deleting section: ", e);
+    }
+  };
+
+  const handleAddSection = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setUpdatedSections([...updatedSections, { title: "", description: "" }]);
   };
 
   return (
@@ -173,35 +213,34 @@ const EditButton: React.FC<Props> = (props) => {
                   onChange={(e) => setNewImage(e.target.files?.[0] ?? null)}
                 />
               </div>
-              {props.sections.map((section, index) => (
-                <div key={index} className={style.sectionBox}>
-                  <label htmlFor={`title-${index}`}>
-                    {story.section.title}:
-                  </label>
-                  <input
-                    id={`title-${index}`}
-                    value={updatedSections[index].title}
-                    onChange={(e) =>
-                      handleSectionTitleChange(index, e.target.value)
-                    }
-                  />
+              {updatedSections.map((section, index) => (
+                <div key={index}>
+                  <span>
+                    <div>
+                      <button
+                        onClick={(event) => handleDeleteSection(index, event)}
+                      >
+                        Delete
+                      </button>
+                    </div>
 
-                  <label htmlFor={`description-${index}`}>
-                    {story.section.description}:
-                  </label>
+                    <input
+                      type="text"
+                      value={section.title}
+                      onChange={(e) =>
+                        handleSectionTitleChange(index, e.target.value)
+                      }
+                    />
+                  </span>
                   <textarea
-                    id={`description-${index}`}
-                    value={updatedSections[index].description}
-                    onFocus={() => setSectionIndexToUpdate(index)}
-                    onBlur={() => {
-                      setSectionIndexToUpdate(-1);
-                    }}
+                    value={section.description}
                     onChange={(e) =>
                       handleSectionDescriptionChange(index, e.target.value)
                     }
                   />
                 </div>
               ))}
+              <button onClick={handleAddSection}>Add Section</button>
 
               <button className={style.editButton} type="submit">
                 {story.section.submit}
