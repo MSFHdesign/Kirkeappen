@@ -11,8 +11,8 @@
     "email": "Email",
     "password": "Password",
     "submit": "Log ind",
-    "ResetPassword": "Send kode",
-    "ResetLabel": "Glemt kode?",
+    "resetPassword": "Send kode",
+    "resetLabel": "Glemt kode?",
     "failedToLogIn": "Kunne ikke logge dig ind"
   },
   "dashboard": {

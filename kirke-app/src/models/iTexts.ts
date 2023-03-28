@@ -12,8 +12,8 @@ export interface iTexts {
     email: string;
     password: string;
     submit: string;
-    ResetPassword: string;
-    ResetLabel: string;
+    resetPassword: string;
+    resetLabel: string;
     failedToLogIn: string;
   };
   dashboard: {
