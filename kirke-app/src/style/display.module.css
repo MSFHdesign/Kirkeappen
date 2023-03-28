@@ -4,12 +4,20 @@
   gap: 20px;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 20px;
   height: 80vh;
   overflow: scroll;
   align-content: center;
   flex-direction: column;
   align-items: center;
+}
+.selectWrapper {
+  gap: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
 .cardWrapper {
@@ -95,4 +103,24 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+.loadMoreStories {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  background-color: #1abc9c;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.loadMoreStories:hover {
+  background-color: #16a085;
 }
