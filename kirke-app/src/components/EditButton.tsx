@@ -240,7 +240,7 @@ const EditButton: React.FC<Props> = (props) => {
                 </span>
               </div>
               <div className={style.imgcontainer}>
-                <label htmlFor="image">Image:</label>
+                <label htmlFor="image">{story.img}:</label>
                 <img
                   className={style.img}
                   src={
@@ -248,7 +248,7 @@ const EditButton: React.FC<Props> = (props) => {
                       ? URL.createObjectURL(newImage)
                       : props.imageUrl || Logo
                   }
-                  alt={"billede af " + props.firstName}
+                  alt={"billede af " + props.firstName + props.lastName}
                 />
 
                 <input
@@ -267,7 +267,7 @@ const EditButton: React.FC<Props> = (props) => {
                         className={style.deleteDtn}
                         onClick={(event) => handleDeleteSection(index, event)}
                       >
-                        Delete
+                        {story.delete}
                       </button>
                     </div>
 
@@ -291,14 +291,14 @@ const EditButton: React.FC<Props> = (props) => {
               ))}
               <div className={style.btnBox}>
                 <button className={style.sectionBtn} onClick={handleAddSection}>
-                  Add Section
+                  {story.section.addSection}
                 </button>
                 <span className={style.btnSpan}>
                   <button
                     onClick={handleCancelClick}
                     className={style.cancelBtn}
                   >
-                    Cancel
+                    {story.section.cancel}
                   </button>
                   <button className={style.submitBtn} type="submit">
                     {story.section.submit}

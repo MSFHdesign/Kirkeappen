@@ -3,6 +3,7 @@ import React from "react";
 import DashboardCard from "../components/DashboardCard";
 import { useLanguage } from "../components/LanguageContext";
 import style from "../style/dashCard.module.css";
+
 export interface IDashBoardProps {
   userEmail: string;
 }
@@ -30,40 +31,35 @@ const DashBoard: React.FunctionComponent<IDashBoardProps> = (props) => {
       <div className={style.DashContainer}>
         <div className={style.containerBox}>
           <DashboardCard
-            heading={"Personlige Historier"}
-            text={
-              "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers."
-            }
+            heading={dash.cardOne.header}
+            text={dash.cardOne.content}
             addnew={{
-              btnTitle: "Opret ny",
+              btnTitle: dash.cardOne.addTitle,
               btnLink: "/personlige/add",
             }}
             readedit={{
-              btnTitle: "Læs/rediger",
+              btnTitle: dash.cardOne.readTitle,
               btnLink: "/personlige",
             }}
           />
+
           <DashboardCard
-            heading={"Historiske fortællinger"}
-            text={
-              "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers."
-            }
+            heading={dash.cardTwo.header}
+            text={dash.cardTwo.content}
             addnew={{
-              btnTitle: "Opret ny",
+              btnTitle: dash.cardTwo.addTitle,
               btnLink: "/historiske/add",
             }}
             readedit={{
-              btnTitle: "Læs/rediger",
+              btnTitle: dash.cardTwo.readTitle,
               btnLink: "/historiske",
             }}
           />
           <DashboardCard
-            heading={"Historier til godkendelse"}
-            text={
-              "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers."
-            }
+            heading={dash.cardThree.header}
+            text={dash.cardThree.content}
             addnew={{
-              btnTitle: "Læs & rediger",
+              btnTitle: dash.cardThree.readTitle,
               btnLink: "/approve",
             }}
           />
