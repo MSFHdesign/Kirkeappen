@@ -233,7 +233,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 <span className={style.contentWrap}>
                   <label htmlFor="graveNumber">{story.graveID}</label>
                   <input
-                    type="text"
+                    type="number"
                     id="graveNumber"
                     value={graveNumber}
                     onChange={(e) => setGraveNumber(e.target.value)}
