@@ -3,7 +3,12 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../models/FBconfig";
 import style from "../style/edit.module.css";
 import { useLanguage } from "../components/LanguageContext";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  deleteObject,
+} from "firebase/storage";
 import Logo from "../img/logo.svg";
 
 interface Props {
@@ -97,6 +102,10 @@ const EditButton: React.FC<Props> = (props) => {
         // Get the new URL of the image
         newImageUrl = await getDownloadURL(imageRef);
       } else if (props.imageUrl && deleteButtonClicked) {
+        // Remove the image from Firebase Storage
+        const imageRef = ref(storage, props.imageUrl);
+        await deleteObject(imageRef);
+
         newImageUrl = "";
       }
 
@@ -124,6 +133,7 @@ const EditButton: React.FC<Props> = (props) => {
       console.error("Error updating card: ", e);
     }
   };
+
   const handleCancelClick = () => {
     setIsEditing(false);
     setNewFirstName(props.firstName);
@@ -178,6 +188,10 @@ const EditButton: React.FC<Props> = (props) => {
       {isEditing ? (
         <div className={style.Container}>
           <div className={style.boxSize}>
+            <button className={style.closeButton} onClick={handleCancelClick}>
+              X
+            </button>
+
             <form className={style.editForm} onSubmit={handleSaveClick}>
               <div className={style.topBar}>
                 <span className={style.leftSide}>
@@ -187,6 +201,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="firstName"
                     value={newFirstName}
                     onChange={(e) => setNewFirstName(e.target.value)}
+                    required
                   />
                   <label htmlFor="lastName">{story.lastName}:</label>
                   <input
@@ -194,6 +209,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="lastName"
                     value={newLastName}
                     onChange={(e) => setNewLastName(e.target.value)}
+                    required
                   />
                   <label htmlFor="graveId">{story.graveID}:</label>
                   <input
@@ -201,6 +217,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="graveId"
                     value={newGraveId}
                     onChange={(e) => setNewGraveId(e.target.value)}
+                    required
                   />
                 </span>
                 <span className={style.rightSide}>
@@ -210,6 +227,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="born"
                     value={newBorn}
                     onChange={(e) => setNewBorn(e.target.value)}
+                    required
                   />
                   <label htmlFor="death">{story.dead}:</label>
                   <input
@@ -217,6 +235,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="death"
                     value={newDeath}
                     onChange={(e) => setNewDeath(e.target.value)}
+                    required
                   />
                 </span>
               </div>
@@ -224,15 +243,13 @@ const EditButton: React.FC<Props> = (props) => {
                 <label htmlFor="image">Image:</label>
                 <img
                   className={style.img}
-                  src={props.imageUrl || Logo}
+                  src={
+                    newImage
+                      ? URL.createObjectURL(newImage)
+                      : props.imageUrl || Logo
+                  }
                   alt={"billede af " + props.firstName}
                 />
-                <button
-                  className={style.deleteDtn}
-                  onClick={(e) => setDeleteButtonClicked(true)}
-                >
-                  Remove Picture
-                </button>
 
                 <input
                   type="file"
@@ -241,6 +258,7 @@ const EditButton: React.FC<Props> = (props) => {
                   onChange={(e) => setNewImage(e.target.files?.[0] ?? null)}
                 />
               </div>
+
               {updatedSections.map((section, index) => (
                 <div key={index} className={style.sectionContainer}>
                   <span className={style.sectionBox}>
@@ -259,6 +277,7 @@ const EditButton: React.FC<Props> = (props) => {
                       onChange={(e) =>
                         handleSectionTitleChange(index, e.target.value)
                       }
+                      required
                     />
                   </span>
                   <textarea
@@ -266,6 +285,7 @@ const EditButton: React.FC<Props> = (props) => {
                     onChange={(e) =>
                       handleSectionDescriptionChange(index, e.target.value)
                     }
+                    required
                   />
                 </div>
               ))}
@@ -274,7 +294,12 @@ const EditButton: React.FC<Props> = (props) => {
                   Add Section
                 </button>
                 <span className={style.btnSpan}>
-                  <button onClick={handleCancelClick} className={ style.cancelBtn}>Cancel</button>
+                  <button
+                    onClick={handleCancelClick}
+                    className={style.cancelBtn}
+                  >
+                    Cancel
+                  </button>
                   <button className={style.submitBtn} type="submit">
                     {story.section.submit}
                   </button>
