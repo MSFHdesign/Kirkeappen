@@ -1,4 +1,5 @@
 .addWrapper {
+  background-color: #f2f2f2;
   display: flex;
   border: 1px solid #ccc;
   padding: 20px;
@@ -131,15 +132,15 @@ input[type="date"]:focus {
 }
 
 .addImg {
+  width: 250px;
   gap: 10px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
 }
 .imgUploader {
   display: flex;
   height: 250px;
+  width: 250px;
   background-color: #f2f2f2;
   padding: 5px;
   flex-direction: column;
@@ -150,7 +151,7 @@ input[type="date"]:focus {
   gap: 10px;
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 250px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -205,7 +206,8 @@ textarea {
   height: 100px;
   width: 85%;
   border: 1px solid #ccc;
-  background-color: #f2f2f2;
+  background-color: white;
+  color: black;
   overflow-y: scroll;
 }
 
@@ -225,7 +227,7 @@ textarea {
   padding: 10px 75px;
   border: 2px solid black;
   border-radius: 10px;
-  background-color: transparent;
+  background-color: var(--Green50);
   color: black;
   font-size: 0.8rem;
   cursor: pointer;

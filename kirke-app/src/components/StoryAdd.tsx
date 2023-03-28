@@ -57,9 +57,6 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
- 
-
-
     e.preventDefault();
     let hasErrors = false;
     // Reset error messages
@@ -186,7 +183,6 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       formElement.reset();
     } catch (error) {
       console.error("Error adding document: ", error);
-    
     }
   };
   const handleReset = () => {
