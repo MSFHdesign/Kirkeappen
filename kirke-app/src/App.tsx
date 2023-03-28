@@ -59,15 +59,40 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             }
           />
           <Route
-            path="/add"
+            path="/personlige"
+            element={
+              <AuthRoute>
+                <StoryDisplay collectionName="personlige" />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/approve"
+            element={
+              <AuthRoute>
+                <StoryDisplay collectionName="approve" />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/historiske/add"
             element={
               <AuthRoute>
                 <StoryAdd collectionName="Kendte" />
               </AuthRoute>
             }
           />
+          <Route
+            path="/personlige/add"
+            element={
+              <AuthRoute>
+                <StoryAdd collectionName="personlige" />
+              </AuthRoute>
+            }
+          />
 
           <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<DashBoard userEmail={userEmail} />} />
         </Routes>
       </BrowserRouter>
     </LanguageProvider>
