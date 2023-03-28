@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import style from "../style/warning.module.css";
+import login from "../style/login.module.css";
 import { useLanguage } from "../components/LanguageContext";
+import ResetPassword from "./ResetPassword";
 
 export interface ILoginPageProps {}
 
@@ -49,21 +51,32 @@ const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
       )}
 
       <form onSubmit={signInWithEmail}>
-        <input
-          type="email"
-          placeholder={home.email}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder={home.password}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit" disabled={authing}>
-          {home.submit}
-        </button>
+        <div className={login.email}>
+          <h3>Email:</h3>
+          <input
+            type="email"
+            placeholder={home.email}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className={login.password}>
+          <h3>Password:</h3>
+          <input
+            type="password"
+            placeholder={home.password}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className={login.buttonsWrapper}>
+          <ResetPassword />
+          <div className={login.button}>
+            <button type="submit" disabled={authing}>
+              {home.submit}
+            </button>
+          </div>
+        </div>
       </form>
       <br />
     </div>
