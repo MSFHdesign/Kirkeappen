@@ -10,7 +10,6 @@ import { firebaseConfig } from "./models/FBconfig";
 import AuthRoute from "./components/AuthRoute";
 import DashBoard from "./pages/Dashboard";
 import EditProfilePage from "./pages/EditProfilePage";
-import Navigationsbar from "./components/navigationbar";
 import StoryDisplay from "./components/StoryDisplay";
 import StoryAdd from "./components/StoryAdd";
 import { LanguageProvider } from "./components/LanguageContext";
