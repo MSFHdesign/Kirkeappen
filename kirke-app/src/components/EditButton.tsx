@@ -3,7 +3,13 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../models/FBconfig";
 import style from "../style/edit.module.css";
 import { useLanguage } from "../components/LanguageContext";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  deleteObject,
+} from "firebase/storage";
+import Logo from "../img/logo.svg";
 
 interface Props {
   [x: string]: any;
@@ -30,9 +36,9 @@ const EditButton: React.FC<Props> = (props) => {
   const [newGraveId, setNewGraveId] = useState(props.graveId);
   const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
   const [newDescription, setNewDescription] = useState(
-    props.sections?.[sectionIndexToUpdate]?.description || ""
+    props.sections?.[sectionIndexToUpdate]?.description
   );
-
+  const [deleteButtonClicked, setDeleteButtonClicked] = useState(false);
   const [newImage, setNewImage] = useState<File | null>(null);
 
   // Text
@@ -77,6 +83,9 @@ const EditButton: React.FC<Props> = (props) => {
     // update the newDescription state variable for the current section being edited
     if (sectionIndexToUpdate === index) {
       setNewDescription(value);
+    } else {
+      const newDesc = updated[sectionIndexToUpdate]?.description || "";
+      setNewDescription(newDesc);
     }
   };
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -92,6 +101,12 @@ const EditButton: React.FC<Props> = (props) => {
 
         // Get the new URL of the image
         newImageUrl = await getDownloadURL(imageRef);
+      } else if (props.imageUrl && deleteButtonClicked) {
+        // Remove the image from Firebase Storage
+        const imageRef = ref(storage, props.imageUrl);
+        await deleteObject(imageRef);
+
+        newImageUrl = "";
       }
 
       const updatedSectionsWithNewDescription = updatedSections.map(
@@ -119,11 +134,64 @@ const EditButton: React.FC<Props> = (props) => {
     }
   };
 
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    setNewFirstName(props.firstName);
+    setNewLastName(props.lastName);
+    setNewBorn(props.born);
+    setNewDeath(props.death);
+    setNewGraveId(props.graveId);
+    setUpdatedSections(props.sections);
+    setDeleteButtonClicked(false);
+    setNewImage(null);
+  };
+
+  const handleDeleteSection = async (
+    index: number,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+    const updated = [...updatedSections];
+    updated.splice(index, 1);
+    setUpdatedSections(updated);
+
+    try {
+      const docRef = doc(db, props.collectionName, props.cardId);
+
+      await updateDoc(docRef, {
+        sections: updated,
+      });
+
+      // Update the sectionIndexToUpdate state variable
+      const newSectionCount = updated.length;
+      if (sectionIndexToUpdate === index) {
+        // If the deleted section was the one being edited, reset sectionIndexToUpdate
+        setSectionIndexToUpdate(-1);
+      } else if (sectionIndexToUpdate > index) {
+        // If the deleted section was before the one being edited, decrement sectionIndexToUpdate
+        setSectionIndexToUpdate(sectionIndexToUpdate - 1);
+      } else if (sectionIndexToUpdate >= newSectionCount) {
+        setSectionIndexToUpdate(newSectionCount - 1);
+      }
+    } catch (e) {
+      console.error("Error deleting section: ", e);
+    }
+  };
+
+  const handleAddSection = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setUpdatedSections([...updatedSections, { title: "", description: "" }]);
+  };
+
   return (
     <div className={style.editContainer}>
       {isEditing ? (
         <div className={style.Container}>
           <div className={style.boxSize}>
+            <button className={style.closeButton} onClick={handleCancelClick}>
+              X
+            </button>
+
             <form className={style.editForm} onSubmit={handleSaveClick}>
               <div className={style.topBar}>
                 <span className={style.leftSide}>
@@ -133,6 +201,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="firstName"
                     value={newFirstName}
                     onChange={(e) => setNewFirstName(e.target.value)}
+                    required
                   />
                   <label htmlFor="lastName">{story.lastName}:</label>
                   <input
@@ -140,6 +209,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="lastName"
                     value={newLastName}
                     onChange={(e) => setNewLastName(e.target.value)}
+                    required
                   />
                   <label htmlFor="graveId">{story.graveID}:</label>
                   <input
@@ -147,6 +217,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="graveId"
                     value={newGraveId}
                     onChange={(e) => setNewGraveId(e.target.value)}
+                    required
                   />
                 </span>
                 <span className={style.rightSide}>
@@ -156,6 +227,7 @@ const EditButton: React.FC<Props> = (props) => {
                     id="born"
                     value={newBorn}
                     onChange={(e) => setNewBorn(e.target.value)}
+                    required
                   />
                   <label htmlFor="death">{story.dead}:</label>
                   <input
@@ -163,9 +235,22 @@ const EditButton: React.FC<Props> = (props) => {
                     id="death"
                     value={newDeath}
                     onChange={(e) => setNewDeath(e.target.value)}
+                    required
                   />
                 </span>
+              </div>
+              <div className={style.imgcontainer}>
                 <label htmlFor="image">Image:</label>
+                <img
+                  className={style.img}
+                  src={
+                    newImage
+                      ? URL.createObjectURL(newImage)
+                      : props.imageUrl || Logo
+                  }
+                  alt={"billede af " + props.firstName}
+                />
+
                 <input
                   type="file"
                   id="image"
@@ -173,39 +258,53 @@ const EditButton: React.FC<Props> = (props) => {
                   onChange={(e) => setNewImage(e.target.files?.[0] ?? null)}
                 />
               </div>
-              {props.sections.map((section, index) => (
-                <div key={index} className={style.sectionBox}>
-                  <label htmlFor={`title-${index}`}>
-                    {story.section.title}:
-                  </label>
-                  <input
-                    id={`title-${index}`}
-                    value={updatedSections[index].title}
-                    onChange={(e) =>
-                      handleSectionTitleChange(index, e.target.value)
-                    }
-                  />
 
-                  <label htmlFor={`description-${index}`}>
-                    {story.section.description}:
-                  </label>
+              {updatedSections.map((section, index) => (
+                <div key={index} className={style.sectionContainer}>
+                  <span className={style.sectionBox}>
+                    <div>
+                      <button
+                        className={style.deleteDtn}
+                        onClick={(event) => handleDeleteSection(index, event)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+
+                    <input
+                      type="text"
+                      value={section.title}
+                      onChange={(e) =>
+                        handleSectionTitleChange(index, e.target.value)
+                      }
+                      required
+                    />
+                  </span>
                   <textarea
-                    id={`description-${index}`}
-                    value={updatedSections[index].description}
-                    onFocus={() => setSectionIndexToUpdate(index)}
-                    onBlur={() => {
-                      setSectionIndexToUpdate(-1);
-                    }}
+                    value={section.description}
                     onChange={(e) =>
                       handleSectionDescriptionChange(index, e.target.value)
                     }
+                    required
                   />
                 </div>
               ))}
-
-              <button className={style.editButton} type="submit">
-                {story.section.submit}
-              </button>
+              <div className={style.btnBox}>
+                <button className={style.sectionBtn} onClick={handleAddSection}>
+                  Add Section
+                </button>
+                <span className={style.btnSpan}>
+                  <button
+                    onClick={handleCancelClick}
+                    className={style.cancelBtn}
+                  >
+                    Cancel
+                  </button>
+                  <button className={style.submitBtn} type="submit">
+                    {story.section.submit}
+                  </button>
+                </span>
+              </div>
             </form>
           </div>
         </div>
