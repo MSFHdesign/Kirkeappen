@@ -27,8 +27,16 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   // sorting
   const [visibleCount, setVisibleCount] = useState(5); // number of visible items
   const [selectValue, setSelectValue] = useState("5");
-  const [sortValue] = useState(""); // initial sort value is an empty string
-  const [sortDirection] = useState("asc"); // initial sort direction is "newest"
+
+  const [sortingOption, setSortingOption] = useState<string>("");
+
+  const [sortDirections, setSortDirections] = useState({
+    firstName: "asc",
+    lastName: "asc",
+    born: "asc",
+    death: "asc",
+    graveId: "asc",
+  });
 
   // Text
   const { locale } = useLanguage();
@@ -91,15 +99,46 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
     setVisibleCount(parseInt(e.target.value, 10));
   };
   const sortFunction = (data: any[]) => {
-    if (sortValue === "timestamp") {
+    if (sortingOption === "firstName") {
       return [...data].sort((a, b) =>
-        sortDirection === "asc"
-          ? a.timestamp - b.timestamp
-          : b.timestamp - a.timestamp
+        sortDirections.firstName === "asc"
+          ? a.firstName.localeCompare(b.firstName)
+          : b.firstName.localeCompare(a.firstName)
+      );
+    } else if (sortingOption === "lastName") {
+      return [...data].sort((a, b) =>
+        sortDirections.lastName === "asc"
+          ? a.lastName.localeCompare(b.lastName)
+          : b.lastName.localeCompare(a.lastName)
+      );
+    } else if (sortingOption === "born") {
+      return [...data].sort((a, b) =>
+        sortDirections.born === "asc"
+          ? a.born.localeCompare(b.born)
+          : b.born.localeCompare(a.born)
+      );
+    } else if (sortingOption === "death") {
+      return [...data].sort((a, b) =>
+        sortDirections.death === "asc"
+          ? a.death.localeCompare(b.death)
+          : b.death.localeCompare(a.death)
+      );
+    } else if (sortingOption === "graveId") {
+      return [...data].sort((a, b) =>
+        sortDirections.graveId === "asc"
+          ? parseInt(a.graveId) - parseInt(b.graveId)
+          : parseInt(a.graveId) - parseInt(b.graveId)
       );
     } else {
       return data;
     }
+  };
+  const toggleSortingDirection = (option: string) => {
+    setSortingOption(option); // set the sorting option to "firstName"
+    setSortDirections((prevDirections: any) => ({
+      ...prevDirections,
+      [option]: prevDirections[option] === "asc" ? "desc" : "asc",
+    }));
   };
 
   return (
@@ -118,6 +157,57 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
             <option value="25">25</option>
             <option value="50">50</option>
           </select>
+          <div className={style.selctionBar}>
+            <label>story.sortBy</label>
+
+            <div className={style.buttons}>
+              <button
+                className={sortingOption === "" ? style.active : ""}
+                onClick={() => toggleSortingDirection("")}
+              >
+                story.sortByDefault
+              </button>
+              <button onClick={() => toggleSortingDirection("firstName")}>
+                firstName
+                {sortingOption === "firstName" && (
+                  <>{sortDirections.firstName === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button onClick={() => toggleSortingDirection("lastName")}>
+                lastName
+                {sortingOption === "lastName" && (
+                  <>{sortDirections.lastName === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button
+                className={sortingOption === "born" ? style.active : ""}
+                onClick={() => toggleSortingDirection("born")}
+              >
+                story.sortByBirthdate
+                {sortingOption === "lastName" && (
+                  <>{sortDirections.lastName === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button
+                className={sortingOption === "death" ? style.active : ""}
+                onClick={() => toggleSortingDirection("death")}
+              >
+                story.sortByDeathdate
+                {sortingOption === "lastName" && (
+                  <>{sortDirections.lastName === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button
+                className={sortingOption === "graveId" ? style.active : ""}
+                onClick={() => toggleSortingDirection("graveId")}
+              >
+                sortByGraveId
+                {sortingOption === "lastName" && (
+                  <>{sortDirections.lastName === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div className={style.collectionWrapper}>
