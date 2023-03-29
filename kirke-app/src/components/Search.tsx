@@ -8,7 +8,6 @@ interface Props {
 
 const Search: React.FC<Props> = (props) => {
   const [searchText, setSearchText] = useState("");
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
     const filteredData = props.data.filter((item) =>
