@@ -30,6 +30,15 @@ export interface iTexts {
     address: string;
   };
   story: {
+    sort: {
+      sortBy: string;
+      default: string;
+      firstName: string;
+      lastName: string;
+      born: string;
+      dead: string;
+      graveId: string;
+    };
     card: {
       showEnd: string;
       showMore: string;

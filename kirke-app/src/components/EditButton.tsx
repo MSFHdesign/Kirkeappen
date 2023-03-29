@@ -213,7 +213,7 @@ const EditButton: React.FC<Props> = (props) => {
                   />
                   <label htmlFor="graveId">{story.graveID}:</label>
                   <input
-                    type="text"
+                    type="number"
                     id="graveId"
                     value={newGraveId}
                     onChange={(e) => setNewGraveId(e.target.value)}

@@ -29,6 +29,15 @@
     "address": "Adresse"
   },
   "story": {
+    "sort": {
+      "sortBy": "Newliest",
+      "default": "default",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "born": "Born",
+      "dead": "Dead",
+      "graveId": "Grave id"
+    },
     "card": {
       "showMore": "Hent flere historier",
       "showEnd": "Ikke flere historier"
