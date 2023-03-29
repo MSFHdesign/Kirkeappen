@@ -77,7 +77,8 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   };
 
   const handleSearch = (searchText: string) => {
-    const searchDate = Date.parse(searchText);
+    const parsedSearchText = parseInt(searchText);
+
     const filteredData = collectionData.filter(
       (item) =>
         item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -87,8 +88,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
           " " +
           item.lastName.toLowerCase()
         ).includes(searchText.toLowerCase()) ||
-        item.graveNumber.toString().includes(searchText) ||
-        Date.parse(item.born) === searchDate // check if item.born matches searchDate
+        item.graveId === parsedSearchText
     );
     setFilteredCollectionData(filteredData);
   };
