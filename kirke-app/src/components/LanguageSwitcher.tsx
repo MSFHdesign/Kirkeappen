@@ -5,27 +5,31 @@ import uk from "../img/uk.png";
 
 const LanguageSwitcher: React.FC = () => {
   const { toggleLocale } = useLanguage();
-  const [languageFlag, setLanguageFlag] = useState(uk);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
 
-  const handleClick = () => {
-    if (languageFlag === dk) {
-      setLanguageFlag(uk);
-      toggleLocale();
-    } else {
-      setLanguageFlag(dk);
+  const handleLanguageChange = (language: string) => {
+    if (language !== selectedLanguage) {
+      setSelectedLanguage(language);
       toggleLocale();
     }
   };
 
   return (
     <div>
-      <img
-        src={languageFlag}
-        alt="languageFlag"
-        width={100}
-        height={50}
-        onClick={handleClick}
-      />
+      <div>
+        <span>Select language: </span>
+        <select
+          value={selectedLanguage}
+          onChange={(e) => handleLanguageChange(e.target.value)}
+        >
+          <option value="en">
+            <img src={uk} alt="English" width={24} height={24} /> Dansk
+          </option>
+          <option value="da">
+            <img src={dk} alt="Danish" width={24} height={24} /> English
+          </option>
+        </select>
+      </div>
     </div>
   );
 };
