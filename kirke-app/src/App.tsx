@@ -90,7 +90,15 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
           />
 
           <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<DashBoard userEmail={userEmail} />} />
+
+          <Route
+            path="*"
+            element={
+              <AuthRoute>
+                <DashBoard userEmail={userEmail} />
+              </AuthRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </LanguageProvider>
