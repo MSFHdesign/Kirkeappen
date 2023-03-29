@@ -11,13 +11,31 @@
     "email": "Email",
     "password": "Password",
     "submit": "Log ind",
-    "ResetPassword": "Send kode",
-    "ResetLabel": "Glemt kode?",
+    "resetPassword": "Send kode",
+    "resetLabel": "Glemt kode?",
     "failedToLogIn": "Kunne ikke logge dig ind"
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcomeMessage": "Velkommen til dit dashboard"
+    "welcomeMessage": "Velkommen til dit dashboard",
+    "cardOne": {
+      "header": "Personlige Historier",
+      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "addTitle": "Opret ny",
+      "readTitle": "Læs/rediger"
+    },
+    "cardTwo": {
+      "header": "Historiske fortællinger",
+      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "addTitle": "Opret ny",
+      "readTitle": "Læs/rediger"
+    },
+    "cardThree": {
+      "header": "Historier til godkendelse",
+      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "addTitle": "Opret ny",
+      "readTitle": "Læs/rediger"
+    }
   },
   "historie": {
     "title": "Historie",
@@ -39,6 +57,7 @@
       "personale": "Personlige",
       "toApprove": "til godkendelse"
     },
+    "numberToShow": "Antal historier",
     "firstName": "Fornavn",
     "lastName": "Efternavn",
     "born": "Født",
@@ -47,14 +66,19 @@
     "deleteBtn": "Slet",
     "editBtn": "Rediger",
     "submit": "Indsend",
+    "img": "billede",
+    "reset": "nulstil",
+    "delete": "Slet",
     "section": {
       "sectionTitle": "Afsnit",
       "description": "Forklaring",
       "title": "Afsnit title",
       "addSection": "Tilføj afsnit",
       "remove": "fjern section",
-      "submit": "Gem ændringer"
+      "submit": "Gem ændringer",
+      "cancel": "Afslut"
     },
+    "search": "Søg efter navn...",
     "error": {
       "show": "Din søgning matcher ikke med nogen i databasen.",
       "firstName": "Fornavnet skal udfyldes",
@@ -67,6 +91,10 @@
         "description": "Hvis du sletter vil det forsvinde og kan ikke komme tilbage",
         "confirm": "JA",
         "reject": "NEJ"
+      },
+      "submit": {
+        "succes": "Din historie er tilføjet.",
+        "fail": "Der er sket en fejl, tjek igennem og prøv igen"
       }
     }
   }
