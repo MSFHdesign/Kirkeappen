@@ -47,6 +47,15 @@
     "address": "Adresse"
   },
   "story": {
+    "sort": {
+      "sortBy": "Sortere efter",
+      "default": "Nyeste",
+      "firstName": "Fornavn",
+      "lastName": "Efternavn",
+      "born": "Født",
+      "dead": "Død",
+      "graveId": "Gav nummer"
+    },
     "card": {
       "showMore": "load more stories",
       "showEnd": "ikke flere historier"

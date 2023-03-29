@@ -5,7 +5,7 @@
   justify-content: flex-start;
   width: 100%;
   margin-top: 20px;
-  height: 80vh;
+  height: 70vh;
   overflow: scroll;
   align-content: center;
   flex-direction: column;
@@ -128,4 +128,82 @@ h3 {
 
 .loadMoreStories:hover {
   background-color: #16a085;
+}
+
+/* test */
+
+.selectWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.buttons {
+  flex-wrap: wrap;
+}
+
+.selectWrapper .selctionBar {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.selectWrapper .selctionBar label {
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.selectWrapper .selctionBar select {
+  margin-right: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.selectWrapper .selctionBar select:hover,
+.selectWrapper .selctionBar select:focus {
+  border-color: #666;
+}
+
+.selectWrapper .selctionBar .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.selectWrapper .selctionBar .buttons button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selectWrapper .selctionBar .buttons button:hover {
+  background-color: #ccc;
+}
+
+.selectWrapper .selctionBar .buttons button.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.selectWrapper .selctionBar .buttons button.active:hover {
+  background-color: #444;
 }

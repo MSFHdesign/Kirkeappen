@@ -8,8 +8,11 @@ interface Props {
 
 const Search: React.FC<Props> = (props) => {
   const [searchText, setSearchText] = useState("");
+
+
   const { locale } = useLanguage();
   const story = locale.story;
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
     const filteredData = props.data.filter((item) =>
