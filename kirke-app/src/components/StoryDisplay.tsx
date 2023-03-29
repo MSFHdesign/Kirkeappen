@@ -107,7 +107,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
       <div className={style.selectWrapper}>
         <Search data={[]} onSearch={handleSearch} />
         <div className={style.selctionBar}>
-          <label># </label>
+          <label>{story.numberToShow} </label>
           <select
             className={style.value}
             value={selectValue}

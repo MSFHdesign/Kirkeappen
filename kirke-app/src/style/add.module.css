@@ -1,4 +1,5 @@
 .addWrapper {
+  background-color: #f2f2f2;
   display: flex;
   border: 1px solid #ccc;
   padding: 20px;
@@ -131,15 +132,15 @@ input[type="date"]:focus {
 }
 
 .addImg {
+  width: 250px;
   gap: 10px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
 }
 .imgUploader {
   display: flex;
   height: 250px;
+  width: 250px;
   background-color: #f2f2f2;
   padding: 5px;
   flex-direction: column;
@@ -150,7 +151,7 @@ input[type="date"]:focus {
   gap: 10px;
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 250px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -205,7 +206,8 @@ textarea {
   height: 100px;
   width: 85%;
   border: 1px solid #ccc;
-  background-color: #f2f2f2;
+  background-color: white;
+  color: black;
   overflow-y: scroll;
 }
 
@@ -225,7 +227,7 @@ textarea {
   padding: 10px 75px;
   border: 2px solid black;
   border-radius: 10px;
-  background-color: transparent;
+  background-color: var(--Green50);
   color: black;
   font-size: 0.8rem;
   cursor: pointer;
@@ -237,7 +239,7 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
-  background-color: #3c763d;
+  background-color: var(--Green100);
   color: #fff;
   padding: 20px;
   border-radius: 20px;
@@ -245,7 +247,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   width: 50%;
-  height: 10vw;
+  height: 10%;
 }
 
 .warningSucces h3,
@@ -277,27 +279,7 @@ textarea {
   align-items: center;
 }
 
-.warningSucces button::before,
-.Error button::before,
-.warningSucces,
-.Error button::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 2px; /* set the width of the cross lines */
-  height: 15px; /* set the height of the cross lines */
-  background-color: #fff;
-}
 
-.warningSucces,
-.Error button::before {
-  transform: rotate(45deg); /* rotate the line 45 degrees */
-}
-
-.warningSucces,
-.Error button::after {
-  transform: rotate(-45deg); /* rotate the line -45 degrees */
-}
 
 .submitBtn {
   display: block;
@@ -310,7 +292,7 @@ textarea {
   text-transform: uppercase;
   border: none;
   border-radius: var(--roundedBorders);
-  background-color: var(--Green50);
+  background-color: var(--Green100);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
