@@ -2,6 +2,7 @@ import React from "react";
 
 import DashboardCard from "../components/DashboardCard";
 import { useLanguage } from "../components/LanguageContext";
+import Navigationsbar from "../components/navigationbar";
 import style from "../style/dashCard.module.css";
 
 export interface IDashBoardProps {
@@ -23,6 +24,7 @@ const DashBoard: React.FunctionComponent<IDashBoardProps> = (props) => {
   const dash = locale.dashboard;
   return (
     <div>
+      <Navigationsbar />
       <h1>{dash.title}</h1>
       <h2>
         {dash.welcomeMessage}

@@ -2,6 +2,7 @@
   --cardWidth: 90%;
   --cardHeight: 200px;
   --Green100: #889466;
+  --DarkGreen: #889466;
   --Green50: #aec17879;
   --Red100: #c17878;
   --Red50: #c1787881;
@@ -15,4 +16,7 @@ html {
   background-size: contain;
   background-position: bottom;
   min-height: 100vh;
+}
+body {
+  margin: 0;
 }

@@ -13,7 +13,6 @@ import EditProfilePage from "./pages/EditProfilePage";
 import StoryDisplay from "./components/StoryDisplay";
 import StoryAdd from "./components/StoryAdd";
 import { LanguageProvider } from "./components/LanguageContext";
-import Navigationbar from "./components/navigationbar";
 
 initializeApp(firebaseConfig);
 
@@ -30,7 +29,6 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
   }, []);
   return (
     <LanguageProvider>
-      <Navigationbar />
       <BrowserRouter>
         <Routes>
           <Route
