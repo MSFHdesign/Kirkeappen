@@ -16,6 +16,7 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
+  min-height: 100vh;
 }
 body {
   margin: 0;
