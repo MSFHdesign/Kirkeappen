@@ -48,13 +48,15 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
   };
   return (
     <div className={style.container}>
-      {showAlert && (
+      {showAlert ? (
         <div className={style.alert}>
           <span className={style.closebtn} onClick={handleAlertClose}>
             &times;
           </span>
           <strong>{error} </strong>
         </div>
+      ) : (
+        <div></div>
       )}
       {isModalOpen ? (
         <form onSubmit={handleSubmit}>

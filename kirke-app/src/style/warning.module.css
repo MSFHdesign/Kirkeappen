@@ -1,12 +1,12 @@
 .alert {
   padding: 20px;
-  background-color: C17878;
-  color: white;
+  background-color: #f2f2f2;
+  color: var(--textDelete);
 }
 
 .closebtn {
   margin-left: 15px;
-  color: white;
+  color: var(--textDelete);
   font-weight: bold;
   float: right;
   font-size: 22px;
