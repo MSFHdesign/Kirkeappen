@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "../style/search.module.css";
-
+import { useLanguage } from "../components/LanguageContext";
 interface Props {
   data: any[];
   onSearch: (searchText: string, filteredData: any[]) => void;
@@ -8,6 +8,11 @@ interface Props {
 
 const Search: React.FC<Props> = (props) => {
   const [searchText, setSearchText] = useState("");
+
+
+  const { locale } = useLanguage();
+  const story = locale.story;
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
     const filteredData = props.data.filter((item) =>
@@ -20,7 +25,7 @@ const Search: React.FC<Props> = (props) => {
     <div className={style.searchWrapper}>
       <input
         type="text"
-        placeholder="Search by name..."
+        placeholder={locale.story.search}
         value={searchText}
         onChange={handleInputChange}
       />

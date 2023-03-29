@@ -1,32 +1,50 @@
 {
   "error": {
-    "generic": "Der opstod en fejl",
+    "generic": "An error occurred",
     "loginFailed": "Login failed"
   },
   "succes": {
-    "resetEmail": "Tjek din inbox, mulgivis spamfilter."
+    "resetEmail": "Check your inbox, possibly the spam filter."
   },
   "login": {
     "title": "Log in",
-    "email": " eng Email",
-    "password": " eng Password",
+    "email": "Email",
+    "password": "Password",
     "submit": "Log in",
-    "ResetPassword": "Send code",
-    "ResetLabel": "Forgot password?",
-    "failedToLogIn": "Kunne ikke logge dig ind"
+    "resetPassword": "Send code",
+    "resetLabel": "Forgot password?",
+    "failedToLogIn": "Could not log you in"
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcomeMessage": "Welcome to your dashboard"
+    "welcomeMessage": "Welcome to your dashboard",
+    "cardOne": {
+      "header": "Personal Stories",
+      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "addTitle": "Create new",
+      "readTitle": "Read/edit"
+    },
+    "cardTwo": {
+      "header": "Historical Stories",
+      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "addTitle": "Create new",
+      "readTitle": "Read/edit"
+    },
+    "cardThree": {
+      "header": "Stories to be Approved",
+      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "addTitle": "Create new",
+      "readTitle": "Read/edit"
+    }
   },
   "historie": {
-    "title": "Historie",
-    "introText": "Her er en introduktion til historien"
+    "title": "History",
+    "introText": "Here's an introduction to the story"
   },
   "personlige": {
-    "title": "Personlige oplysninger",
-    "fullName": "Fulde navn",
-    "address": "Adresse"
+    "title": "Personal Information",
+    "fullName": "Full name",
+    "address": "Address"
   },
   "story": {
     "sort": {
@@ -39,43 +57,53 @@
       "graveId": "Grave id"
     },
     "card": {
-      "showMore": "Hent flere historier",
-      "showEnd": "Ikke flere historier"
+      "showMore": "load more stories",
+      "showEnd": "no more stories"
     },
     "title": {
-      "add": "tilføj",
-      "history": "Historiske",
-      "personale": "Personlige",
-      "toApprove": "til godkendelse"
+      "add": "add",
+      "history": "Historical",
+      "personale": "Personal",
+      "toApprove": "to approve"
     },
-    "firstName": "string",
-    "lastName": "string",
-    "born": "string",
-    "dead": "string",
-    "graveID": "string",
-    "deleteBtn": "string",
-    "editBtn": "string",
-    "submit": "string",
+    "numberToShow": "Number of stories to show",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "born": "Born",
+    "dead": "Deceased",
+    "graveID": "Grave ID",
+    "deleteBtn": "Delete",
+    "editBtn": "Edit",
+    "submit": "Submit",
+    "img": "Image",
+    "reset": "Reset",
+    "delete": "Delete",
     "section": {
-      "sectionTitle": "string",
-      "description": "string",
-      "title": "string",
-      "addSection": "Add sektion",
+      "sectionTitle": "Section",
+      "description": "Explanation",
+      "title": "Section title",
+      "addSection": "Add section",
       "remove": "Remove section",
-      "submit": "Gem ændringer"
+      "submit": "Save changes",
+      "cancel": "Cancel"
     },
+    "search": "Search for name...",
     "error": {
-      "show": "Nothing to show",
-      "firstName": "string",
-      "lastName": "string",
-      "born": "string",
-      "dead": "string",
-      "graveID": "string",
+      "show": "Your search does not match anyone in the database.",
+      "firstName": "First name must be filled out",
+      "lastName": "Last name must be filled out",
+      "born": "Birth date must be filled out",
+      "dead": "Death date must be filled out",
+      "graveID": "Grave ID must be filled out",
       "delete": {
-        "title": "Are you sure you want to delete this card?",
-        "description": "Hvis du sletter vil det forsvinde og kan ikke komme tilbage",
+        "title": "Are you sure you want to delete?",
+        "description": "If you delete it, it will disappear and cannot be restored",
         "confirm": "YES",
         "reject": "NO"
+      },
+      "submit": {
+        "succes": "Your story has been added.",
+        "fail": "An error occurred, please check and try again"
       }
     }
   }

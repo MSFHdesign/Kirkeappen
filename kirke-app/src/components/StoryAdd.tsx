@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../models/FBconfig";
 import style from "../style/add.module.css";
-
+import Logo from "../img/logo.svg";
 import { useLanguage } from "./LanguageContext";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
@@ -96,15 +96,15 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       }, 5000);
       return;
     }
-    setIsSuccess(true);
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 5000);
+
     try {
       if (file) {
         const storageRef = ref(storage, "images/" + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
-
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
         uploadTask.on(
           "state_changed",
           (snapshot: { bytesTransferred: number; totalBytes: number }) => {
@@ -123,7 +123,6 @@ const AddPersonComponent: React.FC<Props> = (props) => {
             // Handle successful upload
             getDownloadURL(uploadTask.snapshot.ref)
               .then(async (downloadURL) => {
-                console.log("File available at", downloadURL);
                 setImageUrl(downloadURL); // Set imageUrl to the download URL
                 const docRef = await addDoc(
                   collection(db, props.collectionName),
@@ -138,7 +137,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                     timestamp: new Date(),
                   }
                 );
-                console.log("Document written with ID: ", docRef.id);
+
                 // Reset the form inputs
                 setFirstName("");
                 setLastName("");
@@ -167,7 +166,10 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           imageUrl, // Add image URL to document
           timestamp: new Date(),
         });
-
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
         console.log("Document written with ID: ", docRef.id);
       }
       // Reset the form inputs
@@ -222,6 +224,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                     id="firstName"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    required
                   />
                   {firstNameError && (
                     <span className={style.error}>{firstNameError}</span>
@@ -234,6 +237,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                     id="graveNumber"
                     value={graveNumber}
                     onChange={(e) => setGraveNumber(e.target.value)}
+                    required
                   />
 
                   {graveNumberError && (
@@ -248,6 +252,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                   id="lastName"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  required
                 />
                 {lastNameError && (
                   <span className={style.error}>{lastNameError}</span>
@@ -263,6 +268,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 id="born"
                 value={born}
                 onChange={(e) => setBorn(e.target.value)}
+                required
               />
               {bornError && <span className={style.error}>{bornError}</span>}
             </span>
@@ -273,6 +279,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 id="death"
                 value={death}
                 onChange={(e) => setDeath(e.target.value)}
+                required
               />
               {deathError && <span className={style.error}>{deathError}</span>}
             </span>
@@ -281,16 +288,18 @@ const AddPersonComponent: React.FC<Props> = (props) => {
         <div className={style.contentWrap}>
           <div className={style.addImg}>
             <label className={style.imgUploader} htmlFor="image">
-              <span>Vælg et billede</span>
-              <svg viewBox="0 0 24 24">
-                <path d="M17 12l-5-5-1.41 1.41L14.17 11H4v2h10.17l-3.58 3.58L12 17l7-7z" />
-              </svg>
+              <span>{story.img}:</span>
+              <img
+                className={style.img}
+                src={file ? URL.createObjectURL(file) : imageUrl || Logo}
+                alt={"billede af " + firstName + lastName}
+              />
             </label>
             <input
               type="file"
               id="image"
               accept="image/*"
-              onChange={(e) => setFile(e.target.files?.[0] || null)}
+              onChange={(e) => setFile(e.target.files?.[0] ?? null)}
             />
           </div>
           <div className={style.progressContainer}>
@@ -319,6 +328,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                     onChange={(e) =>
                       handleSectionChange(index, "title", e.target.value)
                     }
+                    required
                   />
                 </div>
 
@@ -329,6 +339,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                   onChange={(e) =>
                     handleSectionChange(index, "description", e.target.value)
                   }
+                  required
                 />
               </div>
             </div>
@@ -346,7 +357,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
 
         <span className={style.buttonBar}>
           <button className={style.resetBtn} type="reset">
-            Reset
+            {story.reset}
           </button>
           <button className={style.submitBtn} type="submit">
             {story.submit}
@@ -354,17 +365,14 @@ const AddPersonComponent: React.FC<Props> = (props) => {
         </span>
         {hasError && (
           <div className={style.Error}>
-            <h3> An error occurred. Please try again.</h3>
+            <h3> {story.error.submit.fail}</h3>
             <button onClick={() => setHasError(false)}>×</button>
           </div>
         )}
 
         {isSuccess && (
-          <div
-            className={style.warningSucces}
-            onClick={() => setIsSuccess(false)}
-          >
-            <h3>Form submitted successfully!</h3>
+          <div className={style.warningSucces}>
+            <h3>{story.error.submit.succes}</h3>
             <button onClick={() => setIsSuccess(false)}>×</button>
           </div>
         )}
