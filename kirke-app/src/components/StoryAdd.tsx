@@ -5,7 +5,6 @@ import style from "../style/add.module.css";
 import Logo from "../img/logo.svg";
 import { useLanguage } from "./LanguageContext";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import Navigationsbar from "./navigationbar";
 
 interface Props {
   collectionName: string;
@@ -208,185 +207,176 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   };
 
   return (
-    <div>
-      <Navigationsbar />
-      <div className={style.addWrapper}>
-        <form
-          className={style.formData}
-          onReset={handleReset}
-          onSubmit={handleSubmit}
-        >
-          <div className={style.topBar}>
-            <div className={style.leftSide}>
-              <div className={style.nameBox}>
-                <div className={style.dirLod}>
-                  <span className={style.contentWrap}>
-                    <label htmlFor="firstName">{story.firstName}:</label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                    />
-                    {firstNameError && (
-                      <span className={style.error}>{firstNameError}</span>
-                    )}
-                  </span>
-                  <span className={style.contentWrap}>
-                    <label htmlFor="graveNumber">{story.graveID}</label>
-                    <input
-                      type="number"
-                      id="graveNumber"
-                      value={graveNumber}
-                      onChange={(e) => setGraveNumber(e.target.value)}
-                      required
-                    />
-
-                    {graveNumberError && (
-                      <span className={style.error}>{graveNumberError}</span>
-                    )}
-                  </span>
-                </div>
+    <div className={style.addWrapper}>
+      <form
+        className={style.formData}
+        onReset={handleReset}
+        onSubmit={handleSubmit}
+      >
+        <div className={style.topBar}>
+          <div className={style.leftSide}>
+            <div className={style.nameBox}>
+              <div className={style.dirLod}>
                 <span className={style.contentWrap}>
-                  <label htmlFor="lastName">{story.lastName}:</label>
+                  <label htmlFor="firstName">{story.firstName}:</label>
                   <input
                     type="text"
-                    id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
                   />
-                  {lastNameError && (
-                    <span className={style.error}>{lastNameError}</span>
+                  {firstNameError && (
+                    <span className={style.error}>{firstNameError}</span>
+                  )}
+                </span>
+                <span className={style.contentWrap}>
+                  <label htmlFor="graveNumber">{story.graveID}</label>
+                  <input
+                    type="number"
+                    id="graveNumber"
+                    value={graveNumber}
+                    onChange={(e) => setGraveNumber(e.target.value)}
+                    required
+                  />
+
+                  {graveNumberError && (
+                    <span className={style.error}>{graveNumberError}</span>
                   )}
                 </span>
               </div>
-            </div>
-            <div className={style.dirLod}>
               <span className={style.contentWrap}>
-                <label htmlFor="born">{story.born}:</label>
+                <label htmlFor="lastName">{story.lastName}:</label>
                 <input
-                  type="date"
-                  id="born"
-                  value={born}
-                  onChange={(e) => setBorn(e.target.value)}
+                  type="text"
+                  id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   required
                 />
-                {bornError && <span className={style.error}>{bornError}</span>}
-              </span>
-              <span className={style.contentWrap}>
-                <label htmlFor="death">{story.dead}:</label>
-                <input
-                  type="date"
-                  id="death"
-                  value={death}
-                  onChange={(e) => setDeath(e.target.value)}
-                  required
-                />
-                {deathError && (
-                  <span className={style.error}>{deathError}</span>
+                {lastNameError && (
+                  <span className={style.error}>{lastNameError}</span>
                 )}
               </span>
             </div>
           </div>
-          <div className={style.contentWrap}>
-            <div className={style.addImg}>
-              <label className={style.imgUploader} htmlFor="image">
-                <span>{story.img}:</span>
-                <img
-                  className={style.img}
-                  src={file ? URL.createObjectURL(file) : imageUrl || Logo}
-                  alt={"billede af " + firstName + lastName}
-                />
-              </label>
+          <div className={style.dirLod}>
+            <span className={style.contentWrap}>
+              <label htmlFor="born">{story.born}:</label>
               <input
-                type="file"
-                id="image"
-                accept="image/*"
-                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                type="date"
+                id="born"
+                value={born}
+                onChange={(e) => setBorn(e.target.value)}
+                required
               />
-            </div>
-            <div className={style.progressContainer}>
-              <progress
-                className={style.ulProcess}
-                value={progress}
-                max="100"
+              {bornError && <span className={style.error}>{bornError}</span>}
+            </span>
+            <span className={style.contentWrap}>
+              <label htmlFor="death">{story.dead}:</label>
+              <input
+                type="date"
+                id="death"
+                value={death}
+                onChange={(e) => setDeath(e.target.value)}
+                required
               />
-              <span className={style.progressLabel}>{`${progress}%`}</span>
-            </div>
+              {deathError && <span className={style.error}>{deathError}</span>}
+            </span>
           </div>
+        </div>
+        <div className={style.contentWrap}>
+          <div className={style.addImg}>
+            <label className={style.imgUploader} htmlFor="image">
+              <span>{story.img}:</span>
+              <img
+                className={style.img}
+                src={file ? URL.createObjectURL(file) : imageUrl || Logo}
+                alt={"billede af " + firstName + lastName}
+              />
+            </label>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+            />
+          </div>
+          <div className={style.progressContainer}>
+            <progress className={style.ulProcess} value={progress} max="100" />
+            <span className={style.progressLabel}>{`${progress}%`}</span>
+          </div>
+        </div>
 
-          <span className={style.sectionWrap}>
-            <label>{story.section.sectionTitle}:</label>
-            {sections.map((section, index) => (
-              <div key={index} className={style.section}>
-                <div className={style.sectionInputs}>
-                  <div className={style.sectionFlex}>
-                    <button
-                      type="button"
-                      className={style.removeSectionButton}
-                      onClick={() => handleRemoveSection(index)}
-                    >
-                      {story.section.remove}
-                    </button>
-                    <input
-                      type="text"
-                      placeholder={story.section.title}
-                      value={section.title}
-                      onChange={(e) =>
-                        handleSectionChange(index, "title", e.target.value)
-                      }
-                      required
-                    />
-                  </div>
-
-                  <textarea
-                    className={style.textarea}
-                    placeholder={story.section.description}
-                    value={section.description}
+        <span className={style.sectionWrap}>
+          <label>{story.section.sectionTitle}:</label>
+          {sections.map((section, index) => (
+            <div key={index} className={style.section}>
+              <div className={style.sectionInputs}>
+                <div className={style.sectionFlex}>
+                  <button
+                    type="button"
+                    className={style.removeSectionButton}
+                    onClick={() => handleRemoveSection(index)}
+                  >
+                    {story.section.remove}
+                  </button>
+                  <input
+                    type="text"
+                    placeholder={story.section.title}
+                    value={section.title}
                     onChange={(e) =>
-                      handleSectionChange(index, "description", e.target.value)
+                      handleSectionChange(index, "title", e.target.value)
                     }
                     required
                   />
                 </div>
+
+                <textarea
+                  className={style.textarea}
+                  placeholder={story.section.description}
+                  value={section.description}
+                  onChange={(e) =>
+                    handleSectionChange(index, "description", e.target.value)
+                  }
+                  required
+                />
               </div>
-            ))}
-            <span className={style.addSectionBtnbar}>
-              <button
-                className={style.addSectionButton}
-                type="button"
-                onClick={handleAddSection}
-              >
-                {story.section.addSection}
-              </button>
-            </span>
-          </span>
-
-          <span className={style.buttonBar}>
-            <button className={style.resetBtn} type="reset">
-              {story.reset}
-            </button>
-            <button className={style.submitBtn} type="submit">
-              {story.submit}
+            </div>
+          ))}
+          <span className={style.addSectionBtnbar}>
+            <button
+              className={style.addSectionButton}
+              type="button"
+              onClick={handleAddSection}
+            >
+              {story.section.addSection}
             </button>
           </span>
-          {hasError && (
-            <div className={style.Error}>
-              <h3> {story.error.submit.fail}</h3>
-              <button onClick={() => setHasError(false)}>×</button>
-            </div>
-          )}
+        </span>
 
-          {isSuccess && (
-            <div className={style.warningSucces}>
-              <h3>{story.error.submit.succes}</h3>
-              <button onClick={() => setIsSuccess(false)}>×</button>
-            </div>
-          )}
-        </form>
-      </div>
+        <span className={style.buttonBar}>
+          <button className={style.resetBtn} type="reset">
+            {story.reset}
+          </button>
+          <button className={style.submitBtn} type="submit">
+            {story.submit}
+          </button>
+        </span>
+        {hasError && (
+          <div className={style.Error}>
+            <h3> {story.error.submit.fail}</h3>
+            <button onClick={() => setHasError(false)}>×</button>
+          </div>
+        )}
+
+        {isSuccess && (
+          <div className={style.warningSucces}>
+            <h3>{story.error.submit.succes}</h3>
+            <button onClick={() => setIsSuccess(false)}>×</button>
+          </div>
+        )}
+      </form>
     </div>
   );
 };
