@@ -17,6 +17,7 @@ html {
   background-size: cover;
   background-position: bottom;
   min-height: 100vh;
+  background-attachment: fixed;
 }
 body {
   margin: 0;
