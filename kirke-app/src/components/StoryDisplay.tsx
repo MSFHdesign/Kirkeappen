@@ -227,7 +227,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                   <Card
                     firstName={item.firstName}
                     lastName={item.lastName}
-                    graveNumber={item.graveNumber}
+                    graveNumber={item.graveId}
                     born={item.born}
                     death={item.death}
                     imageUrl={item.imageUrl}

@@ -132,6 +132,7 @@ const EditButton: React.FC<Props> = (props) => {
     } catch (e) {
       console.error("Error updating card: ", e);
     }
+
   };
 
   const handleCancelClick = () => {
