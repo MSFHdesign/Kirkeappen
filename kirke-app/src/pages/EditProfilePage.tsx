@@ -22,7 +22,7 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
     setAuthing(true);
 
     if (newPassword !== confirmPassword) {
-      setError("Passwords do not match");
+      setError("Passwords dont match");
       setShowAlert(true);
       setAuthing(false);
       return;
