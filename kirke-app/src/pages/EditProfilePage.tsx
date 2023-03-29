@@ -68,6 +68,8 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
             id="new-password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            required
+            minLength={6}
           />
           <label htmlFor="confirm-password">Confirm Password:</label>
           <input
@@ -76,6 +78,8 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
             id="confirm-password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            minLength={6}
           />
           <button type="submit" disabled={authing}>
             Update
