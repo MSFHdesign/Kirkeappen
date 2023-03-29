@@ -4,8 +4,9 @@
   --Green100: #889466;
   --DarkGreen: #889466;
   --Green50: #aec17879;
-  --Red100: #c17878;
-  --Red50: #c1787881;
+  --Red100: #d9d9d9;
+  --Red50: #d9d9d989;
+  --textDelete: rgb(75, 75, 75);
   --textColor: black;
   --roundedBorders: 15px;
   background-color: #f2f2f2;

@@ -121,14 +121,14 @@ input[type="date"]:focus {
   transform: translate(-50%, -50%);
   z-index: 9999;
   background-color: var(--Red100);
-  color: #fff;
+  color: black;
   padding: 20px;
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
-  height: 10vw;
+  width: 15vw;
+  height: 5vw;
 }
 
 .addImg {
@@ -227,7 +227,7 @@ textarea {
   padding: 10px 75px;
   border: 2px solid black;
   border-radius: 10px;
-  background-color: var(--Green50);
+  background-color: white;
   color: black;
   font-size: 0.8rem;
   cursor: pointer;
@@ -246,13 +246,14 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
-  height: 10%;
+  width: 15vw;
+  height: 5vw;
 }
 
 .warningSucces h3,
 .Error h3 {
   margin: 0;
+  font-size: 20px;
 }
 
 .buttonBar {
@@ -264,10 +265,9 @@ textarea {
 
 .warningSucces button,
 .Error button {
-  text-decoration: underline;
   background: none;
   border: none;
-  color: #fff;
+  color: black;
   font-size: 20px;
   cursor: pointer;
   margin-left: 20px;
@@ -277,6 +277,9 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.warningSucces button {
+  color: #fff;
 }
 
 .submitBtn {
@@ -306,7 +309,7 @@ textarea {
   padding: 10px 20px;
   font-size: 18px;
   font-weight: bold;
-  color: #ffffff;
+  color: black;
   text-align: center;
   text-transform: uppercase;
   border: none;
