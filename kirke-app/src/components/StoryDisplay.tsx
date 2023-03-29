@@ -9,6 +9,7 @@ import Search from "./Search";
 import Card from "./StoryCard";
 // Costum Hooks
 import { useLanguage } from "../components/LanguageContext";
+import Navigationsbar from "./navigationbar";
 
 // add sorting compontent
 
@@ -104,6 +105,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
 
   return (
     <div>
+      <Navigationsbar />
       <div className={style.selectWrapper}>
         <Search data={[]} onSearch={handleSearch} />
         <div className={style.selctionBar}>

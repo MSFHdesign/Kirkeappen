@@ -2,6 +2,7 @@ import navigation from "../style/navigation.module.css";
 import logo from "../img/logo.svg";
 import SignOut from "./SignOut";
 import EditProfilPage from "../pages/EditProfilePage";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -9,7 +10,9 @@ const Navigationsbar = (props: Props) => {
   return (
     <div className={navigation.container}>
       <div className={navigation.img}>
-        <img src={logo} alt="logo" />
+        <Link to="/">
+          <img src={logo} alt="logo" />
+        </Link>
       </div>
       <div className={navigation.dropdown}>
         <button className={navigation.dropbtn}></button>
