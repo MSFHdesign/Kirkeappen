@@ -15,6 +15,7 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,9 +43,11 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
   const handleAlertClose = () => {
     setShowAlert(false);
   };
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
   return (
-    <div>
-      <h1>Edit Profile</h1>
+    <div className={style.container}>
       {showAlert && (
         <div className={style.alert}>
           <span className={style.closebtn} onClick={handleAlertClose}>
@@ -53,27 +56,35 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
           <strong>{error} </strong>
         </div>
       )}
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="new-password">New Password:</label>
-        <input
-          type="password"
-          name="new-password"
-          id="new-password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
-        <label htmlFor="confirm-password">Confirm Password:</label>
-        <input
-          type="password"
-          name="confirm-password"
-          id="confirm-password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <button type="submit" disabled={authing}>
-          Update
-        </button>
-      </form>
+      {isModalOpen ? (
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="new-password">New Password:</label>
+          <input
+            type="password"
+            name="new-password"
+            id="new-password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+          <label htmlFor="confirm-password">Confirm Password:</label>
+          <input
+            type="password"
+            name="confirm-password"
+            id="confirm-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <button type="submit" disabled={authing}>
+            Update
+          </button>
+        </form>
+      ) : (
+        <div>
+          <button type="button" onClick={handleModalOpen}>
+            skift password
+          </button>
+        </div>
+      )}
     </div>
   );
 };
