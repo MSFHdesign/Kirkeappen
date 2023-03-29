@@ -32,6 +32,7 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
       await updatePassword(auth.currentUser!, newPassword);
       console.log("Password updated successfully");
       navigate("/");
+      setIsModalOpen(false);
     } catch (error) {
       console.log(error);
       setError("Failed to update password");
