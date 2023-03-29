@@ -156,20 +156,20 @@ h3 {
 
 .selectWrapper .selctionBar label {
   margin-right: 10px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: var(--textColor);
 }
 
 .selectWrapper .selctionBar select {
   margin-right: 10px;
-  padding: 5px 10px;
+  padding: 10px 15px;
   font-size: 16px;
   font-weight: bold;
   color: #333;
   background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border: 0px solid #ccc;
+  border-radius: var(--roundedBorders);
 }
 
 .selectWrapper .selctionBar select:hover,
@@ -186,25 +186,26 @@ h3 {
 
 .selectWrapper .selctionBar .buttons button {
   margin-right: 10px;
-  padding: 5px 10px;
+  padding: 10px 15px;
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: var(--textColor);
   background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border: 0px solid #ccc;
+  border-radius: var(--roundedBorders);
   cursor: pointer;
 }
 
 .selectWrapper .selctionBar .buttons button:hover {
-  background-color: #ccc;
+  background-color: var(--DarkGreen);
 }
 
 .selectWrapper .selctionBar .buttons button.active {
-  background-color: #333;
+  background-color: var(--DarkGreen);
   color: #fff;
 }
 
 .selectWrapper .selctionBar .buttons button.active:hover {
-  background-color: #444;
+  background-color: var(--DarkGreen);
+  color: var(--textColor);
 }

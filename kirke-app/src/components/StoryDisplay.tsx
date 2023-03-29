@@ -176,13 +176,19 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
               >
                 {story.sort.default}
               </button>
-              <button onClick={() => toggleSortingDirection("firstName")}>
+              <button
+                className={sortingOption === "firstName" ? style.active : ""}
+                onClick={() => toggleSortingDirection("firstName")}
+              >
                 {story.sort.firstName}
                 {sortingOption === "firstName" && (
                   <>{sortDirections.firstName === "asc" ? "▼" : "▲"}</>
                 )}
               </button>
-              <button onClick={() => toggleSortingDirection("lastName")}>
+              <button
+                className={sortingOption === "lastName" ? style.active : ""}
+                onClick={() => toggleSortingDirection("lastName")}
+              >
                 {story.sort.lastName}
                 {sortingOption === "lastName" && (
                   <>{sortDirections.lastName === "asc" ? "▼" : "▲"}</>

@@ -28,7 +28,7 @@
   width: 90%;
   height: 90%;
   overflow-y: scroll;
-  background-color: #f2f2f2;
+  background-color: white;
 }
 
 .closeButton {
@@ -156,7 +156,7 @@
 }
 .editForm input,
 .editForm textarea {
-  background-color: white;
+  background-color: #f2f2f2;
   margin: 0 10px;
   font-size: 16px;
   padding: 8px;
@@ -167,7 +167,7 @@
 
 .editForm button {
   font-size: 16px;
-  padding: 8px;
+  padding: 8px 20px;
   border: none;
   border-radius: var(--roundedBorders);
 }

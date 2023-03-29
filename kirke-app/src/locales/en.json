@@ -48,8 +48,8 @@
   },
   "story": {
     "sort": {
-      "sortBy": "Newliest",
-      "default": "default",
+      "sortBy": "Sort by",
+      "default": "newest",
       "firstName": "First name",
       "lastName": "Last name",
       "born": "Born",
