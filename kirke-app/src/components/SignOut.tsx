@@ -12,7 +12,7 @@ const SignOut: React.FC<SignOutProps> = () => {
     } catch (error) {}
   };
 
-  return <button onClick={handleSignOut}>Sign out of Firebase</button>;
+  return <button onClick={handleSignOut}>log ud</button>;
 };
 
 export default SignOut;
