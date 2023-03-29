@@ -12,13 +12,31 @@ export interface iTexts {
     email: string;
     password: string;
     submit: string;
-    ResetPassword: string;
-    ResetLabel: string;
+    resetPassword: string;
+    resetLabel: string;
     failedToLogIn: string;
   };
   dashboard: {
     title: string;
     welcomeMessage: string;
+    cardOne: {
+      header: string;
+      content: string;
+      addTitle: string;
+      readTitle: string;
+    };
+    cardTwo: {
+      header: string;
+      content: string;
+      addTitle: string;
+      readTitle: string;
+    };
+    cardThree: {
+      header: string;
+      content: string;
+      addTitle: string;
+      readTitle: string;
+    };
   };
   historie: {
     title: string;
@@ -49,6 +67,7 @@ export interface iTexts {
       personale: string;
       toApprove: string;
     };
+    numberToShow: string;
     firstName: string;
     lastName: string;
     born: string;
@@ -57,6 +76,9 @@ export interface iTexts {
     deleteBtn: string;
     editBtn: string;
     submit: string;
+    img: string;
+    reset: string;
+    delete: string;
     section: {
       sectionTitle: string;
       description: string;
@@ -64,7 +86,9 @@ export interface iTexts {
       addSection: string;
       remove: string;
       submit: string;
+      cancel: string;
     };
+    search: string;
     error: {
       show: string;
       firstName: string;
@@ -77,6 +101,10 @@ export interface iTexts {
         description: string;
         confirm: string;
         reject: string;
+      };
+      submit: {
+        succes: string;
+        fail: string;
       };
     };
   };
