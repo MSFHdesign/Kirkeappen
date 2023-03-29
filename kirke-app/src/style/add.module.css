@@ -217,7 +217,7 @@ textarea {
   border: none;
   border-radius: 10px;
   background-color: var(--Red100);
-  color: white;
+  color: var(--textColor);
   font-size: 0.8rem;
   cursor: pointer;
 }
@@ -305,7 +305,6 @@ textarea {
 
 .resetBtn {
   display: block;
-
   padding: 10px 20px;
   font-size: 18px;
   font-weight: bold;
@@ -314,7 +313,7 @@ textarea {
   text-transform: uppercase;
   border: none;
   border-radius: var(--roundedBorders);
-  background-color: var(--Red50);
+  background-color: var(--Red100);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
