@@ -12,7 +12,9 @@ const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {
 
   return (
     <div className={login.container}>
-      <LanguageSwitcher />
+      <div className={login.language}>
+        <LanguageSwitcher />
+      </div>
       <div className={login.spacing}>
         <div className={login.img}>
           <img src={logo} alt="logo" />
