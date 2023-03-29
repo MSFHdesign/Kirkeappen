@@ -14,9 +14,8 @@
 html {
   background: url("../img/bg.svg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: bottom;
-  min-height: 100vh;
 }
 body {
   margin: 0;
