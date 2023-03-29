@@ -21,13 +21,13 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   const [lastName, setLastName] = useState("");
   const [born, setBorn] = useState("");
   const [death, setDeath] = useState("");
-  const [graveNumber, setGraveNumber] = useState("");
+  const [graveId, setgraveId] = useState("");
   const [sections, setSections] = useState<Section[]>([]);
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [bornError, setBornError] = useState("");
   const [deathError, setDeathError] = useState("");
-  const [graveNumberError, setGraveNumberError] = useState("");
+  const [graveIdError, setgraveIdError] = useState("");
 
   const [file, setFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -64,7 +64,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
     setLastNameError("");
     setBornError("");
     setDeathError("");
-    setGraveNumberError("");
+    setgraveIdError("");
 
     // Check if fields are not empty
     if (!firstName.trim()) {
@@ -83,8 +83,8 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       setDeathError(story.error.dead);
       hasErrors = true;
     }
-    if (!graveNumber.trim()) {
-      setGraveNumberError(story.error.graveID);
+    if (!graveId.trim()) {
+      setgraveIdError(story.error.graveID);
       hasErrors = true;
     }
 
@@ -127,11 +127,11 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 const docRef = await addDoc(
                   collection(db, props.collectionName),
                   {
-                    firstName,
-                    lastName,
-                    born,
-                    death,
-                    graveNumber,
+                    firstName: firstName,
+                    lastName: lastName,
+                    born: born,
+                    death: death,
+                    graveId: graveId,
                     sections: sections ? sections : [],
                     imageUrl: downloadURL, // Use download URL as imageUrl
                     timestamp: new Date(),
@@ -143,7 +143,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                 setLastName("");
                 setBorn("");
                 setDeath("");
-                setGraveNumber("");
+                setgraveId("");
                 setSections([]);
                 setFile(null);
                 setProgress(0);
@@ -157,13 +157,13 @@ const AddPersonComponent: React.FC<Props> = (props) => {
         );
       } else {
         const docRef = await addDoc(collection(db, props.collectionName), {
-          firstName,
-          lastName,
-          born,
-          death,
-          graveNumber,
+          firstName: firstName,
+          lastName: lastName,
+          born: born,
+          death: death,
+          graveId: graveId,
           sections: sections ? sections : [],
-          imageUrl, // Add image URL to document
+          imageUrl: imageUrl, // Use download URL as imageUrl
           timestamp: new Date(),
         });
         setIsSuccess(true);
@@ -177,7 +177,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       setLastName("");
       setBorn("");
       setDeath("");
-      setGraveNumber("");
+      setgraveId("");
       setSections([]);
       setFile(null);
       setProgress(0);
@@ -186,13 +186,14 @@ const AddPersonComponent: React.FC<Props> = (props) => {
     } catch (error) {
       console.error("Error adding document: ", error);
     }
+    console.log(graveId);
   };
   const handleReset = () => {
     setFirstName("");
     setLastName("");
     setBorn("");
     setDeath("");
-    setGraveNumber("");
+    setgraveId("");
     setSections([]);
     setFile(null);
     setImageUrl("");
@@ -203,7 +204,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
     setLastNameError("");
     setBornError("");
     setDeathError("");
-    setGraveNumberError("");
+    setgraveIdError("");
   };
 
   return (
@@ -231,17 +232,16 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                   )}
                 </span>
                 <span className={style.contentWrap}>
-                  <label htmlFor="graveNumber">{story.graveID}</label>
+                  <label htmlFor="graveId">{story.graveID}</label>
                   <input
                     type="number"
-                    id="graveNumber"
-                    value={graveNumber}
-                    onChange={(e) => setGraveNumber(e.target.value)}
-                    required
+                    id="graveId"
+                    value={graveId}
+                    onChange={(e) => setgraveId(e.target.value)}
                   />
 
-                  {graveNumberError && (
-                    <span className={style.error}>{graveNumberError}</span>
+                  {graveIdError && (
+                    <span className={style.error}>{graveIdError}</span>
                   )}
                 </span>
               </div>

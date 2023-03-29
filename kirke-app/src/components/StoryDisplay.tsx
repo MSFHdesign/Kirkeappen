@@ -28,8 +28,16 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   // sorting
   const [visibleCount, setVisibleCount] = useState(5); // number of visible items
   const [selectValue, setSelectValue] = useState("5");
-  const [sortValue] = useState(""); // initial sort value is an empty string
-  const [sortDirection] = useState("asc"); // initial sort direction is "newest"
+
+  const [sortingOption, setSortingOption] = useState<string>("");
+
+  const [sortDirections, setSortDirections] = useState({
+    firstName: "asc",
+    lastName: "asc",
+    born: "asc",
+    death: "asc",
+    graveId: "asc",
+  });
 
   // Text
   const { locale } = useLanguage();
@@ -70,6 +78,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   };
 
   const handleSearch = (searchText: string) => {
+    const searchDate = Date.parse(searchText);
     const filteredData = collectionData.filter(
       (item) =>
         item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -78,7 +87,9 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
           item.firstName.toLowerCase() +
           " " +
           item.lastName.toLowerCase()
-        ).includes(searchText.toLowerCase())
+        ).includes(searchText.toLowerCase()) ||
+        item.graveNumber.toString().includes(searchText) ||
+        Date.parse(item.born) === searchDate // check if item.born matches searchDate
     );
     setFilteredCollectionData(filteredData);
   };
@@ -92,15 +103,46 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
     setVisibleCount(parseInt(e.target.value, 10));
   };
   const sortFunction = (data: any[]) => {
-    if (sortValue === "timestamp") {
+    if (sortingOption === "firstName") {
       return [...data].sort((a, b) =>
-        sortDirection === "asc"
-          ? a.timestamp - b.timestamp
-          : b.timestamp - a.timestamp
+        sortDirections.firstName === "asc"
+          ? a.firstName.localeCompare(b.firstName)
+          : b.firstName.localeCompare(a.firstName)
+      );
+    } else if (sortingOption === "lastName") {
+      return [...data].sort((a, b) =>
+        sortDirections.lastName === "asc"
+          ? a.lastName.localeCompare(b.lastName)
+          : b.lastName.localeCompare(a.lastName)
+      );
+    } else if (sortingOption === "born") {
+      return [...data].sort((a, b) =>
+        sortDirections.born === "asc"
+          ? a.born.localeCompare(b.born)
+          : b.born.localeCompare(a.born)
+      );
+    } else if (sortingOption === "death") {
+      return [...data].sort((a, b) =>
+        sortDirections.death === "asc"
+          ? a.death.localeCompare(b.death)
+          : b.death.localeCompare(a.death)
+      );
+    } else if (sortingOption === "graveId") {
+      return [...data].sort((a, b) =>
+        sortDirections.graveId === "asc"
+          ? parseInt(a.graveId) - parseInt(b.graveId)
+          : parseInt(b.graveId) - parseInt(a.graveId)
       );
     } else {
       return data;
     }
+  };
+  const toggleSortingDirection = (option: string) => {
+    setSortingOption(option); // set the sorting option to the picked one
+    setSortDirections((prevDirections: any) => ({
+      ...prevDirections,
+      [option]: prevDirections[option] === "asc" ? "desc" : "asc",
+    }));
   };
 
   return (
@@ -120,6 +162,57 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
             <option value="25">25</option>
             <option value="50">50</option>
           </select>
+          <div className={style.selctionBar}>
+            <label>{story.sort.sortBy}</label>
+
+            <div className={style.buttons}>
+              <button
+                className={sortingOption === "" ? style.active : ""}
+                onClick={() => toggleSortingDirection("")}
+              >
+                {story.sort.default}
+              </button>
+              <button onClick={() => toggleSortingDirection("firstName")}>
+                {story.sort.firstName}
+                {sortingOption === "firstName" && (
+                  <>{sortDirections.firstName === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button onClick={() => toggleSortingDirection("lastName")}>
+                {story.sort.lastName}
+                {sortingOption === "lastName" && (
+                  <>{sortDirections.lastName === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button
+                className={sortingOption === "born" ? style.active : ""}
+                onClick={() => toggleSortingDirection("born")}
+              >
+                {story.sort.born}
+                {sortingOption === "born" && (
+                  <>{sortDirections.born === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button
+                className={sortingOption === "death" ? style.active : ""}
+                onClick={() => toggleSortingDirection("death")}
+              >
+                {story.sort.dead}
+                {sortingOption === "death" && (
+                  <>{sortDirections.death === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+              <button
+                className={sortingOption === "graveId" ? style.active : ""}
+                onClick={() => toggleSortingDirection("graveId")}
+              >
+                {story.sort.graveId}
+                {sortingOption === "graveId" && (
+                  <>{sortDirections.graveId === "asc" ? "▼" : "▲"}</>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div className={style.collectionWrapper}>
@@ -136,7 +229,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                   <Card
                     firstName={item.firstName}
                     lastName={item.lastName}
-                    graveNumber={item.graveNumber}
+                    graveNumber={item.graveId}
                     born={item.born}
                     death={item.death}
                     imageUrl={item.imageUrl}

@@ -47,6 +47,15 @@
     "address": "Address"
   },
   "story": {
+    "sort": {
+      "sortBy": "Newliest",
+      "default": "default",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "born": "Born",
+      "dead": "Dead",
+      "graveId": "Grave id"
+    },
     "card": {
       "showMore": "load more stories",
       "showEnd": "no more stories"
