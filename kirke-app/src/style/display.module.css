@@ -23,7 +23,6 @@
 .cardWrapper {
   display: flex;
   flex-direction: row;
-
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   padding: 20px;
@@ -31,7 +30,7 @@
   max-width: var(--cardWidth);
   min-height: var(--cardHeight);
   max-height: var(--cardHeight);
-  width: 100%;
+  width: 60%;
 }
 
 .cardImg {
