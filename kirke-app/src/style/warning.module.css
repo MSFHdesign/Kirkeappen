@@ -1,12 +1,12 @@
 .alert {
   padding: 20px;
-  background-color: C17878;
-  color: white;
+  background-color: #f2f2f2;
+  color: var(--textDelete);
 }
 
 .closebtn {
   margin-left: 15px;
-  color: white;
+  color: var(--textDelete);
   font-weight: bold;
   float: right;
   font-size: 22px;
@@ -46,7 +46,7 @@
 .warning-modal-content {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: var(--roundedBorders);
   text-align: center;
 }
 
@@ -69,7 +69,7 @@
 
 .warning-modal-content button.yes-button {
   background-color: var(--Red100);
-  color: white;
+  color: var(--textDelete);
 }
 
 .warning-modal-content button.yes-button:hover {
@@ -87,7 +87,7 @@
 
 .delete-button {
   background-color: var(--Red100);
-  color: var(--textColor);
+  color: var(--textDelete);
   text-transform: uppercase;
   border: none;
   padding: 8px 50px;

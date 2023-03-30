@@ -5,8 +5,9 @@
   justify-content: flex-start;
   width: 100%;
   margin-top: 20px;
-  height: 70vh;
-  overflow: scroll;
+  padding-top: 20px;
+  height: 60vh;
+  overflow-y: scroll;
   align-content: center;
   flex-direction: column;
   align-items: center;
@@ -16,14 +17,12 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
   flex-direction: column;
 }
 
 .cardWrapper {
   display: flex;
   flex-direction: row;
-
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   padding: 20px;
@@ -31,7 +30,7 @@
   max-width: var(--cardWidth);
   min-height: var(--cardHeight);
   max-height: var(--cardHeight);
-  width: 100%;
+  width: 60%;
 }
 
 .cardImg {
@@ -115,19 +114,19 @@ h3 {
   padding: 10px 20px;
   font-size: 18px;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--textColor);
   text-align: center;
   text-transform: uppercase;
   border: none;
   border-radius: 5px;
-  background-color: #1abc9c;
+  background-color: #f2f2f2;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
 .loadMoreStories:hover {
-  background-color: #16a085;
+  background-color: #d9d9d9;
 }
 
 /* test */
@@ -155,20 +154,20 @@ h3 {
 
 .selectWrapper .selctionBar label {
   margin-right: 10px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: var(--textColor);
 }
 
 .selectWrapper .selctionBar select {
   margin-right: 10px;
-  padding: 5px 10px;
+  padding: 10px 15px;
   font-size: 16px;
   font-weight: bold;
   color: #333;
   background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border: 0px solid #ccc;
+  border-radius: var(--roundedBorders);
 }
 
 .selectWrapper .selctionBar select:hover,
@@ -185,25 +184,26 @@ h3 {
 
 .selectWrapper .selctionBar .buttons button {
   margin-right: 10px;
-  padding: 5px 10px;
+  padding: 10px 15px;
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: var(--textColor);
   background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border: 0px solid #ccc;
+  border-radius: var(--roundedBorders);
   cursor: pointer;
 }
 
 .selectWrapper .selctionBar .buttons button:hover {
-  background-color: #ccc;
+  background-color: var(--DarkGreen);
 }
 
 .selectWrapper .selctionBar .buttons button.active {
-  background-color: #333;
+  background-color: var(--DarkGreen);
   color: #fff;
 }
 
 .selectWrapper .selctionBar .buttons button.active:hover {
-  background-color: #444;
+  background-color: var(--DarkGreen);
+  color: var(--textColor);
 }

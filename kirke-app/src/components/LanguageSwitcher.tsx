@@ -16,20 +16,18 @@ const LanguageSwitcher: React.FC = () => {
 
   return (
     <div>
-      <div>
-        <span>Select language: </span>
-        <select
-          value={selectedLanguage}
-          onChange={(e) => handleLanguageChange(e.target.value)}
-        >
-          <option value="en">
-            <img src={uk} alt="English" width={24} height={24} /> Dansk
-          </option>
-          <option value="da">
-            <img src={dk} alt="Danish" width={24} height={24} /> English
-          </option>
-        </select>
-      </div>
+      <span>Select language: </span>
+      <select
+        value={selectedLanguage}
+        onChange={(e) => handleLanguageChange(e.target.value)}
+      >
+        <option value="en">
+          <img src={uk} alt="English" width={24} height={24} /> Dansk
+        </option>
+        <option value="da">
+          <img src={dk} alt="Danish" width={24} height={24} /> English
+        </option>
+      </select>
     </div>
   );
 };

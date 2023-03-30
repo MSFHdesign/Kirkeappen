@@ -4,8 +4,9 @@
   --Green100: #889466;
   --DarkGreen: #889466;
   --Green50: #aec17879;
-  --Red100: #c17878;
-  --Red50: #c1787881;
+  --Red100: #d9d9d9;
+  --Red50: #d9d9d989;
+  --textDelete: rgb(75, 75, 75);
   --textColor: black;
   --roundedBorders: 15px;
   background-color: #f2f2f2;
@@ -13,10 +14,16 @@
 html {
   background: url("../img/bg.svg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: bottom;
   min-height: 100vh;
+  background-attachment: fixed;
 }
 body {
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

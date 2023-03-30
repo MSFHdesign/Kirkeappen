@@ -49,7 +49,7 @@
   height: 30px;
   width: 100%;
   border-radius: var(--roundedBorders);
-  color: var(--DarkGreen);
+  color: var(--textColor);
   border: 0px solid black;
 }
 
@@ -59,4 +59,20 @@
 
 .dropdownContent form {
   margin: 0;
+}
+.language {
+  display: flex;
+  flex-direction: column;
+  min-height: fit-content;
+  margin: 20px 0;
+}
+
+.language span {
+  font-size: 18px;
+}
+
+.language select {
+  padding: 10px 15px;
+  width: 100%;
+  border-radius: var(--roundedBorders);
 }

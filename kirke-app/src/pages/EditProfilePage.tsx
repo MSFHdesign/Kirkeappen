@@ -22,7 +22,7 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
     setAuthing(true);
 
     if (newPassword !== confirmPassword) {
-      setError("Passwords do not match");
+      setError("Passwords dont match");
       setShowAlert(true);
       setAuthing(false);
       return;
@@ -32,6 +32,7 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
       await updatePassword(auth.currentUser!, newPassword);
       console.log("Password updated successfully");
       navigate("/");
+      setIsModalOpen(false);
     } catch (error) {
       console.log(error);
       setError("Failed to update password");
@@ -48,13 +49,15 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
   };
   return (
     <div className={style.container}>
-      {showAlert && (
+      {showAlert ? (
         <div className={style.alert}>
           <span className={style.closebtn} onClick={handleAlertClose}>
             &times;
           </span>
           <strong>{error} </strong>
         </div>
+      ) : (
+        <div></div>
       )}
       {isModalOpen ? (
         <form onSubmit={handleSubmit}>

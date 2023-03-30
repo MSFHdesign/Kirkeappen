@@ -7,6 +7,9 @@
   align-items: center;
   width: 100%;
 }
+.container {
+  text-align: center;
+}
 
 .containerBox {
   width: 90%;

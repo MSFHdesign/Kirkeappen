@@ -23,12 +23,11 @@ const DashBoard: React.FunctionComponent<IDashBoardProps> = (props) => {
   const { locale } = useLanguage();
   const dash = locale.dashboard;
   return (
-    <div>
+    <div className={style.container}>
       <Navigationsbar />
       <h1>{dash.title}</h1>
       <h2>
-        {dash.welcomeMessage}
-        <strong>{props.userEmail}</strong>
+        {dash.welcomeMessage} <strong>{props.userEmail}</strong>
       </h2>
       <div className={style.DashContainer}>
         <div className={style.containerBox}>
