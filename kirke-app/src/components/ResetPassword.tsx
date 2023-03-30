@@ -58,7 +58,7 @@ const ResetPassword: React.FC<Props> = ({ onSuccess, onError }) => {
   return (
     <div className={login.button}>
       {isModalOpen ? (
-        <div>
+        <div className={login.rp}>
           <label htmlFor="email">{locale.login.resetLabel}</label>
           <input
             type="email"
@@ -67,7 +67,7 @@ const ResetPassword: React.FC<Props> = ({ onSuccess, onError }) => {
             value={email}
             onChange={handleEmailChange}
           />
-          <button onClick={handleResetPassword}>
+          <button className={login.button} onClick={handleResetPassword}>
             {locale.login.resetPassword}
           </button>
         </div>

@@ -95,7 +95,7 @@
   width: 45%;
 }
 
-.button > button,
+.button button,
 .buttonStyling > button {
   background-color: var(--Green100);
   border-radius: var(--roundedBorders);
@@ -104,4 +104,14 @@
   padding: 10px;
   width: 100%;
   color: white;
+}
+
+.rp {
+  width: 100;
+}
+
+.rp input {
+  width: 90%;
+  margin-bottom: 10px;
+  border-radius: var(--roundedBorders);
 }
