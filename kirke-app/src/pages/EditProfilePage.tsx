@@ -57,7 +57,7 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
           <strong>{error} </strong>
         </div>
       ) : (
-        <div></div>
+        <div className={style.hide}></div>
       )}
       {isModalOpen ? (
         <form onSubmit={handleSubmit}>
@@ -86,7 +86,7 @@ const EditProfilPage: React.FunctionComponent<IEditProfilPageProps> = (
           </button>
         </form>
       ) : (
-        <div>
+        <div className={style.button}>
           <button type="button" onClick={handleModalOpen}>
             skift password
           </button>

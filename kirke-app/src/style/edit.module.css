@@ -184,3 +184,9 @@
 .cancelBtn {
   color: var(--textDelete);
 }
+
+@media screen and (max-width: 900px) {
+  .editContainer {
+    flex-direction: row;
+  }
+}

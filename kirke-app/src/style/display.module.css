@@ -207,3 +207,26 @@ h3 {
   background-color: var(--DarkGreen);
   color: var(--textColor);
 }
+
+@media screen and (max-width: 900px) {
+  .cardWrapper {
+    flex-wrap: wrap;
+    max-height: none;
+    min-height: fit-content;
+  }
+  .contentWrapper {
+    height: fit-content;
+  }
+  .buttonsWrapper,
+  .topBoxes {
+    display: block;
+  }
+  .buttonsWrapper button {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .dates {
+    align-items: flex-start;
+  }
+}
