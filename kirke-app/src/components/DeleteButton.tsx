@@ -43,7 +43,7 @@ const DeleteButton: React.FC<Props> = (props) => {
         <div className={style["warning-modal"]}>
           <div className={style["warning-modal-content"]}>
             <h3>{story.error.delete.title}</h3>
-            <p> {story.error.delete.description}</p>
+            <p>{story.error.delete.description}</p>
             <button
               className={`${style["yes-button"]} ${style["warning-modal-content"]}`}
               onClick={handleDeleteConfirmed}
