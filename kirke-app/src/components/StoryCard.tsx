@@ -17,7 +17,7 @@ interface CardProps {
   }[];
   collectionName: string;
   cardId: string;
-  onDelete?: () => void;
+  onDelete: () => void;
 }
 
 const Card: React.FC<CardProps> = (props) => {
