@@ -70,7 +70,7 @@
     "firstName": "First name",
     "lastName": "Last name",
     "born": "Born",
-    "dead": "Deceased",
+    "dead": "Dead",
     "graveID": "Grave ID",
     "deleteBtn": "Delete",
     "editBtn": "Edit",

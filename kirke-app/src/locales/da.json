@@ -70,7 +70,7 @@
     "firstName": "Fornavn",
     "lastName": "Efternavn",
     "born": "Født",
-    "dead": "Afgået",
+    "dead": "Død",
     "graveID": "Grav nummer",
     "deleteBtn": "Slet",
     "editBtn": "Rediger",
