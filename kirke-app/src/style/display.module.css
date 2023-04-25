@@ -5,15 +5,19 @@
   justify-content: flex-start;
   width: 100%;
   margin-top: 20px;
-  padding-top: 20px;
   height: 60vh;
   overflow-y: scroll;
   align-content: center;
   flex-direction: column;
   align-items: center;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+.collectionWrapper::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera but keeps the function*/
+}
+
 .selectWrapper {
-  gap: 20px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -146,7 +150,6 @@ h3 {
 .selectWrapper .selctionBar {
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
   margin-top: 10px;
@@ -206,4 +209,27 @@ h3 {
 .selectWrapper .selctionBar .buttons button.active:hover {
   background-color: var(--DarkGreen);
   color: var(--textColor);
+}
+
+@media screen and (max-width: 900px) {
+  .cardWrapper {
+    flex-wrap: wrap;
+    max-height: none;
+    min-height: fit-content;
+  }
+  .contentWrapper {
+    height: fit-content;
+  }
+  .buttonsWrapper,
+  .topBoxes {
+    display: block;
+  }
+  .buttonsWrapper button {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .dates {
+    align-items: flex-start;
+  }
 }
