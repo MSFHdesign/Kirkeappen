@@ -26,7 +26,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
   const [sections, setSections] = useState<Section[]>([]);
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
-  const [bornError, setBornError] = useState("");
+
   const [deathError, setDeathError] = useState("");
   const [graveIdError, setgraveIdError] = useState("");
 
@@ -63,7 +63,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
     // Reset error messages
     setFirstNameError("");
     setLastNameError("");
-    setBornError("");
+
     setDeathError("");
     setgraveIdError("");
 
@@ -76,10 +76,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
       setLastNameError(story.error.lastName);
       hasErrors = true;
     }
-    if (!born.trim()) {
-      setBornError(story.error.born);
-      hasErrors = true;
-    }
+
     if (!death.trim()) {
       setDeathError(story.error.dead);
       hasErrors = true;
@@ -203,7 +200,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
     setIsSuccess(false);
     setFirstNameError("");
     setLastNameError("");
-    setBornError("");
+
     setDeathError("");
     setgraveIdError("");
   };
@@ -234,19 +231,6 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                       <span className={style.error}>{firstNameError}</span>
                     )}
                   </span>
-                  <span className={style.contentWrap}>
-                    <label htmlFor="graveId">{story.graveID}</label>
-                    <input
-                      type="number"
-                      id="graveId"
-                      value={graveId}
-                      onChange={(e) => setgraveId(e.target.value)}
-                    />
-
-                    {graveIdError && (
-                      <span className={style.error}>{graveIdError}</span>
-                    )}
-                  </span>
                 </div>
                 <span className={style.contentWrap}>
                   <label htmlFor="lastName">{story.lastName}:</label>
@@ -261,6 +245,19 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                     <span className={style.error}>{lastNameError}</span>
                   )}
                 </span>
+                <span className={style.contentWrap}>
+                  <label htmlFor="graveId">{story.graveID}</label>
+                  <input
+                    type="text"
+                    id="graveId"
+                    value={graveId}
+                    onChange={(e) => setgraveId(e.target.value)}
+                  />
+
+                  {graveIdError && (
+                    <span className={style.error}>{graveIdError}</span>
+                  )}
+                </span>
               </div>
             </div>
             <div className={style.dirLod}>
@@ -271,9 +268,7 @@ const AddPersonComponent: React.FC<Props> = (props) => {
                   id="born"
                   value={born}
                   onChange={(e) => setBorn(e.target.value)}
-                  required
                 />
-                {bornError && <span className={style.error}>{bornError}</span>}
               </span>
               <span className={style.contentWrap}>
                 <label htmlFor="death">{story.dead}:</label>

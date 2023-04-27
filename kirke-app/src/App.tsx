@@ -52,7 +52,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/Historiske"
             element={
               <AuthRoute>
-                <StoryDisplay collectionName="Kendte" />
+                <StoryDisplay collectionName="Åby kirkegård" />
               </AuthRoute>
             }
           />
@@ -60,7 +60,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/personlige"
             element={
               <AuthRoute>
-                <StoryDisplay collectionName="personlige" />
+                <StoryDisplay collectionName="Åbyhøj kirkegård" />
               </AuthRoute>
             }
           />
@@ -76,7 +76,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/historiske/add"
             element={
               <AuthRoute>
-                <StoryAdd collectionName="Kendte" />
+                <StoryAdd collectionName="Åby kirkegård" />
               </AuthRoute>
             }
           />
@@ -84,7 +84,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/personlige/add"
             element={
               <AuthRoute>
-                <StoryAdd collectionName="personlige" />
+                <StoryAdd collectionName="Åbyhøj kirkegård" />
               </AuthRoute>
             }
           />

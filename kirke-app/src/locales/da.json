@@ -19,14 +19,14 @@
     "title": "Dashboard",
     "welcomeMessage": "Velkommen til dit dashboard",
     "cardOne": {
-      "header": "Personlige Historier",
-      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "header": "Åbyhøj kirkegård",
+      "content": "Skriv historier til Åbyhøj kirkegård",
       "addTitle": "Opret ny",
       "readTitle": "Læs/rediger"
     },
     "cardTwo": {
-      "header": "Historiske fortællinger",
-      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "header": "Åby kirkegård",
+      "content": "Skriv historier til Åby kirkegård.",
       "addTitle": "Opret ny",
       "readTitle": "Læs/rediger"
     },

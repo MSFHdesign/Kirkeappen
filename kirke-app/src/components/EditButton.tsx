@@ -132,7 +132,6 @@ const EditButton: React.FC<Props> = (props) => {
     } catch (e) {
       console.error("Error updating card: ", e);
     }
-
   };
 
   const handleCancelClick = () => {
@@ -214,7 +213,7 @@ const EditButton: React.FC<Props> = (props) => {
                   />
                   <label htmlFor="graveId">{story.graveID}:</label>
                   <input
-                    type="number"
+                    type="text"
                     id="graveId"
                     value={newGraveId}
                     onChange={(e) => setNewGraveId(e.target.value)}
@@ -228,7 +227,6 @@ const EditButton: React.FC<Props> = (props) => {
                     id="born"
                     value={newBorn}
                     onChange={(e) => setNewBorn(e.target.value)}
-                    required
                   />
                   <label htmlFor="death">{story.dead}:</label>
                   <input
