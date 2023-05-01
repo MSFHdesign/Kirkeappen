@@ -94,7 +94,8 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
           item.born.includes(parsedSearchText)) ||
         (!isNaN(parsedSearchText) &&
           item.death &&
-          item.death.includes(parsedSearchText))
+          item.death.includes(parsedSearchText)) ||
+        item.graveId.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredCollectionData(filteredData);
   };

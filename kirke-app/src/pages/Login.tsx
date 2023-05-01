@@ -4,6 +4,7 @@ import login from "../style/login.module.css";
 import logo from "../img/logo.svg";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 
+// This is the Login page. Where the user can login.
 export interface ILoginPageProps {}
 
 const LoginPage: React.FunctionComponent<ILoginPageProps> = (props) => {

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../models/FBconfig";
 import { onSnapshot, doc } from "firebase/firestore";
 
+import style from "../style/authSelect.module.css";
+
+// This component gets the users auth kirkegårde, from the firebase show in a modal.
 interface Props {}
 
 const AuthSelect: React.FC<Props> = () => {
@@ -9,7 +12,10 @@ const AuthSelect: React.FC<Props> = () => {
   const [user, setUser] = useState<any>(null);
   const [, setIsLoading] = useState<boolean>(true);
   const [selectedOption, setSelectedOption] = useState<string>("");
-
+  const [filter, setFilter] = useState<string>("");
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const selectedValue =
+    localStorage.getItem("selectedValue") || "Vælg kirkegård";
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -48,28 +54,69 @@ const AuthSelect: React.FC<Props> = () => {
     };
   }, [userEmail]);
 
-  const handleSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value;
-    localStorage.setItem("selectedValue", selectedValue);
-    console.log(`Selected value "${selectedValue}" was added to local storage`);
+  const handleOptionClick = (option: string) => {
+    localStorage.setItem("selectedValue", option);
+    setSelectedOption(option);
+    console.log(`Selected value "${option}" was added to local storage`);
+    setShowModal(false);
+    window.location.reload();
+  };
+
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(event.target.value);
   };
 
   if (userEmail === null) {
-    return <p>Loading...</p>;
+    return (
+      <span>
+        <p className={style.loading}>Loading...</p>
+      </span>
+    );
   }
 
   return (
-    <div>
-      <p>Vælg kirkegård</p>
+    <div className={style.container}>
       {user?.options && (
-        <select value={selectedOption} onChange={handleSelection}>
-          <option value="">Vælg</option>
-          {user.options.map((option: string, index: number) => (
-            <option key={index} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+        <div>
+          <button
+            className={style.selectButton}
+            onClick={() => setShowModal((prevShowModal) => !prevShowModal)}
+          >
+            {selectedValue}
+          </button>
+          {showModal && (
+            <div className={style.modal}>
+              <input
+                className={style.filter}
+                type="text"
+                placeholder="Søg efter en kirkegård"
+                value={filter}
+                onChange={handleFilter}
+              />
+              <div className={style.optionContainer}>
+                {user.options
+                  .filter((option: string) =>
+                    option.toLowerCase().includes(filter.toLowerCase())
+                  )
+                  .map((option: string, index: number) => (
+                    <div
+                      className={style.option}
+                      key={index}
+                      onClick={() => handleOptionClick(option)}
+                    >
+                      {option}
+                    </div>
+                  ))}
+              </div>
+              <button
+                className={style.selectButton}
+                onClick={() => setShowModal((prevShowModal) => !prevShowModal)}
+              >
+                Luk
+              </button>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

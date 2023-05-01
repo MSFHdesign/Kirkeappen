@@ -4,29 +4,26 @@ import SignOut from "./SignOut";
 import EditProfilPage from "../pages/EditProfilePage";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
+import style from "../style/navigation.module.css";
 
 type Props = {};
 
 const Navigationsbar = (props: Props) => {
   return (
-    <div className={navigation.container}>
-      <div className={navigation.img}>
+    <div className={style.container}>
+      <div className={style.img}>
         <Link to="/">
           <img src={logo} alt="logo" />
         </Link>
       </div>
-      <div className={navigation.dropdown}>
-        <button className={navigation.dropbtn}></button>
-        <div className={navigation.dropdownContent}>
-          <p className={navigation.language}>
-            <LanguageSwitcher />
-          </p>
-          <p>
-            <SignOut />
-          </p>
-          <p>
-            <EditProfilPage />
-          </p>
+      <div className={style.dropdown}>
+        <button className={style.dropbtn}></button>
+        <div className={style.dropdownContent}>
+          <LanguageSwitcher />
+
+          <SignOut />
+
+          <EditProfilPage />
         </div>
       </div>
     </div>

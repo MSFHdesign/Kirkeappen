@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { auth } from "../models/FBconfig";
 
+// This component looks into auth in firebase and gets the users Email
 interface Props {}
 
 const AuthWelcome: React.FC<Props> = () => {
@@ -17,7 +18,12 @@ const AuthWelcome: React.FC<Props> = () => {
     return unsubscribe;
   }, []);
 
-  return <div>{userEmail ? `Velkommen ${userEmail}` : "NOT VELKOMMEN!"}</div>;
+  return (
+    <div>
+      <h4>{userEmail ? `Velkommen ${userEmail}` : "NOT VELKOMMEN!"}</h4>
+      <p>Hvilken kirkegård ønsker du at arbejde på i dag?</p>
+    </div>
+  );
 };
 
 export default AuthWelcome;

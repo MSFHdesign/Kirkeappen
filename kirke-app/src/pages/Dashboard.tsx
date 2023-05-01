@@ -9,9 +9,13 @@ import AuthSelect from "../components/AuthSelect";
 // Style
 import style from "../style/dashCard.module.css";
 
+// This page is the user dash board, that display every directions the user may navigate in.
 const DashBoard: React.FunctionComponent = (props) => {
   const { locale } = useLanguage();
   const dash = locale.dashboard;
+  const selectedValue =
+    localStorage.getItem("selectedValue") || "Ingen kirkegård valgt";
+
   return (
     <div className={style.container}>
       <Navigationsbar />
@@ -24,20 +28,8 @@ const DashBoard: React.FunctionComponent = (props) => {
       <div className={style.DashContainer}>
         <div className={style.containerBox}>
           <DashboardCard
-            heading={dash.cardOne.header}
-            text={dash.cardOne.content}
-            addnew={{
-              btnTitle: dash.cardOne.addTitle,
-              btnLink: "/personlige/add",
-            }}
-            readedit={{
-              btnTitle: dash.cardOne.readTitle,
-              btnLink: "/personlige",
-            }}
-          />
-
-          <DashboardCard
-            heading={dash.cardTwo.header}
+            key={selectedValue}
+            heading={selectedValue}
             text={dash.cardTwo.content}
             addnew={{
               btnTitle: dash.cardTwo.addTitle,
