@@ -8,6 +8,11 @@ const SignOut: React.FC<SignOutProps> = () => {
 
   const handleSignOut = async () => {
     try {
+      // Remove the localStorage item here
+      localStorage.removeItem("selectedValue");
+      localStorage.removeItem("userEmail");
+
+      // Sign out the user
       await signOut(auth);
     } catch (error) {}
   };
