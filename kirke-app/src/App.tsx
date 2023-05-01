@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // globale CSS
@@ -7,6 +7,8 @@ import "./style/global.css";
 import LoginPage from "./pages/Login";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./models/FBconfig";
+
+// Compoonents
 import AuthRoute from "./components/AuthRoute";
 import DashBoard from "./pages/Dashboard";
 import EditProfilePage from "./pages/EditProfilePage";
@@ -19,14 +21,6 @@ initializeApp(firebaseConfig);
 export interface IApplicationProps {}
 
 const Application: React.FunctionComponent<IApplicationProps> = (props) => {
-  const [userEmail, setUserEmail] = useState("");
-
-  useEffect(() => {
-    const email = localStorage.getItem("userEmail");
-    if (email) {
-      setUserEmail(email);
-    }
-  }, []);
   return (
     <LanguageProvider>
       <BrowserRouter>
@@ -35,7 +29,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/"
             element={
               <AuthRoute>
-                <DashBoard userEmail={userEmail} />
+                <DashBoard />
               </AuthRoute>
             }
           />
@@ -95,7 +89,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="*"
             element={
               <AuthRoute>
-                <DashBoard userEmail={userEmail} />
+                <DashBoard />
               </AuthRoute>
             }
           />
