@@ -122,19 +122,16 @@ const AddPersonComponent: React.FC<Props> = (props) => {
             getDownloadURL(uploadTask.snapshot.ref)
               .then(async (downloadURL) => {
                 setImageUrl(downloadURL); // Set imageUrl to the download URL
-                const docRef = await addDoc(
-                  collection(db, props.collectionName),
-                  {
-                    firstName: firstName,
-                    lastName: lastName,
-                    born: born,
-                    death: death,
-                    graveId: graveId,
-                    sections: sections ? sections : [],
-                    imageUrl: downloadURL, // Use download URL as imageUrl
-                    timestamp: new Date(),
-                  }
-                );
+                await addDoc(collection(db, props.collectionName), {
+                  firstName: firstName,
+                  lastName: lastName,
+                  born: born,
+                  death: death,
+                  graveId: graveId,
+                  sections: sections ? sections : [],
+                  imageUrl: downloadURL, // Use download URL as imageUrl
+                  timestamp: new Date(),
+                });
 
                 // Reset the form inputs
                 setFirstName("");

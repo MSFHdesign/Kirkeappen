@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// globale CSS
+// global CSS
 import "./style/global.css";
 
 import LoginPage from "./pages/Login";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./models/FBconfig";
+
+// Components
 import AuthRoute from "./components/AuthRoute";
 import DashBoard from "./pages/Dashboard";
 import EditProfilePage from "./pages/EditProfilePage";
@@ -14,19 +16,16 @@ import StoryDisplay from "./components/StoryDisplay";
 import StoryAdd from "./components/StoryAdd";
 import { LanguageProvider } from "./components/LanguageContext";
 
+// This is the overall structure of the page. Each route that needs an auth-person have to pass thrue it. If they do not, they will be placed to the login screen. As we do not want un-auth personal to go thrue the door. 
+
 initializeApp(firebaseConfig);
 
 export interface IApplicationProps {}
 
 const Application: React.FunctionComponent<IApplicationProps> = (props) => {
-  const [userEmail, setUserEmail] = useState("");
+  const selectedValue =
+    localStorage.getItem("selectedValue") || "Ingen kirkegård valgt";
 
-  useEffect(() => {
-    const email = localStorage.getItem("userEmail");
-    if (email) {
-      setUserEmail(email);
-    }
-  }, []);
   return (
     <LanguageProvider>
       <BrowserRouter>
@@ -35,7 +34,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/"
             element={
               <AuthRoute>
-                <DashBoard userEmail={userEmail} />
+                <DashBoard />
               </AuthRoute>
             }
           />
@@ -52,18 +51,11 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/Historiske"
             element={
               <AuthRoute>
-                <StoryDisplay collectionName="Åby kirkegård" />
+                <StoryDisplay collectionName={selectedValue} />
               </AuthRoute>
             }
           />
-          <Route
-            path="/personlige"
-            element={
-              <AuthRoute>
-                <StoryDisplay collectionName="Åbyhøj kirkegård" />
-              </AuthRoute>
-            }
-          />
+
           <Route
             path="/approve"
             element={
@@ -76,15 +68,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/historiske/add"
             element={
               <AuthRoute>
-                <StoryAdd collectionName="Åby kirkegård" />
-              </AuthRoute>
-            }
-          />
-          <Route
-            path="/personlige/add"
-            element={
-              <AuthRoute>
-                <StoryAdd collectionName="Åbyhøj kirkegård" />
+                <StoryAdd collectionName={selectedValue} />
               </AuthRoute>
             }
           />
@@ -95,7 +79,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="*"
             element={
               <AuthRoute>
-                <DashBoard userEmail={userEmail} />
+                <DashBoard />
               </AuthRoute>
             }
           />

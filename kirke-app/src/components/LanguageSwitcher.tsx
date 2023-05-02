@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useLanguage } from "./LanguageContext";
-import dk from "../img/dk.png";
-import uk from "../img/uk.png";
-
+// This component is for allowing the user to set prefered language.
 const LanguageSwitcher: React.FC = () => {
   const { toggleLocale } = useLanguage();
   const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -16,7 +14,9 @@ const LanguageSwitcher: React.FC = () => {
 
   return (
     <div>
-      <span>Select language: </span>
+      <span>
+        <p>Select language: </p>
+      </span>
       <select
         value={selectedLanguage}
         onChange={(e) => handleLanguageChange(e.target.value)}
