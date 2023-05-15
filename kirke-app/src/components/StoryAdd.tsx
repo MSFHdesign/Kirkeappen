@@ -214,21 +214,20 @@ const AddPersonComponent: React.FC<Props> = (props) => {
           <div className={style.topBar}>
             <div className={style.leftSide}>
               <div className={style.nameBox}>
-                <div className={style.dirLod}>
-                  <span className={style.contentWrap}>
-                    <label htmlFor="firstName">{story.firstName}:</label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                    />
-                    {firstNameError && (
-                      <span className={style.error}>{firstNameError}</span>
-                    )}
-                  </span>
-                </div>
+                <span className={style.contentWrap}>
+                  <label htmlFor="firstName">{story.firstName}:</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                  />
+                  {firstNameError && (
+                    <span className={style.error}>{firstNameError}</span>
+                  )}
+                </span>
+
                 <span className={style.contentWrap}>
                   <label htmlFor="lastName">{story.lastName}:</label>
                   <input

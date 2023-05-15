@@ -4,6 +4,7 @@ import { useLanguage } from "./LanguageContext";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 import Logo from "../img/logo.svg";
+
 interface CardProps {
   firstName: string;
   lastName: string;
@@ -15,13 +16,18 @@ interface CardProps {
     title: string;
     description: string;
   }[];
+  comments: {
+    title: string;
+    comment: string;
+  }[];
   collectionName: string;
   cardId: string;
   onDelete: () => void;
 }
 
 const Card: React.FC<CardProps> = (props) => {
-  const { firstName, lastName, graveNumber, born, death, sections } = props;
+  const { firstName, lastName, graveNumber, born, death, sections, comments } =
+    props;
   const { locale } = useLanguage();
   const story = locale.story;
 
@@ -53,6 +59,7 @@ const Card: React.FC<CardProps> = (props) => {
               </h3>
             </span>
           </div>
+
           <div>
             {sections.map((section, index) => (
               <div key={index} className={style.section}>
@@ -60,6 +67,18 @@ const Card: React.FC<CardProps> = (props) => {
                 <p>{section.description}</p>
               </div>
             ))}
+          </div>
+          <div>
+            {comments.length > 0 && (
+              <div>
+                {comments.map((commentss, index) => (
+                  <div key={index} className={style.section}>
+                    <h3>{commentss.title}</h3>
+                    <p>{commentss.comment}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <div className={style.buttonsWrapper}>
@@ -78,6 +97,7 @@ const Card: React.FC<CardProps> = (props) => {
             death={props.death}
             graveId={props.graveNumber}
             sections={props.sections}
+            comments={props.comments}
           />
         </div>
       </div>

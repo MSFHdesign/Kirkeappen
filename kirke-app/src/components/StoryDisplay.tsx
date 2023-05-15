@@ -10,6 +10,7 @@ import Card from "./StoryCard";
 // Costum Hooks
 import { useLanguage } from "../components/LanguageContext";
 import Navigationsbar from "./navigationbar";
+import AuthSelect from "./AuthSelect";
 
 // add sorting compontent
 
@@ -42,7 +43,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   // Text
   const { locale } = useLanguage();
   const story = locale.story;
-
+  // Fetching Data
   useEffect(() => {
     const subCollectionRef = collection(db, props.collectionName);
 
@@ -61,7 +62,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
 
     return () => unsubscribe();
   }, [props.collectionName]);
-
+  // Updating data, sorting data
   useEffect(() => {
     const sortedData = [...collectionData].sort(
       (a, b) => b.timestamp - a.timestamp
@@ -76,7 +77,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
     setCollectionData(updatedCollectionData);
     setFilteredCollectionData(updatedCollectionData); // update filtered data when item is deleted
   };
-
+  // This will handle the bahavior of searching
   const handleSearch = (searchText: string) => {
     const parsedSearchText = parseInt(searchText);
     const filteredData = collectionData.filter(
@@ -107,6 +108,7 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
     setSelectValue(e.target.value);
     setVisibleCount(parseInt(e.target.value, 10));
   };
+  //This will handle the sorting behavior.
   const sortFunction = (data: any[]) => {
     if (sortingOption === "firstName") {
       return [...data].sort((a, b) =>
@@ -230,7 +232,10 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         {isLoading ? (
           <Skeletor index={3} />
         ) : filteredCollectionData.length === 0 ? (
-          <div>{story.error.show}</div>
+          <div>
+            <p>{story.error.show}</p>
+            <AuthSelect />
+          </div>
         ) : (
           <>
             {sortFunction(filteredCollectionData)
@@ -250,6 +255,16 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
                         description: section.description,
                       })
                     )}
+                    comments={
+                      item.comments && Array.isArray(item.comments)
+                        ? item.comments.map(
+                            (comments: { title: string; comment: string }) => ({
+                              title: comments.title,
+                              comment: comments.comment,
+                            })
+                          )
+                        : []
+                    }
                     collectionName={props.collectionName}
                     cardId={item.id}
                     onDelete={() => handleCardDelete(item.id)}

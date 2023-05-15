@@ -28,6 +28,7 @@ const DashBoard: React.FunctionComponent = (props) => {
       <div className={style.DashContainer}>
         <div className={style.containerBox}>
           <DashboardCard
+            selectedValue={selectedValue}
             key={selectedValue}
             heading={selectedValue}
             text={dash.cardTwo.content}
@@ -41,6 +42,7 @@ const DashBoard: React.FunctionComponent = (props) => {
             }}
           />
           <DashboardCard
+            selectedValue={selectedValue}
             heading={dash.cardThree.header}
             text={dash.cardThree.content}
             addnew={{
