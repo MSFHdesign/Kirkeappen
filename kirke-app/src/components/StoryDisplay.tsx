@@ -10,6 +10,7 @@ import Card from "./StoryCard";
 // Costum Hooks
 import { useLanguage } from "../components/LanguageContext";
 import Navigationsbar from "./navigationbar";
+import AuthSelect from "./AuthSelect";
 
 // add sorting compontent
 
@@ -231,7 +232,10 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         {isLoading ? (
           <Skeletor index={3} />
         ) : filteredCollectionData.length === 0 ? (
-          <div>{story.error.show}</div>
+          <div>
+            <p>{story.error.show}</p>
+            <AuthSelect />
+          </div>
         ) : (
           <>
             {sortFunction(filteredCollectionData)
