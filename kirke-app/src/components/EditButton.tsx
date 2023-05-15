@@ -94,7 +94,11 @@ const EditButton: React.FC<Props> = (props) => {
     setNewImage(null);
   };
 
-  const handleDeleteSection = (index: number) => {
+  const handleDeleteSection = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    event.preventDefault();
     const updated = [...updatedSections];
     updated.splice(index, 1);
     setUpdatedSections(updated);
@@ -104,9 +108,19 @@ const EditButton: React.FC<Props> = (props) => {
     setUpdatedSections([...updatedSections, { title: "", description: "" }]);
   };
 
-  function handleSectionTitleChange(index: number, value: string): void {
-    throw new Error("Function not implemented.");
-  }
+  const handleSectionTitleChange = (index: number, value: string): void => {
+    const updated = [...updatedSections];
+    updated[index].title = value;
+    setUpdatedSections(updated);
+  };
+  const handleSectionDescriptionChange = (
+    index: number,
+    value: string
+  ): void => {
+    const updated = [...updatedSections];
+    updated[index].description = value;
+    setUpdatedSections(updated);
+  };
 
   return (
     <div className={style.editContainer}>
@@ -189,7 +203,7 @@ const EditButton: React.FC<Props> = (props) => {
                     <div>
                       <button
                         className={style.deleteDtn}
-                        onClick={() => handleDeleteSection(index)}
+                        onClick={(e) => handleDeleteSection(e, index)}
                       >
                         {story.delete}
                       </button>
@@ -207,7 +221,7 @@ const EditButton: React.FC<Props> = (props) => {
                   <textarea
                     value={section.description}
                     onChange={(e) =>
-                      handleSectionTitleChange(index, e.target.value)
+                      handleSectionDescriptionChange(index, e.target.value)
                     }
                     required
                   />
