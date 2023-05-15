@@ -25,6 +25,10 @@ interface Props {
     title: string;
     description: string;
   }[];
+  comments: {
+    title: string;
+    comment: string;
+  }[];
 }
 
 const EditButton: React.FC<Props> = (props) => {
@@ -41,6 +45,7 @@ const EditButton: React.FC<Props> = (props) => {
   const story = locale.story;
 
   const [updatedSections, setUpdatedSections] = useState(props.sections);
+  const [updatedComments, setUpdatedComments] = useState(props.comments);
 
   const handleEditClick = () => {
     setIsEditing((prevIsEditing) => !prevIsEditing);
@@ -50,6 +55,7 @@ const EditButton: React.FC<Props> = (props) => {
     setNewDeath(props.death);
     setNewGraveId(props.graveId);
     setUpdatedSections(props.sections);
+    setUpdatedComments(props.comments);
   };
 
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -75,6 +81,7 @@ const EditButton: React.FC<Props> = (props) => {
         graveId: newGraveId,
         imageUrl: newImageUrl,
         sections: updatedSections,
+        comments: updatedComments,
       });
 
       setIsEditing(false);
@@ -120,6 +127,34 @@ const EditButton: React.FC<Props> = (props) => {
     const updated = [...updatedSections];
     updated[index].description = value;
     setUpdatedSections(updated);
+  };
+
+  const handleDeleteComment = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    event.preventDefault();
+    const updated = [...updatedComments];
+    updated.splice(index, 1);
+    setUpdatedComments(updated);
+  };
+
+  const handleAddComment = () => {
+    setUpdatedComments([...updatedComments, { title: "", comment: "" }]);
+  };
+  const handleCommentTitleChange = (index: number, value: string): void => {
+    const updated = [...updatedComments];
+    updated[index] = { ...updated[index], title: value };
+    setUpdatedComments([...updated]);
+  };
+
+  const handleCommentDescriptionChange = (
+    index: number,
+    value: string
+  ): void => {
+    const updated = [...updatedComments];
+    updated[index] = { ...updated[index], comment: value };
+    setUpdatedComments([...updated]);
   };
 
   return (
@@ -227,10 +262,47 @@ const EditButton: React.FC<Props> = (props) => {
                   />
                 </div>
               ))}
+
+              <button className={style.sectionBtn} onClick={handleAddSection}>
+                {story.section.addSection}
+              </button>
+
+              {updatedComments.map((comments, index) => (
+                <div key={index} className={style.commentContainer}>
+                  <span className={style.sectionBox}>
+                    <div>
+                      <button
+                        className={style.deleteDtn}
+                        onClick={(e) => handleDeleteComment(e, index)}
+                      >
+                        {story.delete}
+                      </button>
+                    </div>
+
+                    <input
+                      type="text"
+                      value={comments.title}
+                      onChange={(e) =>
+                        handleCommentTitleChange(index, e.target.value)
+                      }
+                      required
+                    />
+                  </span>
+                  <textarea
+                    value={comments.comment}
+                    onChange={(e) =>
+                      handleCommentDescriptionChange(index, e.target.value)
+                    }
+                    required
+                  />
+                </div>
+              ))}
+
               <div className={style.btnBox}>
-                <button className={style.sectionBtn} onClick={handleAddSection}>
-                  {story.section.addSection}
+                <button className={style.commentBtn} onClick={handleAddComment}>
+                  <p> Tilføj</p>
                 </button>
+
                 <span className={style.btnSpan}>
                   <button
                     onClick={handleCancelClick}

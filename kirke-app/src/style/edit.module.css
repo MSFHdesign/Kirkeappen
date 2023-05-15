@@ -98,8 +98,10 @@
 }
 
 .sectionContainer {
+  padding: 10px 0;
+
   width: 100%;
-  gap: 20px;
+
   display: flex;
   flex-direction: column;
   align-content: stretch;
@@ -154,7 +156,7 @@
   margin-bottom: 8px;
 }
 .editForm textarea {
-  width: 100%;
+  width: 98%;
   height: 150px;
 }
 .editForm input,
@@ -186,6 +188,10 @@
 
 .cancelBtn {
   color: var(--textDelete);
+}
+
+.commentContainer {
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 900px) {
