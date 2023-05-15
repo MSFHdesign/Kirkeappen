@@ -4,6 +4,7 @@
   gap: 20px;
   justify-content: flex-start;
   width: 100%;
+
   margin-top: 20px;
   height: 60vh;
   overflow-y: scroll;
@@ -30,12 +31,14 @@
   justify-content: center;
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  padding: 20px;
+  padding: 20px 10px;
   background-color: #fff;
   max-width: var(--cardWidth);
   min-height: var(--cardHeight);
   max-height: var(--cardHeight);
   width: 60%;
+  overflow-y: hidden;
+  min-width: 500px;
 }
 
 .cardImg {
@@ -46,6 +49,8 @@
 .contentWrapper {
   height: 100%;
   width: 100%;
+  min-width: 370px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -54,11 +59,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-items: flex-start;
 }
 .nameBox {
   margin: 0;
   width: 70%;
   height: 24px;
+  padding-right: 5px;
 }
 .nameBox p {
   margin: 0;
@@ -79,8 +86,11 @@ h3 {
   font-size: 14px;
 }
 .dates {
+  gap: 5px;
+  width: 100%;
+
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-end;
 }
 
@@ -105,7 +115,6 @@ h3 {
 .buttonsWrapper {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
 }
 .loadMoreStories {
   display: block;
@@ -206,25 +215,7 @@ h3 {
   color: var(--textColor);
 }
 
-@media screen and (max-width: 900px) {
-  .cardWrapper {
-    flex-wrap: wrap;
-    max-height: none;
-    min-height: fit-content;
-  }
-  .contentWrapper {
-    height: fit-content;
-  }
-  .buttonsWrapper,
-  .topBoxes {
-    display: block;
-  }
-  .buttonsWrapper button {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: flex-start;
-  }
-  .dates {
-    align-items: flex-start;
-  }
+.TopLevelWrapper {
+  display: flex;
+  align-items: center;
 }

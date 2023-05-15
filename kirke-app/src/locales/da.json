@@ -71,7 +71,7 @@
     "lastName": "Efternavn",
     "born": "Født",
     "dead": "Død",
-    "graveID": "Grav nummer",
+    "graveID": "Grav Nr",
     "deleteBtn": "Slet",
     "editBtn": "Rediger",
     "submit": "Indsend",
