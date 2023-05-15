@@ -26,13 +26,13 @@
     },
     "cardTwo": {
       "header": "Åby kirkegård",
-      "content": "Skriv historier til Åby kirkegård.",
+      "content": "Skriv historier til",
       "addTitle": "Opret ny",
       "readTitle": "Læs/rediger"
     },
     "cardThree": {
       "header": "Historier til godkendelse",
-      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "content": "Godkend historier fra appen til",
       "addTitle": "Opret ny",
       "readTitle": "Læs/rediger"
     }

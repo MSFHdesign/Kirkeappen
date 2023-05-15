@@ -20,19 +20,19 @@
     "welcomeMessage": "Welcome to your dashboard",
     "cardOne": {
       "header": "Personal Stories",
-      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "content": "Write story",
       "addTitle": "Create new",
       "readTitle": "Read/edit"
     },
     "cardTwo": {
       "header": "Historical Stories",
-      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "content": "Write story",
       "addTitle": "Create new",
       "readTitle": "Read/edit"
     },
     "cardThree": {
       "header": "Stories to be Approved",
-      "content": "Yes, Yes, without the oops! Do you have any idea how long it takes those cups to decompose. God help us, we're in the hands of engineers.",
+      "content": "Approve stories",
       "addTitle": "Create new",
       "readTitle": "Read/edit"
     }

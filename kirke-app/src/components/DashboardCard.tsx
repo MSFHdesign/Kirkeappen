@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import style from "../style/dashCard.module.css";
 
 interface CardProps {
+  selectedValue: string;
   heading: string;
   text: string;
   addnew?: {
@@ -15,7 +16,13 @@ interface CardProps {
   };
 }
 
-const Card: React.FC<CardProps> = ({ heading, text, addnew, readedit }) => {
+const Card: React.FC<CardProps> = ({
+  heading,
+  text,
+  addnew,
+  readedit,
+  selectedValue,
+}) => {
   return (
     <div className={style.card}>
       <span className={style.topBar}>
@@ -23,6 +30,7 @@ const Card: React.FC<CardProps> = ({ heading, text, addnew, readedit }) => {
       </span>
       <span className={style.contentBox}>
         <p>{text}</p>
+        <h3>{selectedValue}</h3>
       </span>
       <div className={style.BtnBox}>
         {addnew?.btnTitle && addnew?.btnLink && (
