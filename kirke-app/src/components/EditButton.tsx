@@ -7,7 +7,7 @@ import {
   ref,
   getDownloadURL,
   uploadBytesResumable,
-  deleteObject,
+
 } from "firebase/storage";
 import Logo from "../img/logo.svg";
 
