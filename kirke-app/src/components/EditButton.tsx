@@ -34,11 +34,6 @@ const EditButton: React.FC<Props> = (props) => {
   const [newBorn, setNewBorn] = useState(props.born);
   const [newDeath, setNewDeath] = useState(props.death);
   const [newGraveId, setNewGraveId] = useState(props.graveId);
-  const [sectionIndexToUpdate, setSectionIndexToUpdate] = useState(-1);
-  const [newDescription, setNewDescription] = useState(
-    props.sections?.[sectionIndexToUpdate]?.description
-  );
-  const [deleteButtonClicked, setDeleteButtonClicked] = useState(false);
   const [newImage, setNewImage] = useState<File | null>(null);
 
   // Text
@@ -57,37 +52,6 @@ const EditButton: React.FC<Props> = (props) => {
     setUpdatedSections(props.sections);
   };
 
-  const handleSectionTitleChange = (index: number, value: string) => {
-    const updated = updatedSections.map((section, i) => {
-      if (i === index) {
-        return { ...section, title: value };
-      }
-      return section;
-    });
-    setUpdatedSections(updated);
-
-    // set sectionIndexToUpdate to the index of the section being edited
-    setSectionIndexToUpdate(index);
-  };
-
-  const handleSectionDescriptionChange = (index: number, value: string) => {
-    // update the updatedSections state variable
-    const updated = updatedSections.map((section, i) => {
-      if (i === index) {
-        return { ...section, description: value };
-      }
-      return section;
-    });
-    setUpdatedSections(updated);
-
-    // update the newDescription state variable for the current section being edited
-    if (sectionIndexToUpdate === index) {
-      setNewDescription(value);
-    } else {
-      const newDesc = updated[sectionIndexToUpdate]?.description || "";
-      setNewDescription(newDesc);
-    }
-  };
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -101,22 +65,7 @@ const EditButton: React.FC<Props> = (props) => {
 
         // Get the new URL of the image
         newImageUrl = await getDownloadURL(imageRef);
-      } else if (props.imageUrl && deleteButtonClicked) {
-        // Remove the image from Firebase Storage
-        const imageRef = ref(storage, props.imageUrl);
-        await deleteObject(imageRef);
-
-        newImageUrl = "";
       }
-
-      const updatedSectionsWithNewDescription = updatedSections.map(
-        (section, index) => {
-          if (index === sectionIndexToUpdate) {
-            return { ...section, description: newDescription };
-          }
-          return section;
-        }
-      );
 
       await updateDoc(docRef, {
         firstName: newFirstName,
@@ -125,7 +74,7 @@ const EditButton: React.FC<Props> = (props) => {
         death: newDeath,
         graveId: newGraveId,
         imageUrl: newImageUrl,
-        sections: updatedSectionsWithNewDescription,
+        sections: updatedSections,
       });
 
       setIsEditing(false);
@@ -142,45 +91,35 @@ const EditButton: React.FC<Props> = (props) => {
     setNewDeath(props.death);
     setNewGraveId(props.graveId);
     setUpdatedSections(props.sections);
-    setDeleteButtonClicked(false);
     setNewImage(null);
   };
 
-  const handleDeleteSection = async (
-    index: number,
-    event: React.MouseEvent<HTMLButtonElement>
+  const handleDeleteSection = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    index: number
   ) => {
     event.preventDefault();
     const updated = [...updatedSections];
     updated.splice(index, 1);
     setUpdatedSections(updated);
-
-    try {
-      const docRef = doc(db, props.collectionName, props.cardId);
-
-      await updateDoc(docRef, {
-        sections: updated,
-      });
-
-      // Update the sectionIndexToUpdate state variable
-      const newSectionCount = updated.length;
-      if (sectionIndexToUpdate === index) {
-        // If the deleted section was the one being edited, reset sectionIndexToUpdate
-        setSectionIndexToUpdate(-1);
-      } else if (sectionIndexToUpdate > index) {
-        // If the deleted section was before the one being edited, decrement sectionIndexToUpdate
-        setSectionIndexToUpdate(sectionIndexToUpdate - 1);
-      } else if (sectionIndexToUpdate >= newSectionCount) {
-        setSectionIndexToUpdate(newSectionCount - 1);
-      }
-    } catch (e) {
-      console.error("Error deleting section: ", e);
-    }
   };
 
-  const handleAddSection = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const handleAddSection = () => {
     setUpdatedSections([...updatedSections, { title: "", description: "" }]);
+  };
+
+  const handleSectionTitleChange = (index: number, value: string): void => {
+    const updated = [...updatedSections];
+    updated[index].title = value;
+    setUpdatedSections(updated);
+  };
+  const handleSectionDescriptionChange = (
+    index: number,
+    value: string
+  ): void => {
+    const updated = [...updatedSections];
+    updated[index].description = value;
+    setUpdatedSections(updated);
   };
 
   return (
@@ -264,7 +203,7 @@ const EditButton: React.FC<Props> = (props) => {
                     <div>
                       <button
                         className={style.deleteDtn}
-                        onClick={(event) => handleDeleteSection(index, event)}
+                        onClick={(e) => handleDeleteSection(e, index)}
                       >
                         {story.delete}
                       </button>
