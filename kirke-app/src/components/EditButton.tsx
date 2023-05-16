@@ -3,12 +3,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../models/FBconfig";
 import style from "../style/edit.module.css";
 import { useLanguage } from "../components/LanguageContext";
-import {
-  ref,
-  getDownloadURL,
-  uploadBytesResumable,
-
-} from "firebase/storage";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import Logo from "../img/logo.svg";
 
 interface Props {

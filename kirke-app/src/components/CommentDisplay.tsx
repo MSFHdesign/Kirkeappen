@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  collection,
-  onSnapshot,
-  query,
-  where,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { db } from "../models/FBconfig";
 // components
 
@@ -14,6 +8,7 @@ import Skeletor from "./Skeleton";
 // Costum Hooks
 import { useLanguage } from "../components/LanguageContext";
 import Navigationsbar from "./navigationbar";
+import EditButton2 from "./UpdateCommentsButton";
 
 // add sorting compontent
 
@@ -29,7 +24,6 @@ const DisplayComment: React.FC<Props> = (props) => {
   const [filteredCollectionData, setFilteredCollectionData] = useState<any[]>(
     []
   );
-
   // sorting
   const [visibleCount, setVisibleCount] = useState(5); // number of visible items
   const [selectValue, setSelectValue] = useState("5");
@@ -138,9 +132,13 @@ const DisplayComment: React.FC<Props> = (props) => {
               .slice(0, visibleCount)
               .map((item, index) => (
                 <div key={index} className={style.cardWrapper}>
-                  {item.storyID}
-                  {item.title}
                   {item.comment}
+                  <EditButton2
+                    collectionName={props.collectionName}
+                    cardId={item.storyID}
+                    commentsValue={item.comment}
+                    titleValue={item.title}
+                  />
                 </div>
               ))}
 
