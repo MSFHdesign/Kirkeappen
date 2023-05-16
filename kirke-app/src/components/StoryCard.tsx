@@ -43,11 +43,11 @@ const Card: React.FC<CardProps> = (props) => {
         <div className={style.textBox}>
           <div className={style.topBoxes}>
             <span className={style.nameBox}>
-              <h2>
+              <h2 className={ style.fullName}>
                 {firstName}&nbsp;{lastName}
               </h2>
               <p>
-                <b>{story.graveID}: </b> {graveNumber}
+                {story.graveID}: {graveNumber}
               </p>
             </span>
             <span className={style.dates}>

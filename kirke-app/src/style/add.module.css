@@ -6,7 +6,6 @@
   width: 80%;
   max-width: 700px;
   height: 100%;
-
 }
 .contentWrap {
   display: flex;
@@ -240,7 +239,7 @@ textarea {
 }
 
 .warningSucces {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -254,6 +253,8 @@ textarea {
   align-items: center;
   width: 15vw;
   height: 5vw;
+  min-width: 400px;
+  min-height: 50px;
 }
 
 .warningSucces h3,
