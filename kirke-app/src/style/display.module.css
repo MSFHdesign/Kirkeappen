@@ -36,10 +36,12 @@
   max-width: var(--cardWidth);
   min-height: var(--cardHeight);
   max-height: var(--cardHeight);
+
   width: 90%;
   overflow-y: hidden;
   justify-content: flex-start;
   align-items: center;
+
 }
 
 .cardImg {
@@ -49,6 +51,7 @@
 .contentWrapper {
   height: 100%;
   width: 100%;
+  min-width: 370px;
   padding-left: 10px;
   display: flex;
   flex-direction: column;

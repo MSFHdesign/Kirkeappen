@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = (props) => {
   const story = locale.story;
 
   return (
-    <>
+    <div className={style.TopLevelWrapper}>
       <img
         src={props.imageUrl || Logo}
         alt={firstName}
@@ -52,10 +52,12 @@ const Card: React.FC<CardProps> = (props) => {
             </span>
             <span className={style.dates}>
               <h3>
-                {story.born}: {born}
+                {story.born}: <br />
+                {born}
               </h3>
               <h3>
-                {story.dead}: {death}
+                {story.dead}: <br />
+                {death}
               </h3>
             </span>
           </div>
@@ -101,7 +103,7 @@ const Card: React.FC<CardProps> = (props) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
