@@ -1,56 +1,104 @@
 import React, { useEffect, useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../models/FBconfig";
 import style from "../style/edit.module.css";
 
 interface Props {
-  [x: string]: any;
   collectionName: string;
   cardId: string;
   commentsValue: string;
   titleValue: string;
+  onDelete: () => void;
 }
+
 interface Section {
   title: string;
   comment: string;
 }
 
 const EditButton2: React.FC<Props> = (props) => {
-  const [updatedComments, setUpdatedComments] = useState<Section[]>([]);
-  const [commentsValue, setCommentsValue] = useState(props.commentsValue);
   const [titleValue, setTitleValue] = useState(props.titleValue);
+  const [commentsValue, setCommentsValue] = useState(props.commentsValue);
 
-  const addComment = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setUpdatedComments([
-      ...updatedComments,
-      { title: titleValue, comment: commentsValue },
-    ]);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, props.collectionName, props.cardId);
+        const docSnap = await getDoc(docRef);
 
-  // useEffect(() => {
-  //   setUpdatedComments(props.comments);
-  // }, [props.comments]);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const comments = data?.comments || [];
+
+          // Retrieve the latest comment values from the comments array
+          const latestComment = comments[comments.length - 1] || {};
+
+          setTitleValue(latestComment.title || "");
+          setCommentsValue(latestComment.comment || "");
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, [props.collectionName, props.cardId]);
 
   const handleSaveClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setUpdatedComments([
-      ...updatedComments,
-      { title: titleValue, comment: commentsValue },
-    ]);
-    console.log(setUpdatedComments);
+
+    const newComment: Section = {
+      title: titleValue,
+      comment: commentsValue,
+    };
 
     try {
       const docRef = doc(db, props.collectionName, props.cardId);
+      const docSnap = await getDoc(docRef);
 
-      await updateDoc(docRef, {
-        comments: updatedComments,
-      });
-    } catch (e) {
-      console.error("Error updating card: ", e);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const comments = data?.comments || [];
+
+        const updatedComments = [...comments, newComment];
+
+        const toApproveDocRef = doc(
+          db,
+          "ToApprove",
+          props.collectionName,
+          "Comments",
+          props.cardId
+        );
+
+        await updateDoc(docRef, {
+          comments: updatedComments,
+        });
+
+        props.onDelete(); // Call the onDelete function to update the parent component's state
+      }
+    } catch (error) {
+      console.error("Error updating card: ", error);
     }
   };
-  console.log(updatedComments, 2);
+
+  const handleDeleteClick = async () => {
+    try {
+      const toApproveDocRef = doc(
+        db,
+        "ToApprove",
+        props.collectionName,
+        "Comments",
+        props.cardId
+      );
+
+      await deleteDoc(toApproveDocRef); // Delete the comment
+
+      props.onDelete(); // Call the onDelete function to update the parent component's state
+    } catch (error) {
+      console.error("Error deleting comment: ", error);
+    }
+  };
+
   return (
     <>
       <form onSubmit={handleSaveClick}>
@@ -65,9 +113,13 @@ const EditButton2: React.FC<Props> = (props) => {
           value={commentsValue}
           onChange={(e) => setCommentsValue(e.target.value)}
         />
-        <button>godkend</button>
+        <button type="submit">Godkend</button>
+        <button type="button" onClick={handleDeleteClick}>
+          Slet
+        </button>
       </form>
     </>
   );
 };
+
 export default EditButton2;

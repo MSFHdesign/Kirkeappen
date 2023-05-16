@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../models/FBconfig";
-// components
-
 import style from "../style/display.module.css";
 import Skeletor from "./Skeleton";
-// Costum Hooks
 import { useLanguage } from "../components/LanguageContext";
 import Navigationsbar from "./navigationbar";
 import EditButton2 from "./UpdateCommentsButton";
-
-// add sorting compontent
 
 interface Props {
   collectionName: string;
@@ -20,15 +21,12 @@ interface Props {
 const DisplayComment: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [collectionData, setCollectionData] = useState<any[]>([]);
-  //   const [collectionIndex, setCollectionIndex] = useState<any[]>([]);
   const [filteredCollectionData, setFilteredCollectionData] = useState<any[]>(
     []
   );
-  // sorting
-  const [visibleCount, setVisibleCount] = useState(5); // number of visible items
+  const [visibleCount, setVisibleCount] = useState(5);
   const [selectValue, setSelectValue] = useState("5");
 
-  // Text
   const { locale } = useLanguage();
   const story = locale.story;
 
@@ -39,51 +37,40 @@ const DisplayComment: React.FC<Props> = (props) => {
       props.collectionName,
       "Comments"
     );
-    console.log(subCollectionRef);
 
     const unsubscribe = onSnapshot(subCollectionRef, (snapshot) => {
-      const data = snapshot.docs.map((doc) => {
-        return {
-          ...doc.data(),
-          id: doc.id,
-        };
-      });
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+
       setCollectionData(data);
-      setFilteredCollectionData(data); // set filtered data to initial data
-      setIsLoading(false); // set isLoading to false when data is fetched
+      setFilteredCollectionData(data);
+      setIsLoading(false);
     });
 
     return () => unsubscribe();
   }, [props.collectionName]);
 
-  //   useEffect(() => {
-  //     const getCollectionIndex = collection(db, props.collectionName);
+  const handleCardDelete = async (cardId: string) => {
+    try {
+      const toApproveDocRef = doc(
+        db,
+        "ToApprove",
+        props.collectionName,
+        "Comments",
+        cardId
+      );
+      await deleteDoc(toApproveDocRef);
 
-  //     const unsubscribe = onSnapshot(getCollectionIndex, (snapshot) => {
-  //       const data = snapshot.docs.map((doc) => {
-  //         return {
-  //           ...doc.data(),
-  //           id: doc.id,
-  //         };
-  //       });
-  //       console.log(getCollectionIndex, hej);
-  //       const q = query(
-  //         getCollectionIndex,
-  //         where("id", "==", "9ZebYQHOb9u65X6Z9DzR")
-  //       );
-  //       console.log(q, "med");
-  //       setCollectionIndex(data);
-  //     });
-
-  //     return () => unsubscribe();
-  //   }, [props.collectionName]);
-
-  const handleCardDelete = (cardId: string) => {
-    const updatedCollectionData = collectionData.filter(
-      (item) => item.id !== cardId
-    );
-    setCollectionData(updatedCollectionData);
-    setFilteredCollectionData(updatedCollectionData); // update filtered data when item is deleted
+      const updatedCollectionData = collectionData.filter(
+        (item) => item.id !== cardId
+      );
+      setCollectionData(updatedCollectionData);
+      setFilteredCollectionData(updatedCollectionData);
+    } catch (error) {
+      console.error("Error deleting card: ", error);
+    }
   };
 
   const handleShowMore = () => {
@@ -94,6 +81,7 @@ const DisplayComment: React.FC<Props> = (props) => {
     setSelectValue(e.target.value);
     setVisibleCount(parseInt(e.target.value, 10));
   };
+
   const sortFunction = (data: any[]) => {
     return data;
   };
@@ -138,6 +126,7 @@ const DisplayComment: React.FC<Props> = (props) => {
                     cardId={item.storyID}
                     commentsValue={item.comment}
                     titleValue={item.title}
+                    onDelete={() => handleCardDelete(item.id)}
                   />
                 </div>
               ))}
