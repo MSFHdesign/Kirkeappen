@@ -24,8 +24,8 @@ const DisplayComment: React.FC<Props> = (props) => {
   const [filteredCollectionData, setFilteredCollectionData] = useState<any[]>(
     []
   );
-  const [visibleCount, setVisibleCount] = useState(5);
-  const [selectValue, setSelectValue] = useState("5");
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [selectValue, setSelectValue] = useState("6");
 
   const { locale } = useLanguage();
   const story = locale.story;
@@ -110,39 +110,37 @@ const DisplayComment: React.FC<Props> = (props) => {
         </div>
       </div>
       <div className={style.collectionWrapper}>
-        {isLoading ? (
-          <Skeletor index={3} />
-        ) : filteredCollectionData.length === 0 ? (
-          <div>{story.error.show}</div>
+        <div className={style.collectionFlex}>
+          {isLoading ? (
+            <Skeletor index={3} />
+          ) : filteredCollectionData.length === 0 ? (
+            <div>{story.error.show}</div>
+          ) : (
+            <>
+              {sortFunction(filteredCollectionData)
+                .slice(0, visibleCount)
+                .map((item, index) => (
+                  <div key={index} className={style.cardWrapperComment}>
+                    <EditButton2
+                      collectionName={props.collectionName}
+                      cardId={item.storyID}
+                      commentsValue={item.comment}
+                      titleValue={item.title}
+                      onDelete={() => handleCardDelete(item.id)}
+                      firstName={item.firstName}
+                      lastName={item.lastName}
+                    />
+                  </div>
+                ))}
+            </>
+          )}
+        </div>
+        {filteredCollectionData.length > visibleCount ? (
+          <button className={style.loadMoreStories} onClick={handleShowMore}>
+            {story.card.showMore.replace("{0}", String(visibleCount))}
+          </button>
         ) : (
-          <>
-            {sortFunction(filteredCollectionData)
-              .slice(0, visibleCount)
-              .map((item, index) => (
-                <div key={index} className={style.cardWrapper}>
-                  <EditButton2
-                    collectionName={props.collectionName}
-                    cardId={item.storyID}
-                    commentsValue={item.comment}
-                    titleValue={item.title}
-                    onDelete={() => handleCardDelete(item.id)}
-                    firstName={item.firstName}
-                    lastName={item.lastName}
-                  />
-                </div>
-              ))}
-
-            {filteredCollectionData.length > visibleCount ? (
-              <button
-                className={style.loadMoreStories}
-                onClick={handleShowMore}
-              >
-                {story.card.showMore.replace("{0}", String(visibleCount))}
-              </button>
-            ) : (
-              <div className={style.loadMoreStories}>{story.card.showEnd}</div>
-            )}
-          </>
+          <div className={style.loadMoreStories}>{story.card.showEnd}</div>
         )}
       </div>
     </div>

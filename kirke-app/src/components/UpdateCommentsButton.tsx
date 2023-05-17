@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { doc, updateDoc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../models/FBconfig";
 import style from "../style/edit.module.css";
+import warning from "../style/warning.module.css";
 
 interface Props {
   collectionName: string;
@@ -108,22 +109,37 @@ const EditButton2: React.FC<Props> = (props) => {
           Denne historie er skrevet til {props.firstName + " "}
           {props.lastName}
         </p>
-
-        <span className={style.sectionBox}>
+        <label>Titel:</label>
+        <span className={style.sectionBoxComment}>
           <input
             type="text"
             value={titleValue}
             onChange={(e) => setTitleValue(e.target.value)}
           />
         </span>
+        <label>Historie:</label>
         <textarea
           value={commentsValue}
           onChange={(e) => setCommentsValue(e.target.value)}
         />
-        <button type="submit">Godkend</button>
-        <button type="button" onClick={handleDeleteClick}>
-          Slet
-        </button>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <button className={style.editButton} type="submit">
+            Godkend
+          </button>
+          <button
+            className={warning["delete-button"]}
+            type="button"
+            onClick={handleDeleteClick}
+          >
+            Slet
+          </button>
+        </div>
       </form>
     </>
   );

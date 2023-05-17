@@ -105,7 +105,8 @@
   align-items: center;
 }
 
-.sectionBox {
+.sectionBox,
+.sectionBoxComment {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -203,6 +204,10 @@
 
 .appstory {
   margin-top: 10px;
+}
+
+.sectionBoxComment {
+  padding-bottom: 15px;
 }
 
 @media only screen and (max-width: 1150px) {
