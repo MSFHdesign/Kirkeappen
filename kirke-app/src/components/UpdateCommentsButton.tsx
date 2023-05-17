@@ -9,6 +9,8 @@ interface Props {
   commentsValue: string;
   titleValue: string;
   onDelete: () => void;
+  firstName: string;
+  lastName: string;
 }
 
 interface Section {
@@ -102,6 +104,11 @@ const EditButton2: React.FC<Props> = (props) => {
   return (
     <>
       <form onSubmit={handleSaveClick}>
+        <p>
+          Denne historie er skrevet til {props.firstName + " "}
+          {props.lastName}
+        </p>
+
         <span className={style.sectionBox}>
           <input
             type="text"

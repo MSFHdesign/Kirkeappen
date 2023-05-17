@@ -120,13 +120,14 @@ const DisplayComment: React.FC<Props> = (props) => {
               .slice(0, visibleCount)
               .map((item, index) => (
                 <div key={index} className={style.cardWrapper}>
-                  {item.comment}
                   <EditButton2
                     collectionName={props.collectionName}
                     cardId={item.storyID}
                     commentsValue={item.comment}
                     titleValue={item.title}
                     onDelete={() => handleCardDelete(item.id)}
+                    firstName={item.firstName}
+                    lastName={item.lastName}
                   />
                 </div>
               ))}
