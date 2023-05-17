@@ -70,7 +70,6 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 .leftSide {
   display: flex;
@@ -90,8 +89,12 @@
 }
 
 .img {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
 }
 
 .sectionContainer {
@@ -108,9 +111,6 @@
 .sectionBox {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  flex-direction: row;
 }
 
 .deleteDtn,
@@ -120,8 +120,7 @@
 
 .editButton,
 .submitBtn,
-.sectionBtn,
-.commentBtn {
+.sectionBtn {
   font-size: 16px;
   text-transform: uppercase;
   font-weight: bold;
@@ -140,7 +139,6 @@
 .submitBtn,
 .cancelBtn {
   width: 25%;
-  min-width: 100px;
 }
 
 .btnBox {
@@ -161,11 +159,6 @@
   width: 98%;
   height: 150px;
 }
-
-.editForm input {
-  min-width: 100px;
-}
-
 .editForm input,
 .editForm textarea {
   background-color: #f2f2f2;
@@ -173,7 +166,7 @@
   font-size: 16px;
   padding: 8px;
   border-radius: 4px;
-  border: 1.5px solid var(--Green100);
+  border: 1px solid #ccc;
   margin-bottom: 16px;
 }
 
@@ -190,7 +183,7 @@
   width: 100%;
   justify-content: space-between;
   padding-bottom: 10px;
-  gap: 5px;
+  gap: 20px;
 }
 
 .cancelBtn {
@@ -201,12 +194,8 @@
   margin-top: 20px;
 }
 
-.appstory {
-  margin-top: 10px;
-}
-
-@media only screen and (max-width: 1150px) {
-  .editButton {
-    padding: 8px 30px;
+@media screen and (max-width: 900px) {
+  .editContainer {
+    flex-direction: row;
   }
 }

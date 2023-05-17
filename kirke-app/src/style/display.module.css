@@ -1,6 +1,10 @@
 .collectionWrapper {
-  display: block;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  justify-content: flex-start;
   width: 100%;
+
   margin-top: 20px;
   height: 60vh;
   overflow-y: scroll;
@@ -12,13 +16,6 @@
 }
 .collectionWrapper::-webkit-scrollbar {
   display: none; /* Hide scrollbar for Chrome, Safari and Opera but keeps the function*/
-}
-.collectionFlex {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  width: 100%;
 }
 
 .selectWrapper {
@@ -36,25 +33,23 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   padding: 20px 10px;
   background-color: #fff;
-  min-width: 400px;
-  max-width: 40%;
+  max-width: var(--cardWidth);
   min-height: var(--cardHeight);
   max-height: var(--cardHeight);
-
-  width: 90%;
+  width: 60%;
   overflow-y: hidden;
-  justify-content: flex-start;
-  align-items: center;
+  min-width: 500px;
 }
 
 .cardImg {
   width: 100px;
   height: 100px;
+  margin-right: 20px;
 }
 .contentWrapper {
   height: 100%;
   width: 100%;
-  min-width: 300px;
+  min-width: 370px;
   padding-left: 10px;
   display: flex;
   flex-direction: column;
@@ -62,13 +57,12 @@
 }
 .topBoxes {
   display: flex;
-  width: 95%;
   justify-content: space-between;
   align-items: center;
   align-items: flex-start;
 }
 .nameBox {
-  padding: 0 5px 10px 0px;
+  margin: 0;
   width: 70%;
   height: 24px;
   padding-right: 5px;
@@ -85,19 +79,19 @@
 
 h2 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 14px;
 }
 h3 {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 .dates {
   gap: 5px;
   width: 100%;
+
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: flex-end;
 }
 
 .cardWrapper h2,
@@ -110,8 +104,6 @@ h3 {
 
 .section {
   padding-top: 5px;
-  width: 95%;
-  overflow-wrap: break-word;
 }
 
 .section h3 {
@@ -122,14 +114,13 @@ h3 {
 }
 .buttonsWrapper {
   display: flex;
-  width: 95%;
   justify-content: space-between;
 }
 .loadMoreStories {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: bold;
   color: var(--textColor);
   text-align: center;
@@ -146,10 +137,7 @@ h3 {
   background-color: #d9d9d9;
 }
 
-.fullName {
-  text-transform: capitalize;
-  overflow-wrap: break-word;
-}
+/* test */
 
 .selectWrapper {
   width: 100%;
@@ -173,7 +161,7 @@ h3 {
 
 .selectWrapper .selctionBar label {
   margin-right: 10px;
-  font-size: 1.3rem;
+  font-size: 20px;
   font-weight: bold;
   color: var(--textColor);
 }
@@ -181,7 +169,7 @@ h3 {
 .selectWrapper .selctionBar select {
   margin-right: 10px;
   padding: 10px 15px;
-  font-size: 1.2rem;
+  font-size: 16px;
   font-weight: bold;
   color: #333;
   background-color: #fff;
@@ -204,7 +192,7 @@ h3 {
 .selectWrapper .selctionBar .buttons button {
   margin-right: 10px;
   padding: 10px 15px;
-  font-size: 1.1rem;
+  font-size: 16px;
   font-weight: bold;
   color: var(--textColor);
   background-color: #fff;
@@ -229,7 +217,5 @@ h3 {
 
 .TopLevelWrapper {
   display: flex;
-  height: 100%;
-  width: 100%;
   align-items: center;
 }

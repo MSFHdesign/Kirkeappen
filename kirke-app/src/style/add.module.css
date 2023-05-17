@@ -6,6 +6,7 @@
   width: 80%;
   max-width: 700px;
   height: 100%;
+
 }
 .contentWrap {
   display: flex;
@@ -81,9 +82,9 @@ label {
 
 input {
   padding: 8px;
-  padding-left: 10px;
-  border: 1.5px solid #889466;
-  border-radius: 25px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  border-radius: 3px;
   font-size: 1rem;
   color: #444;
   outline: none;
@@ -109,8 +110,8 @@ input[type="date"]::-webkit-inner-spin-button {
 input[type="date"] {
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1.5px solid #889466;
-  border-radius: 25px;
+  border: 2px solid #ccc;
+  border-radius: 0.25rem;
   outline: none;
 }
 
@@ -230,15 +231,16 @@ textarea {
 .addSectionButton {
   font-weight: bold;
   padding: 10px 75px;
-  border: 1.5px solid #889466;
-  border-radius: 25px;
-  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  color: black;
   font-size: 0.8rem;
   cursor: pointer;
 }
 
 .warningSucces {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -252,8 +254,6 @@ textarea {
   align-items: center;
   width: 15vw;
   height: 5vw;
-  min-width: 400px;
-  min-height: 50px;
 }
 
 .warningSucces h3,
