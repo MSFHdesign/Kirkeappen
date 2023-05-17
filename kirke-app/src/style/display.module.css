@@ -259,7 +259,7 @@ form > textarea {
   padding: 15px;
   border: 1.5px solid #889466;
   border-radius: 25px;
-  margin: 5px 0;
+  margin: 10px 0;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

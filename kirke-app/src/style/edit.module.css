@@ -135,7 +135,7 @@
 }
 .editButton:hover,
 .submitBtn:hover {
-  background-color: var(--Green50);
+  background-color: var(--Green75);
 }
 
 .submitBtn,

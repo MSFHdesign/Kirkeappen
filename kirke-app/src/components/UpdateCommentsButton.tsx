@@ -35,9 +35,6 @@ const EditButton2: React.FC<Props> = (props) => {
 
           // Retrieve the latest comment values from the comments array
           const latestComment = comments[comments.length - 1] || {};
-
-          setTitleValue(latestComment.title || "");
-          setCommentsValue(latestComment.comment || "");
         }
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -129,15 +126,15 @@ const EditButton2: React.FC<Props> = (props) => {
             justifyContent: "space-between",
           }}
         >
-          <button className={style.editButton} type="submit">
-            Godkend
-          </button>
           <button
             className={warning["delete-button"]}
             type="button"
             onClick={handleDeleteClick}
           >
             Slet
+          </button>
+          <button className={style.editButton} type="submit">
+            Godkend
           </button>
         </div>
       </form>
