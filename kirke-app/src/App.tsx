@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // global CSS
@@ -14,9 +14,10 @@ import DashBoard from "./pages/Dashboard";
 import EditProfilePage from "./pages/EditProfilePage";
 import StoryDisplay from "./components/StoryDisplay";
 import StoryAdd from "./components/StoryAdd";
+import DisplayComment from "./components/CommentDisplay";
 import { LanguageProvider } from "./components/LanguageContext";
 
-// This is the overall structure of the page. Each route that needs an auth-person have to pass thrue it. If they do not, they will be placed to the login screen. As we do not want un-auth personal to go thrue the door. 
+// This is the overall structure of the page. Each route that needs an auth-person have to pass thrue it. If they do not, they will be placed to the login screen. As we do not want un-auth personal to go thrue the door.
 
 initializeApp(firebaseConfig);
 
@@ -60,7 +61,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
             path="/approve"
             element={
               <AuthRoute>
-                <StoryDisplay collectionName="approve" />
+                <DisplayComment collectionName={selectedValue} />
               </AuthRoute>
             }
           />
