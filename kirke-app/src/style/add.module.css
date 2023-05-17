@@ -81,9 +81,9 @@ label {
 
 input {
   padding: 8px;
-  border: 1px solid #ccc;
-  background-color: #f2f2f2;
-  border-radius: 3px;
+  padding-left: 10px;
+  border: 1.5px solid #889466;
+  border-radius: 25px;
   font-size: 1rem;
   color: #444;
   outline: none;
@@ -109,8 +109,8 @@ input[type="date"]::-webkit-inner-spin-button {
 input[type="date"] {
   padding: 0.5rem;
   font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 0.25rem;
+  border: 1.5px solid #889466;
+  border-radius: 25px;
   outline: none;
 }
 
@@ -230,10 +230,9 @@ textarea {
 .addSectionButton {
   font-weight: bold;
   padding: 10px 75px;
-  border: 2px solid black;
-  border-radius: 10px;
-  background-color: #f2f2f2;
-  color: black;
+  border: 1.5px solid #889466;
+  border-radius: 25px;
+  background-color: #fff;
   font-size: 0.8rem;
   cursor: pointer;
 }

@@ -101,3 +101,9 @@
 .delete-button:hover {
   background-color: var(--Red50);
 }
+
+@media only screen and (max-width: 1150px) {
+  .delete-button {
+    padding: 8px 30px;
+  }
+}
