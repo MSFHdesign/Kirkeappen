@@ -27,8 +27,8 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   );
 
   // sorting
-  const [visibleCount, setVisibleCount] = useState(5); // number of visible items
-  const [selectValue, setSelectValue] = useState("5");
+  const [visibleCount, setVisibleCount] = useState(6); // number of visible items
+  const [selectValue, setSelectValue] = useState("6");
 
   const [sortingOption, setSortingOption] = useState<string>("");
 
@@ -46,7 +46,6 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   // Fetching Data
   useEffect(() => {
     const subCollectionRef = collection(db, props.collectionName);
-    console.log(subCollectionRef);
     const unsubscribe = onSnapshot(subCollectionRef, (snapshot) => {
       snapshot.docs.sort((a, b) => b.data().createdAt - a.data().createdAt);
       const data = snapshot.docs.map((doc) => {
@@ -229,62 +228,64 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
         </div>
       </div>
       <div className={style.collectionWrapper}>
-        {isLoading ? (
-          <Skeletor index={3} />
-        ) : filteredCollectionData.length === 0 ? (
-          <div>
-            <p>{story.error.show}</p>
-            <AuthSelect />
-          </div>
-        ) : (
-          <>
-            {sortFunction(filteredCollectionData)
-              .slice(0, visibleCount)
-              .map((item, index) => (
-                <div key={index} className={style.cardWrapper}>
-                  <Card
-                    firstName={item.firstName}
-                    lastName={item.lastName}
-                    graveNumber={item.graveId}
-                    born={item.born}
-                    death={item.death}
-                    imageUrl={item.imageUrl}
-                    sections={item.sections.map(
-                      (section: { title: string; description: string }) => ({
-                        title: section.title,
-                        description: section.description,
-                      })
-                    )}
-                    comments={
-                      item.comments && Array.isArray(item.comments)
-                        ? item.comments.map(
-                            (comments: { title: string; comment: string }) => ({
-                              title: comments.title,
-                              comment: comments.comment,
-                            })
-                          )
-                        : []
-                    }
-                    collectionName={props.collectionName}
-                    cardId={item.id}
-                    onDelete={() => handleCardDelete(item.id)}
-                  />
-                </div>
-              ))}
+        <div className={style.collectionFlex}>
+          {isLoading ? (
+            <Skeletor index={3} />
+          ) : filteredCollectionData.length === 0 ? (
+            <div>
+              <p>{story.error.show}</p>
 
-            {filteredCollectionData.length > visibleCount ? (
-              <button
-                className={style.loadMoreStories}
-                onClick={handleShowMore}
-              >
-                {story.card.showMore.replace("{0}", String(visibleCount))}
-              </button>
-            ) : (
-              <div className={style.loadMoreStories}>{story.card.showEnd}</div>
-            )}
-          </>
-        )}
+              <AuthSelect />
+            </div>
+          ) : (
+            <>
+              {sortFunction(filteredCollectionData)
+                .slice(0, visibleCount)
+                .map((item, index) => (
+                  <div key={index} className={style.cardWrapper}>
+                    <Card
+                      firstName={item.firstName}
+                      lastName={item.lastName}
+                      graveNumber={item.graveId}
+                      born={item.born}
+                      death={item.death}
+                      imageUrl={item.imageUrl}
+                      sections={item.sections.map(
+                        (section: { title: string; description: string }) => ({
+                          title: section.title,
+                          description: section.description,
+                        })
+                      )}
+                      comments={
+                        item.comments && Array.isArray(item.comments)
+                          ? item.comments.map(
+                              (comments: {
+                                title: string;
+                                comment: string;
+                              }) => ({
+                                title: comments.title,
+                                comment: comments.comment,
+                              })
+                            )
+                          : []
+                      }
+                      collectionName={props.collectionName}
+                      cardId={item.id}
+                      onDelete={() => handleCardDelete(item.id)}
+                    />
+                  </div>
+                ))}
+            </>
+          )}
+        </div>
       </div>
+      {filteredCollectionData.length > visibleCount ? (
+        <button className={style.loadMoreStories} onClick={handleShowMore}>
+          {story.card.showMore.replace("{0}", String(visibleCount))}
+        </button>
+      ) : (
+        <div className={style.loadMoreStories}>{story.card.showEnd}</div>
+      )}
     </div>
   );
 };

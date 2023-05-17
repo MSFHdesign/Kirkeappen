@@ -54,7 +54,7 @@
       "lastName": "Efternavn",
       "born": "Født",
       "dead": "Død",
-      "graveId": "Gav nummer"
+      "graveId": "Grav nr"
     },
     "card": {
       "showMore": "load more stories",
@@ -89,7 +89,7 @@
     },
     "search": "Søg efter navn...",
     "error": {
-      "show": "Din søgning matcher ikke med nogen i databasen.",
+      "show": "Din søgning matcher ikke med nogen i:",
       "firstName": "Fornavnet skal udfyldes",
       "lastName": "Efternavn skal udfyldes",
       "born": "Fødselsdagen skal udfyldes",

@@ -226,7 +226,7 @@ const EditButton: React.FC<Props> = (props) => {
                   onChange={(e) => setNewImage(e.target.files?.[0] ?? null)}
                 />
               </div>
-
+              <h3 className={style.appstory}> Historiske fortællinger </h3>
               {updatedSections.map((section, index) => (
                 <div key={index} className={style.sectionContainer}>
                   <span className={style.sectionBox}>
@@ -258,10 +258,10 @@ const EditButton: React.FC<Props> = (props) => {
                 </div>
               ))}
 
-              <button className={style.sectionBtn} onClick={handleAddSection}>
+              <button className={style.commentBtn} onClick={handleAddSection}>
                 {story.section.addSection}
               </button>
-
+              <h3 className={style.appstory}> Historier fra app'en </h3>
               {updatedComments.map((comments, index) => (
                 <div key={index} className={style.commentContainer}>
                   <span className={style.sectionBox}>
@@ -295,7 +295,7 @@ const EditButton: React.FC<Props> = (props) => {
 
               <div className={style.btnBox}>
                 <button className={style.commentBtn} onClick={handleAddComment}>
-                  <p> Tilføj</p>
+                  Tilføj kommentar
                 </button>
 
                 <span className={style.btnSpan}>
