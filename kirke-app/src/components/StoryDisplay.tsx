@@ -46,7 +46,6 @@ const FirebaseCollectionComponent: React.FC<Props> = (props) => {
   // Fetching Data
   useEffect(() => {
     const subCollectionRef = collection(db, props.collectionName);
-    console.log("subCollectionRef", subCollectionRef);
     const unsubscribe = onSnapshot(subCollectionRef, (snapshot) => {
       snapshot.docs.sort((a, b) => b.data().createdAt - a.data().createdAt);
       const data = snapshot.docs.map((doc) => {

@@ -295,7 +295,7 @@ const EditButton: React.FC<Props> = (props) => {
 
               <div className={style.btnBox}>
                 <button className={style.commentBtn} onClick={handleAddComment}>
-                  Tilføj
+                  Tilføj kommentar
                 </button>
 
                 <span className={style.btnSpan}>
