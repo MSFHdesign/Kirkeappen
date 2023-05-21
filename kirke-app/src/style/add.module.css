@@ -152,6 +152,9 @@ input[type="date"]:focus {
   flex-wrap: nowrap;
   align-items: center;
 }
+.imgUploader > img {
+  max-width: 260px;
+}
 .progressContainer {
   gap: 10px;
   margin: 0;

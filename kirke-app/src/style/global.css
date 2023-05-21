@@ -2,13 +2,14 @@
   --cardWidth: 90%;
   --cardHeight: 200px;
   --Green100: #889466;
+  --Green75: #889466cb;
   --DarkGreen: #889466;
   --Green50: #aec17879;
   --Red100: #d9d9d9;
   --Red50: #d9d9d989;
   --textDelete: rgb(75, 75, 75);
   --textColor: black;
-  --roundedBorders: 15px;
+  --roundedBorders: 25px;
   background-color: #f2f2f2;
 }
 html {

@@ -25,7 +25,7 @@
   align-items: flex-start;
   gap: 20px;
   margin: 0 10px;
-  width: 60%;
+  width: 50%;
   height: 90%;
   overflow-y: scroll;
   background-color: white;
@@ -38,7 +38,7 @@
 
 .closeButton {
   margin: 20px;
-  right: 20%;
+  right: 25%;
   position: absolute;
   display: flex;
   align-items: center;
@@ -46,6 +46,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  border: 1.5px solid var(--Green100);
   background-color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   z-index: 1;
@@ -83,15 +84,15 @@
 
 .imgcontainer {
   justify-content: center;
-  gap: 20px;
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: fit-content;
 }
 
 .img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
+  padding-bottom: 10px;
 }
 
 .sectionContainer {
@@ -105,17 +106,14 @@
   align-items: center;
 }
 
-.sectionBox {
+.sectionBox,
+.sectionBoxComment {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
   justify-content: flex-start;
   flex-direction: row;
-}
-
-.deleteDtn,
-.cancelBtn {
-  background-color: var(--Red100);
 }
 
 .editButton,
@@ -131,16 +129,17 @@
   border: none;
   background-color: var(--Green100);
   border-radius: var(--roundedBorders);
+  min-width: 210px;
+  align-self: center;
 }
 .editButton:hover,
 .submitBtn:hover {
-  background-color: var(--Green50);
+  background-color: var(--Green75);
 }
 
 .submitBtn,
 .cancelBtn {
   width: 25%;
-  min-width: 100px;
 }
 
 .btnBox {
@@ -160,21 +159,21 @@
 .editForm textarea {
   width: 98%;
   height: 150px;
-}
-
-.editForm input {
-  min-width: 100px;
+  margin-top: 0;
 }
 
 .editForm input,
 .editForm textarea {
-  background-color: #f2f2f2;
-  margin: 0 10px;
+  background-color: #fff;
   font-size: 16px;
-  padding: 8px;
-  border-radius: 4px;
+  padding: 8px 0px 8px 10px;
+  border-radius: 25px;
   border: 1.5px solid var(--Green100);
   margin-bottom: 16px;
+}
+.editForm input {
+  padding-right: 10px;
+  width: fit-content;
 }
 
 .editForm button {
@@ -195,6 +194,7 @@
 
 .cancelBtn {
   color: var(--textDelete);
+  min-width: fit-content;
 }
 
 .commentContainer {
@@ -202,11 +202,80 @@
 }
 
 .appstory {
-  margin-top: 10px;
+  margin-top: 40px;
+  margin-bottom: 5px;
+  font-size: 24px;
+}
+
+.sectionBoxComment {
+  padding-bottom: 15px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .editForm {
+    width: 75%;
+  }
+  .closeButton {
+    margin: 1%;
+    right: 25%;
+    width: 35px;
+    height: 35px;
+  }
 }
 
 @media only screen and (max-width: 1150px) {
+  .boxSize {
+    display: block;
+    width: 80%;
+  }
   .editButton {
+    min-width: fit-content;
     padding: 8px 30px;
+  }
+  .editForm {
+    width: 80%;
+    margin-left: 5%;
+  }
+  .closeButton {
+    margin: 1%;
+    right: 10%;
+  }
+  .submitBtn,
+  .sectionBtn,
+  .commentBtn {
+    font-size: 12px;
+    padding: 8px 25px;
+    min-width: 190px;
+    align-self: center;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .imgcontainer {
+    width: 100%;
+  }
+
+  .img {
+    width: 100px;
+    height: 100px;
+  }
+  .editForm input {
+    max-width: 200px;
+  }
+  .editForm textarea {
+    padding: 15px 0 15px 2px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .editForm {
+    width: 80%;
+    margin-left: 5%;
+  }
+  .btnSpan {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
   }
 }
